@@ -1,3 +1,29 @@
+###**
+* @ngdoc directive
+* @name BBAdminServices.Directives:resourceTable
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BBAdminServices.Directives:resourceTable
+*
+* # Has the following set of methods:
+*
+* - controller($scope)
+* - $scope.getResources()
+* - $scope.newResource()
+* - $scope.delete(person)
+* - $scope.edit(person)
+* - link(scope, element, attrs)
+*
+* @requires BBAdmin.Services:AdminCompanyService
+* @requires BBAdmin.Services:AdminResourceService
+* @requires $modal
+* @requires $log
+* @requires BB.Services:ModalForm
+*
+###
+
 angular.module('BBAdminServices').directive 'resourceTable', (AdminCompanyService,
     AdminResourceService, $modal, $log, ModalForm) ->
 

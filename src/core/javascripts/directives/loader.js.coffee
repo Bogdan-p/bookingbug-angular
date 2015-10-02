@@ -1,17 +1,37 @@
 'use strict';
 
-# Loader Directive
+app = angular.module 'BB.Directives'
 
-# Example usage;
+###**
+* @ngdoc directive
+* @name BB.Directives:bbLoader
+* @restrict A
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:bbLoader
+*
+* Classes or ids will be added to the loading item so they can be styled
+* individually.
+*
+* <pre>
+* Example usage;
 # <div bb-loader>
 # <div bb-loader="#someid">
 # <div bb-loader=".someclass">
-
-# classes or ids will be added to the loading item so they can be styled
-# individually.
-
-app = angular.module 'BB.Directives'
-
+* </pre>
+*
+* Has the following set of methods:
+*
+* - controller($scope)
+* - addScopeId(id)
+* - removeScopeId(id)
+* - showLoader e, cscope)
+* - hideLoader(e, cscope)
+* - link(scope, element, attrs)
+*
+###
 app.directive 'bbLoader', ($rootScope, $compile, PathSvc, TemplateSvc) ->
   restrict: 'A'
   replace : false

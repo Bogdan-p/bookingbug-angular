@@ -1,3 +1,16 @@
+###**
+* @ngdoc service
+* @name BB.Services:DateTimeUlititiesService
+*
+* @description
+* Factory DateTimeUlititiesService
+*
+* @returns {Promise} This service has the following set of methods:
+*
+* - convertTimeSlotToMoment(day, time_slot)
+* - convertMomentToTime(datetime)
+*
+###
 angular.module('BB.Services').factory "DateTimeUlititiesService", () ->
 
   # converts date and time belonging to BBModel.Day and BBModel.TimeSlot into

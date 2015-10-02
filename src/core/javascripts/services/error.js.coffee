@@ -1,3 +1,19 @@
+###**
+* @ngdoc service
+* @name BB.Services:ErrorService
+*
+* @description
+* Factory ErrorService
+*
+* @param {service} SettingsService Info
+* <br>
+* {@link BB.Services:SettingsService more}
+*
+* @returns {Promise} This service has the following set of methods:
+*
+* - getError(type)
+*
+###
 angular.module('BB.Services').factory 'ErrorService', (SettingsService) ->
 
   errors = [

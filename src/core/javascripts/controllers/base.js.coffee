@@ -1,5 +1,45 @@
 'use strict';
 
+###**
+* @ngdoc directive
+* @name BB.Directives:bbWidget
+*
+* @restrict A
+* @scope
+*   <pre>
+*   scope:
+*   client: '=?'
+*   apiUrl: '@?'
+*   useParent:'='
+*   transclude: true
+*   controller: 'BBCtrl'
+* </pre>
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:bbWidget
+*
+* # Has the following set of methods:
+*
+* - getTemplate(template)
+* - updatePartials (scope, element, prms)
+* - setupPusher(scope, element, prms)
+* - appendCustomPartials(scope, element, prms)
+* - renderTemplate(scope, element, design_mode, template)
+* - link(scope, element, attrs)
+*
+* @requires BB.Services:PathSvc
+* @requires $http
+* @requires $log
+* @requires $templateCache
+* @requires $compile
+* @requires $q
+* @requires AppConfig
+* @requires $timeout
+* @requires $bbug
+*
+###
 
 angular.module('BB.Directives').directive 'bbWidget', (PathSvc, $http, $log,
     $templateCache, $compile, $q, AppConfig, $timeout, $bbug) ->
@@ -88,6 +128,22 @@ angular.module('BB.Directives').directive 'bbWidget', (PathSvc, $http, $log,
       scope.$on 'refreshPage', () ->
         scope.showPage scope.bb.current_page
 
+###**
+* @ngdoc controller
+* @name BB.Controllers:bbContentController
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller bbContentController
+*
+* # Has the following set of methods:
+*
+* - $scope.initPage()
+*
+* @requires $scope
+*
+###
 
 # a controller used for the main page contents - just in case we need one here
 angular.module('BB.Controllers').controller 'bbContentController', ($scope) ->
@@ -97,7 +153,117 @@ angular.module('BB.Controllers').controller 'bbContentController', ($scope) ->
     $scope.setLoadingPage(false)
 
 
+###**
+* @ngdoc controller
+* @name BB.Controllers:BBCtrl
+*
+* @description
+*{@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller BBCtrl
+*
+* # Has the following set of methods:
+* - $compile("<span bb-display-mode></span>") $scope, (cloned, scope)
+* - $scope.set_company(prms)
+* - $scope.initWidget(prms = {})
+* - $scope.initWidget2()
+* - setupDefaults(company_id)
+* - $scope.setLoadingPage(val)
+* - $scope.isLoadingPage()
+* - $scope.$on '$locationChangeStart', (event)
+* - $scope.showPage(route, dont_record_page)
+* - $scope.jumpToPage(route)
+* - $scope.clearPage()
+* - $scope.getPartial(file)
+* - $scope.setPageLoaded()
+* - $scope.setPageRoute(route)
+* - $scope.decideNextPage(route)
+* - $scope.showCheckout()
+* - $scope.addItemToBasket()
+* - $scope.updateBasket()
+* - $scope.emptyBasket()
+* - $scope.deleteBasketItem(item)
+* - $scope.deleteBasketItems(items)
+* - $scope.clearBasketItem()
+* - $scope.setBasketItem(item)
+* - $scope.setReadyToCheckout(ready)
+* - $scope.moveToBasket()
+* - $scope.quickEmptybasket(options)
+* - $scope.setBasket(basket)
+* - $scope.logout(route)
+* - $scope.setAffiliate(affiliate)
+* - restoreBasket()
+* - $scope.setCompany(company, keep_basket)
+* - $scope.recordStep(step, title)
+* - $scope.setStepTitle(title)
+* - $scope.getCurrentStepTitle)
+* - $scope.checkStepTitle(title)
+* - $scope.loadStep(step)
+* - $scope.loadPreviousStep()
+* - $scope.loadStepByPageName(page_name)
+* - $scope.restart()
+* - $scope.setRoute(rdata)
+* - $scope.setBasicRoute(routes)
+* - $scope.skipThisStep()
+* - $scope.setUsingBasket(usingBasket)
+* - $scope.setClient(client)
+* - $scope.clearClient()
+* - $scope.parseDate(d)
+* - $scope.getUrlParam(param)
+* - $scope.base64encode(param)
+* - $scope.setLastSelectedDate(date)
+* - $scope.setLoaded(cscope)
+* - $scope.setLoadedAndShowError(scope, err, error_string)
+* - $scope.areScopesLoaded(cscope)
+* - $scope.notLoaded(cscope)
+* - $scope.broadcastItemUpdate()
+* - $scope.hidePage()
+* - $scope.bb.company_set()
+* - $scope.isAdmin()
+* - $scope.isAdminIFrame()
+* - $scope.reloadDashboard
+* - $scope.$debounce(tim)
+* - $scope.supportsTouch()
+* - $rootScope.$on 'show:loader', ()
+* - $rootScope.$on 'hide:loader', ()
+*
+* <pre>
+* //Dont change the cid as we use it in the app to identify this as the widget
+* $scope.cid = "BBCtrl"
+* </pre>
+*
+* @requires $scope
+* @requires $location
+* @requires $rootScope
+* @requires $sessionStorage
+* @requires $window
+* @requires $http
+* @requires $localCache
+* @requires $q
+* @requires $timeout
+* @requires $sce
+* @requires $compile
+* @requires $sniffer
+* @requires $modal
+* @requires $log
+* @requires $bbug
+* @requires angular-hal:halClient
+* @requires BB.Services:BasketService
+* @requires BB.Services:LoginService
+* @requires BB.Services:AlertService
+* @requires BB.Models:BBModel
+* @requires BB.Services:BBWidget
+* @requires BB.Services:SSOService
+* @requires BB.Services:ErrorService
+* @requires AppConfig
+* @requires BB.Services:QueryStringService
+* @requires BB.Services:QuestionServic
+* @requires BB.Services:LocaleService
+* @requires BB.Services:PurchaseService
+* @requires BB.Services:SettingsService
+* @requires UriTemplate
 
+###
 angular.module('BB.Controllers').controller 'BBCtrl', ($scope, $location,
     $rootScope, halClient, $window, $http, $localCache, $q, $timeout, BasketService,
     LoginService, AlertService, $sce, $element, $compile, $sniffer, $modal, $log,
@@ -156,16 +322,34 @@ angular.module('BB.Controllers').controller 'BBCtrl', ($scope, $location,
     Checkout: 11
     Slot: 12
     Event: 13
-  $scope.Route = $rootScope.Route 
+  $scope.Route = $rootScope.Route
 
 
   $compile("<span bb-display-mode></span>") $scope, (cloned, scope) =>
     $bbug($element).append(cloned)
 
-  # legacy (already!) delete by Feb 2014 ;-)
+  ###**
+  * @ngdoc method
+  * @name $scope.set_company
+  * @methodOf BB.Controllers:BBCtrl
+  *
+  * @description
+  * Legacy (already!) delete by Feb 2014!
+  *
+  ###
   $scope.set_company = (prms) =>
     $scope.initWidget(prms)
 
+  ###**
+  * @ngdoc method
+  * @name $scope.initWidget
+  * @methodOf BB.Controllers:BBCtrl
+  *
+  * @description
+  * $scope.initWidget
+  *
+  * @param {object} prms prms = {}
+  ###
   $scope.initWidget = (prms = {}) =>
 
     @$init_prms = prms
@@ -194,7 +378,22 @@ angular.module('BB.Controllers').controller 'BBCtrl', ($scope, $location,
         return
 
 
-
+  ###**
+  * @ngdoc method
+  * @name $scope.initWidget2
+  * @methodOf BB.Controllers:BBCtrl
+  *
+  * @description
+  * $scope.initWidget2
+  *
+  * We're going to load a bunch of default stuff which we will vary by the widget
+  * there can be two promise stages - a first pass - then a second set or promises which might be created as a results of the first lot being laoded
+  * i.e. the active of reolving one promise, may need a second to be reoslved before the widget is created
+  * <pre>
+  * setup_promises2 = []
+  * setup_promises= []
+  *</pre>
+  ###
   $scope.initWidget2 = () =>
     $scope.init_widget_started = true
 
@@ -242,12 +441,11 @@ angular.module('BB.Controllers').controller 'BBCtrl', ($scope, $location,
       # if setup is defined - blank the member -a s we're probably setting it - unless specifically defined as false
       prms.clear_member ||= true
     $scope.bb.client_defaults = prms.client if prms.client
-    
+
     if $scope.bb.client_defaults && $scope.bb.client_defaults.name
-      match = $scope.bb.client_defaults.name.match(/^(\S+)(?:\s(\S+))?/)
-      if match
-        $scope.bb.client_defaults.first_name =  match[1]
-        $scope.bb.client_defaults.last_name = match[2] if match[2]?
+      result = $scope.bb.client_defaults.name.match(/^(\S+)\s(.*)/).slice(1)
+      $scope.bb.client_defaults.first_name =  result[0]
+      $scope.bb.client_defaults.last_name =  result[1]
 
     if prms.clear_member
       $scope.bb.clear_member = prms.clear_member
@@ -267,7 +465,7 @@ angular.module('BB.Controllers').controller 'BBCtrl', ($scope, $location,
       $scope.bb.item_defaults =  angular.copy($scope.bb.original_item_defaults)
 
     if prms.route_format
-      $scope.bb.setRouteFormat(prms.route_format)  
+      $scope.bb.setRouteFormat(prms.route_format)
       # do we need to call anything else before continuing...
       if $scope.bb_route_init
         $scope.bb_route_init()
@@ -287,8 +485,8 @@ angular.module('BB.Controllers').controller 'BBCtrl', ($scope, $location,
     if prms.reserve_without_questions
       $scope.bb.reserve_without_questions = prms.reserve_without_questions
 
-    if prms.extra_setup 
-      $scope.bb.extra_setup          = prms.extra_setup  
+    if prms.extra_setup
+      $scope.bb.extra_setup          = prms.extra_setup
       $scope.bb.starting_step_number = parseInt(prms.extra_setup.step) if prms.extra_setup.step
       $scope.bb.return_url           = prms.extra_setup.return_url if prms.extra_setup.return_url
 
@@ -297,7 +495,7 @@ angular.module('BB.Controllers').controller 'BBCtrl', ($scope, $location,
 
     if prms.i18n
       SettingsService.enableInternationalizaton()
-      
+
 
     if prms.private_note
       $scope.bb.private_note = prms.private_note
@@ -374,7 +572,7 @@ angular.module('BB.Controllers').controller 'BBCtrl', ($scope, $location,
         comp = new BBModel.Company(company)
         # if there's a default company - and this is a parent - maybe we want to preselect one of children
         cprom = $q.defer()
-        setup_promises2.push(cprom.promise)  
+        setup_promises2.push(cprom.promise)
         child = null
         if comp.companies && $scope.bb.item_defaults.company
           child = comp.findChildCompany($scope.bb.item_defaults.company)
@@ -469,7 +667,16 @@ angular.module('BB.Controllers').controller 'BBCtrl', ($scope, $location,
       $scope.setLoadedAndShowError($scope, err, 'Sorry, something went wrong')
 
 
-
+  ###**
+  * @ngdoc method
+  * @name setupDefaults
+  * @methodOf BB.Controllers:BBCtrl
+  *
+  * @description
+  * setupDefaults
+  *
+  * @param {object} company_id Info
+  ###
   setupDefaults = (company_id) =>
     def = $q.defer()
 
@@ -528,27 +735,46 @@ angular.module('BB.Controllers').controller 'BBCtrl', ($scope, $location,
         category = halClient.$get($scope.bb.api_url + '/api/v1/' + company_id + '/categories/' + $scope.bb.item_defaults.category )
         $scope.bb.default_setup_promises.push(category)
         category.then (res) =>
-          $scope.bb.item_defaults.category = new BBModel.Category(res)    
+          $scope.bb.item_defaults.category = new BBModel.Category(res)
 
 
       if $scope.bb.item_defaults.duration
         $scope.bb.item_defaults.duration = parseInt($scope.bb.item_defaults.duration)
- 
+
       $q.all($scope.bb.default_setup_promises)['finally'] () ->
-        def.resolve()     
+        def.resolve()
     else
       def.resolve()
     def.promise
 
 
-  ######################
-  # set if a page is loaded yet or now helps prevent double loading
+  ###**
+  * @ngdoc method
+  * @name $scope.setLoadingPage
+  * @methodOf BB.Controllers:BBCtrl
+  *
+  * @description
+  * $scope.setLoadingPage
+  *
+  * Set if a page is loaded yet or now helps prevent double loading.
+  *
+  * @param {object} val Info
+  ###
   $scope.setLoadingPage = (val) =>
     $scope.loading_page = val
 
+  ###**
+  * @ngdoc method
+  * @name $scope.isLoadingPage
+  * @methodOf BB.Controllers:BBCtrl
+  *
+  * @description
+  * $scope.isLoadingPage
+  *
+  ###
   $scope.isLoadingPage = () =>
     $scope.loading_page
-    
+
   $scope.$on '$locationChangeStart', (event) =>
     return if !$scope.bb.routeFormat
     if !$scope.bb.routing
@@ -556,8 +782,18 @@ angular.module('BB.Controllers').controller 'BBCtrl', ($scope, $location,
       $scope.loadStep(step) if step
     $scope.bb.routing = false
 
-
-
+  ###**
+  * @ngdoc method
+  * @name $scope.showPage
+  * @methodOf BB.Controllers:BBCtrl
+  *
+  * @description
+  * $scope.showPage
+  *
+  * @param {object} route Info
+  * @param {object} dont_record_page Info
+  *
+  ###
   $scope.showPage = (route, dont_record_page) =>
     $scope.bb.updateRoute(route)
     $scope.jumped = false
@@ -618,7 +854,7 @@ angular.module('BB.Controllers').controller 'BBCtrl', ($scope, $location,
           $scope.showPage('payment_complete')
         else
           return $scope.showPage(route)
-          
+
     # do we have a pre-set route...
     if $scope.bb.nextSteps && $scope.bb.current_page && $scope.bb.nextSteps[$scope.bb.current_page] && !$scope.bb.routeSteps
       # if  $scope.bb.current_page == "client_admin"
@@ -744,7 +980,7 @@ angular.module('BB.Controllers').controller 'BBCtrl', ($scope, $location,
         # not added to basket, clear the item
         $scope.clearBasketItem().then () ->
           add_defer.resolve(basket)
-      else    
+      else
         add_defer.resolve(basket)
     , (err) ->
       add_defer.reject(err)
@@ -778,7 +1014,7 @@ angular.module('BB.Controllers').controller 'BBCtrl', ($scope, $location,
     return if !$scope.bb.basket.items or ($scope.bb.basket.items and $scope.bb.basket.items.length is 0)
     BasketService.empty($scope.bb).then (basket) ->
       if $scope.bb.current_item.id
-        delete $scope.bb.current_item.id 
+        delete $scope.bb.current_item.id
       $scope.setBasket(basket)
 
   $scope.deleteBasketItem = (item) ->
@@ -820,7 +1056,7 @@ angular.module('BB.Controllers').controller 'BBCtrl', ($scope, $location,
   $scope.quickEmptybasket = (options) ->
     preserve_stacked_items = if options && options.preserve_stacked_items then true else false
     if !preserve_stacked_items
-      $scope.bb.stacked_items = [] 
+      $scope.bb.stacked_items = []
       $scope.setBasket(new BBModel.Basket(null, $scope.bb))
       $scope.clearBasketItem()
     else
@@ -830,7 +1066,7 @@ angular.module('BB.Controllers').controller 'BBCtrl', ($scope, $location,
       def = $q.defer()
       def.resolve()
       def.promise
-      
+
   $scope.setBasket = (basket) ->
     $scope.bb.basket = basket
     $scope.basket = basket

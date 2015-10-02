@@ -1,7 +1,17 @@
 app = angular.module 'BB.Directives'
 
-
-
+###**
+* @ngdoc directive
+* @name BB.Directives:ngConfirmClick
+*
+* # Has the following set of methods:
+*
+* - link: (scope, element, attr)
+*
+* @description
+* Directive BB.Directives:ngConfirmClick
+*
+###
 app.directive 'ngConfirmClick', () ->
   link: (scope, element, attr) ->
     msg = attr.ngConfirmClick || "Are you sure?";
@@ -10,8 +20,22 @@ app.directive 'ngConfirmClick', () ->
       if window.confirm(msg)
         scope.$eval(clickAction)
 
-
-
+###**
+* @ngdoc directive
+* @name BB.Directives:ngValidInclude
+*
+* @description
+* Directive BB.Directives:ngValidInclude
+*
+* # Has the following set of methods:
+*
+* - link(scope, element, attr)
+*
+* @param {service} $compile Compiles an HTML string or DOM into a template and produces a template function, which can then be used to link scope and the template together.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$compile more}
+*
+###
 app.directive 'ngValidInclude', ($compile) ->
     link: (scope, element, attr) ->
       scope[attr.watchValue].then (logged) =>
@@ -19,8 +43,22 @@ app.directive 'ngValidInclude', ($compile) ->
         element.attr('ng-valid-include',null)
         $compile(element)(scope)
 
-
-
+###**
+* @ngdoc directive
+* @name BB.Directives:ngDelayed
+*
+* @description
+* Directive BB.Directives:ngDelayed
+*
+* # Has the following set of methods:
+*
+* - link(scope, element, attr)
+*
+* @param {service} $compile Compiles an HTML string or DOM into a template and produces a template function, which can then be used to link scope and the template together.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$compile more}
+*
+###
 app.directive 'ngDelayed',  ($compile) ->
     link: (scope, element, attr) ->
       scope[attr.ngDelayedWatch].then (logged) =>
@@ -32,8 +70,23 @@ app.directive 'ngDelayed',  ($compile) ->
         if attr.ngDelayedReady
           scope[attr.ngDelayedReady].resolve(true)
 
-
-
+###**
+* @ngdoc directive
+* @name BB.Directives:ngInitial
+* @restrict A
+*
+* @description
+* Directive BB.Directives:ngInitial
+*
+* # Has the following set of methods:
+*
+* - link(scope, element, attr)
+*
+* @param {service} $compile Compiles an HTML string or DOM into a template and produces a template function, which can then be used to link scope and the template together.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$compile more}
+*
+###
 app.directive 'ngInitial', ->
     restrict: 'A',
     controller: [
@@ -48,8 +101,27 @@ app.directive 'ngInitial', ->
         setter($scope, val)
     ]
 
-
-
+###**
+* @ngdoc directive
+* @name BB.Directives:bbPrintPage
+* @restrict A
+*
+* @description
+* Directive BB.Directives:bbPrintPage
+*
+* # Has the following set of methods:
+*
+* - link(scope, element, attr)
+*
+* @param {service} $window A reference to the browser's window object.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$window more}
+*
+* @param {service} $timeout Angular's wrapper for window.setTimeout.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$timeout more}
+*
+###
 app.directive 'bbPrintPage', ($window, $timeout) ->
   restrict: 'A',
   link:(scope, element, attr) ->
@@ -59,8 +131,26 @@ app.directive 'bbPrintPage', ($window, $timeout) ->
           $window.print()
         3000)
 
-
-
+###**
+* @ngdoc directive
+* @name BB.Directives:bbInclude
+*
+* @description
+* Directive BB.Directives:bbInclude
+*
+* # Has the following set of methods:
+*
+* - link(scope, element, attr)
+*
+* @param {service} $compile Compiles an HTML string or DOM into a template and produces a template function, which can then be used to link scope and the template together.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$compile more}
+*
+* @param {service} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope more}
+*
+###
 app.directive 'bbInclude', ($compile, $rootScope) ->
   link: (scope, element, attr) ->
     track_page = if attr.bbTrackPage? then true else false
@@ -71,10 +161,24 @@ app.directive 'bbInclude', ($compile, $rootScope) ->
         $compile(element)(scope)
         $rootScope.$broadcast "page:loaded", attr.bbInclude if track_page
 
-
-
-# Form directive to allow users to specify if they want the form to raise alerts when
-# there is invalid input.
+###**
+* @ngdoc directive
+* @name BB.Directives:bbRaiseAlertWhenInvalid
+*
+* @description
+* Directive BB.Directives:bbRaiseAlertWhenInvalid
+* Form directive to allow users to specify if they want the form to raise alerts when
+* there is invalid input.
+*
+* # Has the following set of methods:
+*
+* - link(scope, element, attr, ctrl)
+*
+* @param {service} $compile Compiles an HTML string or DOM into a template and produces a template function, which can then be used to link scope and the template together.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$compile more}
+*
+###
 app.directive 'bbRaiseAlertWhenInvalid', ($compile) ->
   require: '^form'
   link: (scope, element, attr, ctrl) ->
@@ -84,7 +188,22 @@ app.directive 'bbRaiseAlertWhenInvalid', ($compile) ->
     ctrl.alert = options.alert if options and options.alert
 
 
-
+###**
+* @ngdoc directive
+* @name BB.Directives:bbHeader
+*
+* @description
+* Directive BB.Directives:bbHeader
+*
+* # Has the following set of methods:
+*
+* - link(scope, element, attr)
+*
+* @param {service} $compile Compiles an HTML string or DOM into a template and produces a template function, which can then be used to link scope and the template together.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$compile more}
+*
+###
 app.directive 'bbHeader', ($compile) ->
     link: (scope, element, attr) ->
       scope.bb.waitForRoutes()
@@ -94,8 +213,18 @@ app.directive 'bbHeader', ($compile) ->
           element.attr('bb-header',null)
           $compile(element)(scope)
 
-
-
+###**
+* @ngdoc directive
+* @name BB.Directives:bbDate
+*
+* @description
+* Directive BB.Directives:bbDate
+*
+* # Has the following set of methods:
+*
+* - link(scope, element, attr)
+*
+###
 app.directive 'bbDate', () ->
   restrict: 'AE'
   scope: true
@@ -149,7 +278,7 @@ app.directive 'bbDate', () ->
         scope.max_date = scope.bb.current_item.service.max_advance_datetime
 
         # if the bb_date is before/after the min/max date, move it to the min/max date
-        scope.bb_date.setDate(scope.min_date.clone()) if scope.bb_date.date.isBefore(scope.min_date, 'day') 
+        scope.bb_date.setDate(scope.min_date.clone()) if scope.bb_date.date.isBefore(scope.min_date, 'day')
         scope.bb_date.setDate(scope.max_date.clone()) if scope.bb_date.date.isAfter(scope.max_date, 'day')
 
     # if the js_date has changed, update the moment date representation
@@ -160,13 +289,27 @@ app.directive 'bbDate', () ->
         scope.bb_date.date = ndate
         scope.$broadcast('dateChanged', moment(ndate)) if moment(ndate).isValid()
 
-
-
+###**
+* @ngdoc directive
+* @name BB.Directives:bbDebounce
+*
+* @description
+* Directive BB.Directives:bbDebounce
+*
+* # Has the following set of methods:
+*
+* - link(scope, element, attr)
+*
+* @param {service} $timeout Angular's wrapper for window.setTimeout.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$timeout more}
+*
+###
 app.directive 'bbDebounce', ($timeout) ->
   restrict: 'A',
   link: (scope, element, attrs) ->
     delay = 400
-    delay = attrs.bbDebounce if attrs.bbDebounce 
+    delay = attrs.bbDebounce if attrs.bbDebounce
 
     element.bind 'click', () =>
       $timeout () =>
@@ -176,11 +319,22 @@ app.directive 'bbDebounce', ($timeout) ->
         element.attr('disabled', false)
       , delay
 
-
-
-# bbLocalNumber
-# Adds a formatter that prepends the model value with zero. This is useful for
-# nicely formatting numbers where the prefix has been stripped, i.e. '7875123456'
+###**
+* @ngdoc directive
+* @name BB.Directives:bbLocalNumber
+* @restrict A
+*
+* @description
+* Directive BB.Directives:bbLocalNumber
+* <br>
+* Adds a formatter that prepends the model value with zero. This is useful for
+* nicely formatting numbers where the prefix has been stripped, i.e. '7875123456'
+*
+* # Has the following set of methods:
+*
+* - link(scope, element, attr, ctrl)
+*
+###
 app.directive 'bbLocalNumber', () ->
   restrict: 'A',
   require: 'ngModel',
@@ -195,9 +349,21 @@ app.directive 'bbLocalNumber', () ->
 
     ctrl.$formatters.push(prettyifyNumber)
 
-
-# bbPadWithZeros
-# Adds a formatter that prepends the model value with the specified number of zeros
+###**
+* @ngdoc directive
+* @name BB.Directives:bbPadWithZeros
+* @restrict A
+*
+* @description
+* Directive BB.Directives:bbPadWithZeros
+* <br>
+* Adds a formatter that prepends the model value with the specified number of zeros.
+*
+* # Has the following set of methods:
+*
+* - link(scope, element, attr, ctrl)
+*
+###
 app.directive 'bbPadWithZeros', () ->
   restrict: 'A',
   require: 'ngModel',
@@ -217,9 +383,25 @@ app.directive 'bbPadWithZeros', () ->
 
     ctrl.$formatters.push(padNumber)
 
-
-# bbFormResettable
-# Adds field clearing behaviour to forms.  
+###**
+* @ngdoc directive
+* @name BB.Directives:bbFormResettable
+* @restrict A
+*
+* @description
+* Directive BB.Directives:bbFormResettable
+* <br>
+* Adds field clearing behaviour to forms.
+*
+* # Has the following set of methods:
+*
+* - controller($scope, $element, $attrs)
+*
+* @param {service} $parse Converts Angular expression into a function.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$parse more}
+*
+###
 app.directive 'bbFormResettable', ($parse) ->
   restrict: 'A'
   controller: ($scope, $element, $attrs) ->
@@ -235,10 +417,21 @@ app.directive 'bbFormResettable', ($parse) ->
       getter = $parse input
       $scope.inputs.push({getter: getter, controller: ctrl})
 
-
-
-# bbResettable
-# Registers inputs with the bbFormResettable controller allowing them to be cleared
+###**
+* @ngdoc directive
+* @name BB.Directives:bbResettable
+* @restrict A
+*
+* @description
+* Directive BB.Directives:bbResettable
+* <br>
+* Registers inputs with the bbFormResettable controller allowing them to be cleared.
+*
+* # Has the following set of methods:
+*
+* - controller(scope, element, attrs, ctrls)
+*
+###
 app.directive 'bbResettable', () ->
   restrict: 'A',
   require: ['ngModel', '^bbFormResettable'],
@@ -247,9 +440,23 @@ app.directive 'bbResettable', () ->
     formResettableCtrl = ctrls[1]
     formResettableCtrl.registerInput(attrs.ngModel, ngModelCtrl)
 
-
-
-# bbDateSplit
+###**
+* @ngdoc directive
+* @name BB.Directives:bbDateSplit
+* @restrict A
+*
+* @description
+* Directive BB.Directives:bbDateSplit
+*
+* # Has the following set of methods:
+*
+* - controller($scope, $element, $attrs)
+*
+* @param {service} $parse Converts Angular expression into a function.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$parse more}
+*
+###
 app.directive 'bbDateSplit', ($parse) ->
   restrict: 'A'
   require: ['ngModel']
@@ -267,12 +474,12 @@ app.directive 'bbDateSplit', ($parse) ->
 
       joinDate:  ->
         if @day && @month && @year
-          date_string = @day + '/' + @month + '/' + @year 
+          date_string = @day + '/' + @month + '/' + @year
           @date = moment(date_string, "DD/MM/YYYY")
           date_string = @date.toISODate()
 
           ngModel.$setViewValue(date_string)
-          ngModel.$render()     
+          ngModel.$render()
 
       splitDate: (date) ->
         if date && date.isValid()
@@ -285,8 +492,8 @@ app.directive 'bbDateSplit', ($parse) ->
     # split the date if it's already set
     question.date.splitDate(moment(question.answer)) if question.answer
     question.date.splitDate(moment(ngModel.$viewValue)) if ngModel.$viewValue
- 
-    # watch self to split date when it changes  
+
+    # watch self to split date when it changes
     # scope.$watch attrs.ngModel, (newval) ->
     #   if newval
     #     new_date = moment(newval)
@@ -294,7 +501,23 @@ app.directive 'bbDateSplit', ($parse) ->
     #        question.date.splitDate(new_date)
 
 
-# bbCommPref
+###**
+* @ngdoc directive
+* @name BB.Directives:bbCommPref
+* @restrict A
+*
+* @description
+* Directive BB.Directives:bbCommPref
+*
+* # Has the following set of methods:
+*
+* - controller($scope, $element, $attrs)
+*
+* @param {service} $parse Converts Angular expression into a function.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$parse more}
+*
+###
 app.directive 'bbCommPref', ($parse) ->
   restrict: 'A'
   require: ['ngModel']
@@ -302,7 +525,7 @@ app.directive 'bbCommPref', ($parse) ->
 
     ngModelCtrl = ctrls[0]
 
-    # get the default communication preference 
+    # get the default communication preference
     comm_pref_default = scope.$eval attrs.bbCommPref or false
 
     # and set it
@@ -314,9 +537,25 @@ app.directive 'bbCommPref', ($parse) ->
         scope.bb.current_item.settings.send_email_followup = newval
         scope.bb.current_item.settings.send_sms_followup   = newval
 
-
-# bbCountTicketTypes
-# returns the number of tickets purchased grouped by name
+###**
+* @ngdoc directive
+* @name BB.Directives:bbCountTicketTypes
+* @restrict A
+*
+* @description
+* Directive BB.Directives:bbCountTicketTypes
+* <br>
+* Returns the number of tickets purchased grouped by name.
+*
+* # Has the following set of methods:
+*
+* - controller(scope, element, attrs)
+*
+* @param {service} $parse Converts Angular expression into a function.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$parse more}
+*
+###
 app.directive 'bbCountTicketTypes', () ->
   restrict: 'A'
   link: (scope, element, attrs) ->
@@ -328,7 +567,23 @@ app.directive 'bbCountTicketTypes', () ->
         item.number = counts[item.tickets.name]
 
 
-# bbCapitaliseFirstLetter
+###**
+* @ngdoc directive
+* @name BB.Directives:bbCapitaliseFirstLetter
+* @restrict A
+*
+* @description
+* Directive BB.Directives:bbCapitaliseFirstLetter
+*
+* # Has the following set of methods:
+*
+* - controller$scope, element, attrs, ctrls)
+*
+* @param {service} $parse Converts Angular expression into a function.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$parse more}
+*
+###
 app.directive 'bbCapitaliseFirstLetter', () ->
   restrict: 'A'
   require: ['ngModel']
@@ -344,6 +599,43 @@ app.directive 'bbCapitaliseFirstLetter', () ->
         return
 
 # Deprecate - see below
+
+###**
+* @ngdoc directive
+* @name BB.Directives:apiUrl
+* @restrict A
+* @deprecated
+*
+* @description
+* Directive BB.Directives:apiUrl
+* <br>
+* Please see {@link BB.Directives:bbApiUrl bbApiUrl}
+*
+* # Has the following set of methods:
+*
+* - compile(tElem, tAttrs)
+*
+* @param {service} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope more}
+*
+* @param {service} $compile Compiles an HTML string or DOM into a template and produces a template function, which can then be used to link scope and the template together.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$compile more}
+*
+* @param {service} $sniffer AThis is very simple implementation of testing browser's features.
+* <br>
+* {@link https://github.com/angular/angular.js/blob/master/src/ng/sniffer.js more}
+*
+* @param {service} $timeout Angular's wrapper for window.setTimeout.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$timeout more}
+*
+* @param {service} $window A reference to the browser's window object.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$window more}
+*
+###
 app.directive 'apiUrl', ($rootScope, $compile, $sniffer, $timeout, $window) ->
   restrict: 'A'
   replace: true
@@ -365,7 +657,43 @@ app.directive 'apiUrl', ($rootScope, $compile, $sniffer, $timeout, $window) ->
         $compile("<iframe id='ieapiframefix' name='" + url.hostname + "' src='#{src}' style='visibility:false;display:none;' onload='iframeLoaded()'></iframe>") scope, (cloned, scope) =>
           element.append(cloned)
 
-
+###**
+* @ngdoc directive
+* @name BB.Directives:bbApiUrl
+* @restrict A
+*
+* @description
+* Directive BB.Directives:bbApiUrl
+*
+* # Has the following set of methods:
+*
+* - compile(tElem, tAttrs)
+*
+* @param {service} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope more}
+*
+* @param {service} $compile Compiles an HTML string or DOM into a template and produces a template function, which can then be used to link scope and the template together.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$compile more}
+*
+* @param {service} $sniffer AThis is very simple implementation of testing browser's features.
+* <br>
+* {@link https://github.com/angular/angular.js/blob/master/src/ng/sniffer.js more}
+*
+* @param {service} $timeout Angular's wrapper for window.setTimeout.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$timeout more}
+*
+* @param {service} $window A reference to the browser's window object.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$window more}
+*
+* @param {service} $location The $location service parses the URL in the browser address bar
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$location more}
+*
+###
 app.directive 'bbApiUrl', ($rootScope, $compile, $sniffer, $timeout, $window, $location) ->
   restrict: 'A'
   scope:
@@ -389,7 +717,25 @@ app.directive 'bbApiUrl', ($rootScope, $compile, $sniffer, $timeout, $window, $l
           $compile("<iframe id='ieapiframefix' name='" + url.hostname + "' src='#{src}' style='visibility:false;display:none;' onload='iframeLoaded()'></iframe>") scope, (cloned, scope) =>
             element.append(cloned)
 
-
+###**
+* @ngdoc directive
+* @name BB.Directives:bbPriceFilter
+* @restrict AE
+* @require: ^?bbServices
+*
+* @description
+* Directive BB.Directives:bbPriceFilter
+*
+* # Has the following set of methods:
+*
+* - templateUrl(element, attrs)
+* - controller($scope, $attrs)
+*
+* @param {service} PathSvc Info
+* <br>
+* {@link BB.Services:PathSvc more}
+*
+###
 app.directive 'bbPriceFilter', (PathSvc) ->
   restrict: 'AE'
   replace: true
@@ -407,10 +753,10 @@ app.directive 'bbPriceFilter', (PathSvc) ->
       $scope.price_array.sort (a, b) ->
         return a - b
       suitable_max()
-      
+
     suitable_max = () ->
       top_number = _.last($scope.price_array)
-      max_number = switch 
+      max_number = switch
         when top_number < 1 then 0
         when top_number < 11 then 10
         when top_number < 51 then 50
@@ -429,7 +775,36 @@ app.directive 'bbPriceFilter', (PathSvc) ->
     $scope.$watch 'filters.price.max', (new_val, old_val) ->
       $scope.filterChanged() if new_val != old_val
 
-
+###**
+* @ngdoc directive
+* @name BB.Directives:bbBookingExport
+* @restrict AE
+* @scope true;
+*
+* @description
+* Directive BB.Directives:bbBookingExport
+*
+* <pre>
+* //template
+* <div bb-include="_popout_export_booking" style="display: inline;"></div>
+* </pre>
+*
+* <pre>
+* scope.html = "
+        <a class='image img_outlook' title='Add this booking to an Outlook Calendar' href='#{purchase_total.icalLink()}'><img alt='' src='//images.bookingbug.com/widget/outlook.png'></a>
+        <a class='image img_ical' title='Add this booking to an iCal Calendar' href='#{purchase_total.webcalLink()}'><img alt='' src='//images.bookingbug.com/widget/ical.png'></a>
+        <a class='image img_gcal' title='Add this booking to Google Calendar' href='#{purchase_total.gcalLink()}' target='_blank'><img src='//images.bookingbug.com/widget/gcal.png' border='0'></a>
+      "
+* </pre>
+*
+* # Has the following set of methods:
+* - link(scope, element, attrs)
+*
+* @param {service} $compile Compiles an HTML string or DOM into a template and produces a template function, which can then be used to link scope and the template together.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$compile more}
+*
+###
 app.directive 'bbBookingExport', ($compile) ->
   restrict: 'AE'
   scope: true

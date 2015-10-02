@@ -1,13 +1,85 @@
 'use strict';
 
+###**
+* @ngdoc directive
+* @name BB.Directives:bbResources
+* @restrict AE
+* @scope true
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
 
+* Directive BB.Directives:bbResources
+*
+* See Controller {@link BB.Controllers:ResourceList ResourceList}
+*
+* <pre>
+* restrict: 'AE'
+* replace: true
+* scope: true
+* controller: 'ResourceList'
+* </pre>
+*
+###
 angular.module('BB.Directives').directive 'bbResources', () ->
   restrict: 'AE'
   replace: true
   scope : true
   controller : 'ResourceList'
 
-
+###**
+* @ngdoc controller
+* @name BB.Controllers:ResourceList
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller PurchaseTotal
+*
+* # Has the following set of ResourceList:
+*
+* - loadData()
+* - getItemFromResource(resource)
+* - $scope.selectItem(item, route, skip_step = false)
+* - $scope.$watch 'resource',(newval, oldval)
+* - $scope.$on "currentItemUpdate", (event)
+* - $scope.setReady()
+*
+* @param {service} $scope Scope is an object that refers to the application mode.
+* <br>
+* {@link https://docs.angularjs.org/guide/scope more}
+*
+* @param {service} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope more}
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {service} $attrs Info
+*
+* @param {service} PageControllerService Info
+* <br>
+* {@link BB.Services:PageControllerService more}
+*
+* @param {service} ResourceService Info
+* <br>
+* {@link BB.Services:ResourceService more}
+*
+* @param {service} ItemService Info
+* <br>
+* {@link BB.Services:ItemService more}
+*
+* @param {model} BBModel Info
+* <br>
+* {@link BB.Models:BBModel more}
+*
+* @param {model} ResourceModel Info
+* <br>
+* {@link BB.Models:Admin.ResourceModel more}
+*
+###
 angular.module('BB.Controllers').controller 'ResourceList',
 ($scope,  $rootScope, $attrs, PageControllerService, ResourceService, ItemService, $q, BBModel, ResourceModel) ->
   $scope.controller = "public.controllers.ResourceList"

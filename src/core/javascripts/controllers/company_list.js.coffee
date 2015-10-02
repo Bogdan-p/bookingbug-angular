@@ -1,5 +1,27 @@
 'use strict';
 
+###**
+* @ngdoc controller
+* @name public.Controllers:CompanyList
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller CompanyList
+*
+* # Has the following set of methods:
+*
+* - $scope.init(comp)
+* - $scope.selectItem(item, route)
+* - $scope.splitString(company)
+*
+* @requires $scope
+* @requires $rootScope
+* @requires $q
+* @requires $attrs
+*
+###
+
 CompanyListBase = ($scope, $rootScope, $q, $attrs) ->
 
   $scope.controller = "public.controllers.CompanyList"
@@ -44,13 +66,70 @@ CompanyListBase = ($scope, $rootScope, $q, $attrs) ->
     result = if arr[2] then arr[2] else ""
 
 
+###**
+* @ngdoc directive
+* @name BB.Directives:bbCompanies
+* @restrict AE
+* @scope true
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+
+* Directive BB.Directives:bbCompanies
+*
+* See Controller {@link BB.Controllers:CompanyList CompanyList}
+*
+* <pre>
+* restrict: 'AE'
+* replace: true
+* scope : true
+* controller : 'CompanyList'
+* </pre>
+*
+###
+
 angular.module('BB.Directives').directive 'bbCompanies', () ->
   restrict: 'AE'
   replace: true
   scope : true
   controller : 'CompanyList'
 
+###**
+* @ngdoc controller
+* @name BB.Controllers:CompanyList
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller CompanyList
+*
+* # Has the following set of methods:
+*
+###
+
 angular.module('BB.Controllers').controller 'CompanyList', CompanyListBase
+
+###**
+* @ngdoc directive
+* @name BB.Directives:bbPostcodeLookup
+* @restrict AE
+* @scope true
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+
+* Directive BB.Directives:CompanyList
+*
+* See Controller {@link BB.Controllers:PostcodeLookup PostcodeLookup}
+*
+* <pre>
+* restrict: 'AE'
+* replace: true
+* scope : true
+* controller : 'PostcodeLookup'
+* </pre>
+*
+###
 
 angular.module('BB.Directives').directive 'bbPostcodeLookup', () ->
   restrict: 'AE'
@@ -58,6 +137,43 @@ angular.module('BB.Directives').directive 'bbPostcodeLookup', () ->
   scope : true
   controller : 'PostcodeLookup'
 
+###**
+* @ngdoc controller
+* @name BB.Controllers:PostcodeLookup
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller PostcodeLookup
+*
+* # Has the following set of methods:
+*
+* - $scope.getNearestCompany({center})
+* - $scope.searchPostcode(form, prms)
+*
+* @param {object} $scope Scope is an object that refers to the application mode.
+* <br>
+* {@link https://docs.angularjs.org/guide/scope read more}
+*
+* @param {object} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope read more}
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {service} ValidatorService Info
+* <br>
+* {@link BB.Services:ValidatorService more}
+*
+* @param {service} AlertService Info
+* <br>
+* {@link BB.Services:AlertService more}
+*
+* @param {service} $attrs Info
+*
+###
 
 angular.module('BB.Controllers').controller 'PostcodeLookup', ($scope,  $rootScope, $q, ValidatorService, AlertService, $attrs) ->
   $scope.controller = "PostcodeLookup"

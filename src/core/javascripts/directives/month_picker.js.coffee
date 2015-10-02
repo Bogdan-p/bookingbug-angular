@@ -1,4 +1,26 @@
-
+###**
+* @ngdoc directive
+* @name BB.Directives:bbMonthPicker
+* @restrict AE
+* @scope true
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:bbMonthPicker
+*
+* <pre>
+* restrict: 'AE'
+* replace: true
+* scope : true
+* require : '^bbEvents'
+* </pre>
+*
+* Has the following set of methods:
+* - link : (scope, el, attrs)
+* - controller : ($scope)
+*
+###
 angular.module('BB.Directives').directive 'bbMonthPicker', () ->
   restrict: 'AE'
   replace: true
@@ -45,7 +67,7 @@ angular.module('BB.Directives').directive 'bbMonthPicker', () ->
             day_data = datehash[date.format("DDMMYY")]
 
             week.days.push({
-              date      : date.clone(), 
+              date      : date.clone(),
               data      : day_data,
               available : day_data and day_data.spaces and day_data.spaces > 0,
               today     : moment().isSame(date, 'day'),
@@ -54,7 +76,7 @@ angular.module('BB.Directives').directive 'bbMonthPicker', () ->
             })
 
             date.add(1, 'day')
-            
+
           month.weeks.push(week)
 
         months.push(month)
@@ -73,8 +95,8 @@ angular.module('BB.Directives').directive 'bbMonthPicker', () ->
       if $scope.mode is 0
         for week in month.weeks
           for day in week.days
-            if (day.data && day.data.spaces > 0) and (day.date.isSame(month.start_date, 'day') or day.date.isAfter(month.start_date, 'day')) 
-              $scope.showDay(day) 
+            if (day.data && day.data.spaces > 0) and (day.date.isSame(month.start_date, 'day') or day.date.isAfter(month.start_date, 'day'))
+              $scope.showDay(day)
               return
 
 
@@ -85,7 +107,7 @@ angular.module('BB.Directives').directive 'bbMonthPicker', () ->
       for m in $scope.months
         $scope.selectMonth(m) if m.start_date.month() == month
       $scope.setLoaded $scope
-      
+
       return true
 
 
@@ -108,7 +130,29 @@ angular.module('BB.Directives').directive 'bbMonthPicker', () ->
         $scope.$emit 'month_picker:month_changed', $scope.months[index], last_month_shown
 
 
-
+###**
+* @ngdoc directive
+* @name BB.Directives:bbSlick
+* @restrict AE
+* @scope true
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:bbSlick
+*
+* <pre>
+* restrict: 'AE'
+* replace: true
+* scope : true
+* require : '^bbMonthPicker'
+* </pre>
+*
+* Has the following set of methods:
+* - templateUrl(element, attrs)
+* - controller($scope, $element, $attrs)
+*
+###
 angular.module('BB.Directives').directive 'bbSlick', ($rootScope, $timeout, $bbug, PathSvc, $compile, $templateCache, $window) ->
   restrict: 'A'
   replace: true

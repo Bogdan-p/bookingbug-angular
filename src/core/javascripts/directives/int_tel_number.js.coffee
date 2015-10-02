@@ -1,10 +1,34 @@
 app = angular.module 'BB.Directives'
 
-# International Telephone Input directive
-# http://www.tooorangey.co.uk/posts/that-international-telephone-input-umbraco-7-property-editor/
-# https://github.com/Bluefieldscom/intl-tel-input
+###**
+* @ngdoc directive
+* @name BB.Directives:intTelNumber
+* @restrict A
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:intTelNumber
+*
+* International Telephone Input directive
+*
+* http://www.tooorangey.co.uk/posts/that-international-telephone-input-umbraco-7-property-editor/
+*
+* https://github.com/Bluefieldscom/intl-tel-input
+*
+* <pre>
+* restrict: "A"
+* require: "ngModel"
+* </pre>
+*
+* Has the following set of methods:
+*
+* - link(scope, element, attrs, ctrl)
+* - convertNumber(value)
+*
+###
 app.directive "intTelNumber", ->
-  
+
   # Restrict it to being an attribute
   restrict: "A"
   require: "ngModel"

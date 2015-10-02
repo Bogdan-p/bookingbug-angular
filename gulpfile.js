@@ -15,6 +15,7 @@ var gulp = require('gulp');
     mainBowerFiles = require('main-bower-files');
     streamqueue = require('streamqueue');
     uglify = require('gulp-uglify');
+var gulpDocs = require('gulp-ngdocs');
 
 gulp.task('clean', function(cb) {
   del.sync(['release']);
@@ -116,3 +117,38 @@ gulp.task('webserver', ['assets'], function() {
 gulp.task('assets', ['clean', 'javascripts', 'images', 'stylesheets','fonts', 'theme', 'shims', 'widget']);
 
 gulp.task('default', ['assets', 'watch', 'webserver']);
+
+
+gulp.task('cleandocs', function(cb) {
+  del.sync(['docs']);
+  cb()
+});
+
+gulp.task('ngdocs', [], function () {
+  var options = {
+    html5Mode: false,
+    title: "BookingBug API Docs"
+  }
+  return gulp.src('src/*/javascripts/**')
+    .pipe(gulpif(/.*coffee$/, coffee().on('error', gutil.log)))
+    .pipe(gulpDocs.process(options))
+    .pipe(gulp.dest('./docs'));
+});
+
+gulp.task('copyJsFiles', function() {
+   gulp.src(['src/core/javascripts/components/*.js'])
+   .pipe(gulp.dest('docs/src/core/javascripts/components'));
+});
+
+gulp.task('watch', function() {
+  gulp.watch('src/**/*.coffee', ['ngdocs']);
+  gulp.watch('src/core/javascripts/components/*.js', ['copyJsFiles']);
+});
+
+gulp.task('docs', ['cleandocs','ngdocs', 'watch'], function (cb) {
+  return connect.server({
+    root: ['docs'],
+    port: 8000
+  })
+});
+

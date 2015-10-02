@@ -1,12 +1,80 @@
 'use strict'
 
+###**
+* @ngdoc directive
+* @name BB.Directives:bbEvent
+* @restrict AE
+* @scope true
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+
+* Directive BB.Directives:bbEvent
+*
+* See Controller {@link BB.Controllers:Event Event}
+*
+* <pre>
+* restrict: 'AE'
+* replace: true
+* scope : true
+* controller : 'Event'
+* </pre>
+*
+###
 angular.module('BB.Directives').directive 'bbEvent', () ->
   restrict: 'AE'
   replace: true
   scope : true
   controller : 'Event'
 
-
+###**
+* @ngdoc controller
+* @name BB.Controllers:Event
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller Event
+*
+* # Has the following set of methods:
+*
+* - $scope.init(comp)
+* - $scope.selectTickets()
+* - $scope.selectItem(item, route)
+* - $scope.setReady()
+* - $scope.getPrePaidsForEvent(client, event)
+*
+* @param {service} $scope Scope is an object that refers to the application mode.
+* <br>
+* {@link https://docs.angularjs.org/guide/scope more}
+*
+* @param {service} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope more}
+*
+* @param {service} PageControllerService Info
+* <br>
+* {@link BB.Services:PageControllerService more}
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {service} $attrs Info
+*
+* @param {service} EventService Info
+* <br>
+* {@link BB.Services:EventService more}
+*
+* @param {model} BBModel Info
+* <br>
+* {@link BB.Models:BBModel more}
+*
+* @param {service} ValidatorService Info
+* <br>
+* {@link BB.Services:ValidatorService more}
+*
+###
 angular.module('BB.Controllers').controller 'Event', ($scope, $attrs, $rootScope, EventService, $q, PageControllerService, BBModel, ValidatorService) ->
   $scope.controller = "public.controllers.Event"
   $scope.notLoaded $scope
@@ -41,7 +109,7 @@ angular.module('BB.Controllers').controller 'Event', ($scope, $attrs, $rootScope
         ticket.qty = if $scope.event_options.default_num_tickets then $scope.event_options.default_num_tickets else 0
 
       $scope.selectTickets() if $scope.event_options.default_num_tickets and $scope.event_options.auto_select_tickets and $scope.event.tickets.length is 1
-      
+
       $scope.tickets = $scope.event.tickets
       $scope.bb.basket.total_price = $scope.bb.basket.totalPrice()
       $scope.stopTicketWatch = $scope.$watch 'tickets', (tickets, oldtickets) ->

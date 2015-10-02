@@ -1,5 +1,23 @@
 'use strict';
 
+###**
+* @ngdoc controller
+* @name BBQueue.Controllers:QueuerPosition
+*
+* @description
+*{@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller QueuerPosition
+*
+* # Has the following set of methods:
+*
+* @requires BBQueue.Services:QueuerService
+* @requires $scope
+* @requires $pusher
+* @requires BB.Services:QueryStringService
+*
+###
+
 angular.module('BBQueue.Controllers').controller('QueuerPosition', ["QueuerService", "$scope", "$pusher", "QueryStringService", (QueuerService, $scope, $pusher, QueryStringService) ->
 
 	params =

@@ -1,3 +1,29 @@
+###**
+* @ngdoc directive
+* @name BBAdminServices.Directives:personTable
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BBAdminServices.Directives:personTable
+*
+* # Has the following set of methods:
+*
+* - controller($scope)
+* - $scope.getPeople()
+* - $scope.newPerson()
+* - $scope.delete(person)
+* - $scope.edit(person)
+* - $scope.schedule(person)
+* - link(scope, element, attrs)
+*
+* @requires BBAdmin.Services:AdminCompanyService
+* @requires BBAdmin.Services:AdminPersonService
+* @requires $log
+* @requires BB.Services:ModalForm
+*
+###
+
 angular.module('BBAdminServices').directive 'personTable', (AdminCompanyService,
     AdminPersonService, $log, ModalForm) ->
 

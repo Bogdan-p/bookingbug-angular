@@ -1,5 +1,45 @@
 'use strict';
 
+###**
+* @ngdoc object
+* @name BB.Models:QuestionModel
+*
+* @description
+* This is QuestionModel in BB.Models module that creates Question object.
+*
+* <pre>
+* //Creates class Question that extends BaseModel
+* class Question extends BaseModel
+* </pre>
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* * <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {service} $filter Filters are used for formatting data displayed to the user.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$filter more}
+*
+* @param {model} BBModel Info
+* <br>
+* {@link BB.Models:BBModel more}
+*
+* @param {model} BaseModel Info
+* <br>
+* {@link BB.Models:BaseModel more}
+*
+* @returns {object} Newly created Question object with the following set of methods:
+*
+* - constructor(data)
+* - hasPrice()
+* - selectedPrice()
+* - selectedPriceQty(qty)
+* - getAnswerId()
+* - showElement()
+* - hideElement()
+* - getPostData()
+*
+###
 angular.module('BB.Models').factory "QuestionModel", ($q, $filter, BBModel, BaseModel) ->
 
   class Question extends BaseModel
@@ -40,7 +80,7 @@ angular.module('BB.Models').factory "QuestionModel", ($q, $filter, BBModel, Base
 
     selectedPriceQty: (qty) ->
       qty ||= 1
-      p = @selectedPrice()  
+      p = @selectedPrice()
       if @price_per_booking
         p = p * qty
       p

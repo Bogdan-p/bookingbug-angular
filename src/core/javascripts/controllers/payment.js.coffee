@@ -1,5 +1,43 @@
 'use strict'
 
+###**
+* @ngdoc directive
+* @name BB.Directives:bbPayment
+* @restrict AE
+* @scope true
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+
+* Directive BB.Directives:bbPayment
+*
+* See Controller {@link BB.Controllers:Payment Payment}
+*
+* <pre>
+* restrict: 'AE'
+* replace: true
+* scope: true
+* controller: 'Payment'
+* link: linker
+* </pre>
+*
+* @param {service} $window A reference to the browser's window object.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$window more}
+*
+* @param {service} $location The $location service parses the URL in the browser address bar
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$location more}
+*
+* @param {service} $sce $sce is a service that provides Strict Contextual Escaping services to AngularJS.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$sce more}
+*
+* @param {service} SettingsService Info
+* <br>
+* {@link BB.Services:SettingsService more}
+*
+###
 angular.module('BB.Directives').directive 'bbPayment', ($window, $location, $sce, SettingsService) ->
 
   error = (scope, message) ->
@@ -61,6 +99,55 @@ angular.module('BB.Directives').directive 'bbPayment', ($window, $location, $sce
     link: linker
   }
 
+###**
+* @ngdoc controller
+* @name BB.Controllers:Payment
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller Payment
+*
+* # Has the following set of methods:
+*
+* - $scope.callNotLoaded()
+* - $scope.callSetLoaded()
+* - $scope.paymentDone()
+* - $scope.error(message)
+*
+* @param {service} $scope Scope is an object that refers to the application mode.
+* <br>
+* {@link https://docs.angularjs.org/guide/scope more}
+*
+* @param {service} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope more}
+*
+* @param {service} $location The $location service parses the URL in the browser address bar
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$location more}
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {service} $window A reference to the browser's window object.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$window more}
+*
+* @param {service} $sce $sce is a service that provides Strict Contextual Escaping services to AngularJS.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$sce more}
+*
+* @param {service} $log Simple service for logging.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$log more}
+*
+* @param {service} $timeout Angular's wrapper for window.setTimeout.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$timeout more}
+*
+###
 angular.module('BB.Controllers').controller 'Payment', ($scope,  $rootScope, $q, $location, $window, $sce, $log, $timeout) ->
 
   $scope.controller = "public.controllers.Payment"
@@ -72,7 +159,7 @@ angular.module('BB.Controllers').controller 'Payment', ($scope,  $rootScope, $q,
   $rootScope.connection_started.then =>
     $scope.bb.total = $scope.total if $scope.total
     $scope.url = $sce.trustAsResourceUrl($scope.bb.total.$href('new_payment'))
-  
+
   $scope.callNotLoaded = () =>
     $scope.notLoaded $scope
 

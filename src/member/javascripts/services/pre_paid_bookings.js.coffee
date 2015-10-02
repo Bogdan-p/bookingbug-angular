@@ -1,5 +1,36 @@
+###**
+* @ngdoc service
+* @name BB.Services:MemberPrePaidBookingService
+*
+* @description
+* Factory MemberPrePaidBookingService
+*
+* @requires $q
+* @requires BB.Models:BBModel
+*
+* @returns {Promise} This service has the following set of methods:
+*
+* - query(member, params)
+*
+###
+
 angular.module('BB.Services').factory "MemberPrePaidBookingService", ($q,
   BBModel) ->
+
+      ###**
+      * @ngdoc method
+      * @name query
+      * @methodOf BB.Services:MemberPrePaidBookingService
+      *
+      * @description
+      * Method refresh
+      *
+      * @param {object} member member
+      * @param {object} params params
+      *
+      * @returns {Promise} deferred.reject(err) or deferred.promise
+      *
+      ###
 
       query: (member, params) ->
         deferred = $q.defer()

@@ -1,11 +1,118 @@
 'use strict';
 
+###**
+* @ngdoc directive
+* @name BB.Directives:bbServices
+* @restrict AE
+* @scope true
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+
+* Directive BB.Directives:bbServices
+*
+* See Controller {@link BB.Controllers:ServiceList ServiceList}
+*
+* <pre>
+* restrict: 'AE'
+* replace: true
+* scope: true
+* controller: 'ServiceList'
+* </pre>
+*
+###
 angular.module('BB.Directives').directive 'bbServices', () ->
   restrict: 'AE'
   replace: true
   scope : true
   controller : 'ServiceList'
 
+###**
+* @ngdoc controller
+* @name BB.Controllers:ServiceList
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller ServiceList
+*
+* # Has the following set of ServiceList:
+*
+* - $scope.init(comp)
+* - setServiceItem(items)
+* - $scope.selectItem(item, route)
+* - $scope.$watch 'service', (newval, oldval)
+* - $scope.setReady()
+* - $scope.errorModal()
+* - $scope.filterFunction(service)
+* - $scope.custom_array(match)
+* - $scope.service_name_include(match)
+* - $scope.resetFilters()
+* - $scope.filterChanged()
+*
+* @param {service} $scope Scope is an object that refers to the application mode.
+* <br>
+* {@link https://docs.angularjs.org/guide/scope more}
+*
+* @param {service} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope more}
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {service} $attrs Info
+*
+* @param {service} ModalForm Info
+* <br>
+* {@link BB.Services:ModalForm more}
+*
+* @param {service} $sce $sce is a service that provides Strict Contextual Escaping services to AngularJS.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$sce more}
+*
+* @param {service} ItemService Info
+* <br>
+* {@link BB.Services:ItemService more}
+*
+* @param {service} FormDataStoreService Info
+* <br>
+* {@link BB.Services:FormDataStoreService more}
+*
+* @param {service} ValidatorService Info
+* <br>
+* {@link BB.Services:ValidatorService more}
+*
+* @param {service} PageControllerService Info
+* <br>
+* {@link BB.Services:PageControllerService more}
+*
+* @param {model} halClient Info
+* <br>
+* {@link angular-hal:halClient more}
+*
+* @param {service} AlertService Info
+* <br>
+* {@link BB.Services:AlertService more}
+*
+* @param {service} ErrorService Info
+* <br>
+* {@link BB.Services:ErrorService more}
+*
+* @param {service} ErrorService Info
+* <br>
+* {@link BB.Services:ErrorService more}
+*
+* @param {service} $filter Filters are used for formatting data displayed to the user.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$filter more}
+*
+* @param {service} CategoryService Info
+* <br>
+* {@link BB.Services:CategoryService more}
+*
+###
 angular.module('BB.Controllers').controller 'ServiceList',($scope, $rootScope, $q, $attrs, $modal, $sce, ItemService, FormDataStoreService, ValidatorService, PageControllerService, halClient, AlertService, ErrorService, $filter, CategoryService) ->
 
   $scope.controller = "public.controllers.ServiceList"
@@ -26,7 +133,7 @@ angular.module('BB.Controllers').controller 'ServiceList',($scope, $rootScope, $
   $scope.options = $scope.$eval($attrs.bbServices) or {}
 
   $scope.booking_item = $scope.$eval($attrs.bbItem) if $attrs.bbItem
-  $scope.show_all = true if $attrs.bbShowAll or $scope.options.show_all 
+  $scope.show_all = true if $attrs.bbShowAll or $scope.options.show_all
   $scope.allowSinglePick = true if $scope.options.allow_single_pick
   $scope.price_options = {min: 0, max: 100}
 
@@ -66,16 +173,16 @@ angular.module('BB.Controllers').controller 'ServiceList',($scope, $rootScope, $
 
       # filter out event groups unless explicity requested
       if !$scope.options.show_event_groups
-        items = items.filter (x) -> !x.is_event_group 
+        items = items.filter (x) -> !x.is_event_group
 
-      # if there's only one service and single pick hasn't been enabled, 
+      # if there's only one service and single pick hasn't been enabled,
       # automatically select the service.
       if (items.length is 1 && !$scope.allowSinglePick)
         if !$scope.selectItem(items[0], $scope.nextRoute )
           setServiceItem items
         else if !@skipped
           $scope.skipThisStep()
-          @skipped = true          
+          @skipped = true
       else
         setServiceItem items
 
@@ -111,23 +218,23 @@ angular.module('BB.Controllers').controller 'ServiceList',($scope, $rootScope, $
         if $scope.booking_item.group
           items = items.filter (x) -> !x.group_id || x.group_id == $scope.booking_item.group
         services = (i.item for i in items when i.item?)
-        
+
         $scope.bookable_services = services
         $scope.bookable_items = items
-        
+
         if services.length is 1 and !$scope.allowSinglePick
           if !$scope.selectItem(services[0], $scope.nextRoute )
             setServiceItem services
           else if !@skipped
             $scope.skipThisStep()
-            @skipped = true  
+            @skipped = true
         else
           setServiceItem items
-        
+
         $scope.setLoaded($scope)
-      , (err) ->  
+      , (err) ->
         $scope.setLoadedAndShowError($scope, err, 'Sorry, something went wrong')
-  
+
   # set the service item so the correct item is displayed in the dropdown menu.
   # without doing this the menu will default to 'please select'
   setServiceItem = (items) ->
@@ -183,7 +290,7 @@ angular.module('BB.Controllers').controller 'ServiceList',($scope, $rootScope, $
   $scope.filterFunction = (service) ->
     if !service
       return false
-    $scope.service_array = [] 
+    $scope.service_array = []
     $scope.custom_array = (match)->
       if !match
         return false
@@ -193,12 +300,12 @@ angular.module('BB.Controllers').controller 'ServiceList',($scope, $rootScope, $
           item = item.toLowerCase()
           if item is match
             $scope.show_custom_array = true
-            return true 
+            return true
         return false
     $scope.service_name_include = (match) ->
       if !match
         return false
-      if match 
+      if match
         match = match.toLowerCase()
         item = service.name.toLowerCase()
         if item.includes(match)

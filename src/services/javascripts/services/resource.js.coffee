@@ -1,6 +1,40 @@
+###**
+* @ngdoc service
+* @name BBAdmin.Services:AdminResourceService
+*
+* @description
+* Factory AdminResourceService
+*
+* path: src/services/javascripts/services/resource.js.coffee
+*
+* @requires $q
+* @requires UriTemplate
+* @requires angular-hal:halClient
+* @requires BB.Services:SlotCollections
+* @requires BB.Models:BBModel
+*
+* @returns {Promise} This service has the following set of methods:
+*
+* - query(params)
+* - block(company, resource, data)
+*
+###
 angular.module('BBAdmin.Services').factory 'AdminResourceService',
 ($q, UriTemplate, halClient, SlotCollections, BBModel) ->
 
+  ###**
+  * @ngdoc method
+  * @name query
+  * @methodOf BBAdmin.Services:AdminResourceService
+  *
+  * @description
+  * query
+  *
+  * @params {object} params
+  *
+  * @returns {Promise} deferred.promise
+  *
+  ###
   query: (params) ->
     company = params.company
     defer = $q.defer()
@@ -14,6 +48,21 @@ angular.module('BBAdmin.Services').factory 'AdminResourceService',
       defer.reject(err)
     defer.promise
 
+  ###**
+  * @ngdoc method
+  * @name block
+  * @methodOf BBAdmin.Services:AdminResourceService
+  *
+  * @description
+  * block
+  *
+  * @params {object} params
+  * @params {string} resource
+  * @params {object} data
+  *
+  * @returns {Promise} deferred.promise
+  *
+  ###
   block: (company, resource, data) ->
     prms = {id:  resource.id, company_id: company.id}
 

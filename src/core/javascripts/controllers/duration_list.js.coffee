@@ -1,12 +1,71 @@
 'use strict';
 
+###**
+* @ngdoc directive
+* @name BB.Directives:bbDurations
+* @restrict AE
+* @scope true
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+
+* Directive BB.Directives:bbDurations
+*
+* See Controller {@link BB.Controllers:DurationList DurationList}
+*
+* <pre>
+* restrict: 'AE'
+* replace: true
+* scope : true
+* controller : 'DurationList'
+* </pre>
+*
+###
 angular.module('BB.Directives').directive 'bbDurations', () ->
   restrict: 'AE'
   replace: true
   scope : true
   controller : 'DurationList'
 
-
+###**
+* @ngdoc controller
+* @name BB.Controllers:DurationList
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller DurationList
+*
+* # Has the following set of methods:
+*
+* - $scope.loadData()
+* - $scope.selectDuration(dur, route)
+* - $scope.durationChanged()
+* - $scope.setReady()
+*
+* @param {service} $scope Scope is an object that refers to the application mode.
+* <br>
+* {@link https://docs.angularjs.org/guide/scope more}
+*
+* @param {service} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope more}
+*
+* @param {service} PageControllerService Info
+* <br>
+* {@link BB.Services:PageControllerService more}
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {service} $attrs Info
+*
+* @param {service} AlertService Info
+* <br>
+* {@link BB.Services:AlertService more}
+*
+###
 angular.module('BB.Controllers').controller 'DurationList', ($scope,  $rootScope, PageControllerService, $q, $attrs, AlertService) ->
   $scope.controller = "public.controllers.DurationList"
   $scope.notLoaded $scope
@@ -25,7 +84,7 @@ angular.module('BB.Controllers').controller 'DurationList', ($scope,  $rootScope
       $scope.durations =
         (for d in _.zip(service.durations, service.prices)
           {value: d[0], price: d[1]})
-      
+
       initial_duration = $scope.$eval($attrs.bbInitialDuration)
 
       for duration in $scope.durations

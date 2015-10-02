@@ -1,3 +1,21 @@
+###**
+* @ngdoc directive
+* @name BBMember.Directives:bbMemberPrePaidBookings
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BBMember.Directives:bbMemberPrePaidBookings
+*
+* # Has the following set of methods:
+*
+* -  link(scope, element, attrs)
+*    - getBookings()
+*
+* @requires $rootScope
+*
+###
+
 angular.module('BBMember').directive 'bbMemberPrePaidBookings', ($rootScope) ->
 
   link = (scope, element, attrs) ->

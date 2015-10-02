@@ -1,10 +1,48 @@
 'use strict';
 
+###**
+* @ndgoc directive
+* @name BB.Directives:bbSpaces
+*
+* @restrict AE
+* @scope true
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:bbSpaces
+*
+* # Has the following set of methods:
+*
+###
+
 angular.module('BB.Directives').directive 'bbSpaces', () ->
   restrict: 'AE'
   replace: true
   scope : true
   controller : 'SpaceList'
+
+###**
+* @ngdoc controller
+* @name BB.Controllers:SpaceList
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller SpaceList
+*
+* # Has the following set of methods:
+*
+* - $scope.init(comp)
+* - $scope.selectItem(item, route)
+*
+* @requires $scope
+* @requires $rootScope
+* @requires BB.Services:ServiceService
+* @requires BB.Services:SpaceService
+* @requires $q
+*
+###
 
 angular.module('BB.Controllers').controller 'SpaceList',
 ($scope,  $rootScope, ServiceService, SpaceService, $q) ->

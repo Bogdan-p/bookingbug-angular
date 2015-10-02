@@ -1,5 +1,43 @@
 app = angular.module 'BB.Directives'
 
+###**
+* @ngdoc directive
+* @name BB.Directives:bbDisplayMode
+* @restrict A
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+* Directive BB.Directives:bbDisplayMode
+*
+* * <pre>
+* transclude: false,
+* restrict: 'A',
+* template: '<span class="visible-xs"></span>
+*           <span class="visible-sm"></span>
+*           <span class="visible-md"></span>
+*           <span class="visible-lg"></span>'
+* </pre>
+*
+* Has the following set of methods:
+*
+* - link(scope, elem, attrs)
+* - isVisible(element)
+* - getCurrentSize()
+* - update()
+*
+* @param {service} $compile Compiles an HTML string or DOM into a template and produces a template function, which can then be used to link scope and the template together.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$compile more}
+*
+* @param {service} $window A reference to the browser's window object.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$window more}
+*
+* @param {model} $bbug Releases the hold on the $ shortcut identifier, so that other scripts can use it.
+* <br>
+* {@link $bbug more}
+*
+###
 app.directive 'bbDisplayMode', ($compile, $window, $bbug) ->
   {
     transclude: false,

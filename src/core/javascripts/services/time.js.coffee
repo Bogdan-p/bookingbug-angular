@@ -1,5 +1,27 @@
-
-
+###**
+* @ngdoc service
+* @name BB.Services:TimeService
+*
+* @description
+* Factory TimeService
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {model} BBModel Info
+* <br>
+* {@link BB.Models:BBModel more}
+*
+* @param {model} halClient Info
+*
+* @returns {Promise} This service has the following set of methods:
+*
+* - query(prms)
+* - merge_times(all_events, service, item)
+* - checkCurrentItem(item, sorted_times, ev)
+*
+###
 angular.module('BB.Services').factory "TimeService", ($q, BBModel, halClient) ->
   query: (prms) ->
     deferred = $q.defer()

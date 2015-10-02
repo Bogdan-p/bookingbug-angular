@@ -1,3 +1,23 @@
+###**
+* @ngdoc service
+* @name BB.Services:EventChainService
+*
+* @description
+* Factory EventChainService
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {model} BBModel Info
+* <br>
+* {@link BB.Models:BBModel more}
+*
+* @returns {Promise} This service has the following set of methods:
+*
+* - query(company, params)
+*
+###
 angular.module('BB.Services').factory "EventChainService",  ($q, BBModel) ->
   query: (company, params) ->
     deferred = $q.defer()

@@ -1,6 +1,22 @@
 
 # returns a object literal version of the querystring. you can pass in a key
 # name and it will return a value i.e. QueryStringService('ref')
+###**
+* @ngdoc service
+* @name BB.Services:QueryStringService
+*
+* @description
+* Factory QueryStringService
+*
+* @param {service} $timeout Angular's wrapper for window.setTimeout.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$timeout more}
+*
+* @returns {Promise} This service has the following set of methods:
+*
+* - isNum(num)
+*
+###
 angular.module('BB.Services').factory 'QueryStringService', ($window) ->
   return (keyName) ->
     varObj = {}

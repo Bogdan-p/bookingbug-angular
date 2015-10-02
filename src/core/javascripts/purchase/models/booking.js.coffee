@@ -1,5 +1,42 @@
 'use strict';
 
+###**
+* @ngdoc object
+* @name BB.Models:Purchase.BookingModel
+*
+* @description
+* This is Purchase BookingModel in BB.Models module that creates Booking object.
+*
+* <pre>
+* //Creates class Purchase_Booking that extends BaseModel
+* class Purchase_Booking extends BaseModel
+* </pre>
+*
+* @requires $q
+* @requires $window
+* @requires BB.Models:BBModel
+* @requires BB.Models:BaseModel
+* @requires $bbug
+*
+* @returns {Promise} Newly created Booking object with the following set of methods:
+*
+* - constructor(data)
+* - getGroup()
+* - getColour()
+* - getCompany()
+* - getAnswersPromise()
+* - getSurveyAnswersPromise()
+* - getPostData()
+* - checkReady
+* - printed_price()
+* - getDateString()
+* - getTimeInMins()
+* - getAttachments()
+* - canCancel()
+* - canMove()
+*
+###
+
 angular.module('BB.Models').factory "Purchase.BookingModel", ($q, $window, BBModel, BaseModel, $bbug) ->
 
 

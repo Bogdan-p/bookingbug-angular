@@ -1,10 +1,88 @@
 'use strict';
 
+###**
+* @ngdoc directive
+* @name BB.Directives:bbMultiServiceSelect
+* @restrict AE
+* @scope true
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+
+* Directive BB.Directives:bbMultiServiceSelect
+*
+* See Controller {@link BB.Controllers:MultiServiceSelect MultiServiceSelect}
+*
+* <pre>
+* restrict: 'AE'
+* scope : true
+* controller : 'MultiServiceSelect'
+* </pre>
+*
+###
 angular.module('BB.Directives').directive 'bbMultiServiceSelect', () ->
   restrict: 'AE'
   scope : true
   controller : 'MultiServiceSelect'
 
+###**
+* @ngdoc controller
+* @name BB.Controllers:MultiServiceSelect
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller MultiServiceSelect
+*
+* # Has the following set of methods:
+*
+* - initialise()
+* - checkItemDefaults()
+* - initialiseCategories(categories)
+* - $scope.changeCategory(category_name, services)
+* - $scope.changeCategoryName()
+* - $scope.addItem(item, duration)
+* - $scope.removeItem(item, options)
+* - $scope.nextStep()
+* - $scope.addService()
+* - $scope.setReady()
+* - $scope.selectDuration(service)
+* - controller($scope, $modalInstance, service)
+* - $scope.cancel
+* - $scope.setDuration()
+* - service
+*
+* @param {service} $scope Scope is an object that refers to the application mode.
+* <br>
+* {@link https://docs.angularjs.org/guide/scope more}
+*
+* @param {service} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope more}
+*
+* @param {function} angular.element Wraps a raw DOM element or HTML string as a jQuery element.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/function/angular.element more}
+*
+* @param {service} $attrs Info
+*
+* @param {service} AlertService Info
+* <br>
+* {@link BB.Services:AlertService more}
+*
+* @param {service} ErrorService Info
+* <br>
+* {@link BB.Services:ErrorService more}
+*
+* @param {service} FormDataStoreService Info
+* <br>
+* {@link BB.Services:FormDataStoreService more}
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+###
 angular.module('BB.Controllers').controller 'MultiServiceSelect',
 ($scope, $rootScope, $q, $attrs, BBModel, AlertService, CategoryService, FormDataStoreService, $modal) ->
 
@@ -24,7 +102,7 @@ angular.module('BB.Controllers').controller 'MultiServiceSelect',
         initialise()
     else
       $scope.company = $scope.bb.company
- 
+
     # wait for services before we begin initialisation
     $scope.$watch $scope.options.services, (newval, oldval) ->
       if newval and angular.isArray(newval)
@@ -44,7 +122,7 @@ angular.module('BB.Controllers').controller 'MultiServiceSelect',
 
     # company question promise
     promises.push($scope.company.getCompanyQuestionsPromise()) if $scope.company.$has('company_questions')
-    
+
     $q.all(promises).then (result) ->
 
       $scope.company_questions = result[1]
@@ -94,13 +172,13 @@ angular.module('BB.Controllers').controller 'MultiServiceSelect',
       for category in categories
           category.order = parseInt(category.name.slice(0,2))
           category.name  = category.name.slice(3)
-    
+
     # index categories by their id
     $scope.all_categories = _.indexBy(categories, 'id')
 
     # group services by category id
     all_categories = _.groupBy($scope.items, (item) -> item.category_id)
-    
+
     # find any sub categories
     sub_categories = _.findWhere($scope.company_questions, {name: 'Extra Category'})
     sub_categories = _.map(sub_categories.question_items, (sub_category) -> sub_category.name) if sub_categories
@@ -120,7 +198,7 @@ angular.module('BB.Controllers').controller 'MultiServiceSelect',
         for sub_category in sub_categories
           grouped_sub_category = {
             name: sub_category,
-            services: _.filter(services, (service) -> service.extra.extra_category is sub_category) 
+            services: _.filter(services, (service) -> service.extra.extra_category is sub_category)
           }
 
           # only add the sub category if it has some services
@@ -131,11 +209,11 @@ angular.module('BB.Controllers').controller 'MultiServiceSelect',
 
       # set the category
       category = {
-        name           : category_details.name 
-        description    : category_details.description 
+        name           : category_details.name
+        description    : category_details.description
         sub_categories : grouped_sub_categories
         }
-      
+
       # get the order if instruccted
       category.order = $scope.all_categories[category_id].order if $scope.options.ordered_categories
 
@@ -145,7 +223,7 @@ angular.module('BB.Controllers').controller 'MultiServiceSelect',
       if $scope.selected_category_name and $scope.selected_category_name is category_details.name
         $scope.selected_category = $scope.categories[$scope.categories.length - 1]
       # or if there's a default category
-      else if $scope.bb.item_defaults.category and $scope.bb.item_defaults.category.name is category_details.name and !$scope.selected_category 
+      else if $scope.bb.item_defaults.category and $scope.bb.item_defaults.category.name is category_details.name and !$scope.selected_category
         $scope.selected_category = $scope.categories[$scope.categories.length - 1]
         $scope.selected_category_name = $scope.selected_category.name
 

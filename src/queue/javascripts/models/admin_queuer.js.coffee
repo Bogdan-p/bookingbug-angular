@@ -1,5 +1,31 @@
 'use strict'
 
+###**
+* @ngdoc object
+* @name BB.Models:Admin.QueuerModel
+*
+* @description
+* This is Admin.QueuerModel in BB.Models module that creates Admin Queuer object.
+*
+* <pre>
+* //Creates class Admin_ClientQueue that extends BaseModel
+* class Admin_Queuer extends BaseModel
+* </pre>
+*
+* @requires $q
+* @requires BB.Models:BBModel
+* @requires BB.Models:BaseModel
+*
+* @returns {object} Newly created Admin Queuer object with the following set of methods:
+*
+* - constructor()
+* - remaining()
+* - startServing(person)
+* - finishServing()
+* - extendAppointment (minutes)
+*
+###
+
 angular.module('BB.Models').factory "Admin.QueuerModel", ($q, BBModel, BaseModel) ->
 
   class Admin_Queuer extends BaseModel

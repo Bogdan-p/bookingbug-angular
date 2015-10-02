@@ -3,6 +3,30 @@
 # Directives
 app = angular.module 'BB.Directives'
 
+###**
+* @ngdoc directive
+* @name BB.Directives:bbContent
+* @restrict A
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:bbContent
+*
+* <pre>
+* transclude: false,
+* restrict: 'A',
+* </pre>
+*
+* Has the following set of methods:
+* - link: (scope, element, attrs)
+*
+* @param {service} $compile Compiles an HTML string or DOM into a template and produces a template function, which can then be used to link scope and the template together.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$compile more}
+*
+###
+
 app.directive 'bbContent', ($compile) ->
   transclude: false,
   restrict: 'A',
@@ -17,6 +41,19 @@ app.directive 'bbContent', ($compile) ->
 
     $compile(element)(scope)
 
+###**
+* @ngdoc directive
+* @name BB.Directives:bbLoading
+* @restrict A
+*
+* @description
+* Directive BB.Directives:bbLoading
+*
+* @param {service} $compile Compiles an HTML string or DOM into a template and produces a template function, which can then be used to link scope and the template together.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$compile more}
+*
+###
 
 app.directive 'bbLoading', ($compile) ->
   transclude: false,
@@ -28,6 +65,20 @@ app.directive 'bbLoading', ($compile) ->
     $compile(element)(scope)
     return
 
+###**
+* @ngdoc directive
+* @name BB.Directives:bbWaitFor
+* @restrict A
+* @priority 800
+*
+* @description
+* Directive BB.Directives:bbWaitFor
+*
+* @param {service} $compile Compiles an HTML string or DOM into a template and produces a template function, which can then be used to link scope and the template together.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$compile more}
+*
+###
 app.directive 'bbWaitFor', ($compile) ->
   transclude: false,
   restrict: 'A',
@@ -43,7 +94,22 @@ app.directive 'bbWaitFor', ($compile) ->
 #    $compile(element)(scope)
     return
 
-
+###**
+* @ngdoc directive
+* @name BB.Directives:bbScrollTo
+* @restrict A
+*
+* @description
+* Directive BB.Directives:bbScrollTo
+*
+* @param {service} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope more}
+*
+* @param {object} AppConfig Use this to inject application wide settings around the app
+* <br>
+* {@link AppConfig more}
+###
 app.directive 'bbScrollTo', ($rootScope, AppConfig, BreadcrumbService, $bbug, $window, SettingsService) ->
   transclude: false,
   restrict: 'A',
@@ -68,7 +134,7 @@ app.directive 'bbScrollTo', ($rootScope, AppConfig, BreadcrumbService, $bbug, $w
         scroll_to_element = $bbug(element)
 
       current_step = BreadcrumbService.getCurrentStep()
-      
+
       # if the event is page:loaded or the element is not in view, scroll to it
       if (scroll_to_element)
         if (evnt == "page:loaded" and current_step > 1) or always_scroll or (evnt == "widget:restart") or
@@ -83,12 +149,35 @@ app.directive 'bbScrollTo', ($rootScope, AppConfig, BreadcrumbService, $bbug, $w
 
 # bbSlotGrouper
 # group time slots together based on a given start time and end time
+
+###**
+* @ngdoc directive
+* @name BB.Directives:bbSlotGrouper
+* @restrict A
+*
+* @scope true
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:bbSlotGrouper
+*
+* <pre>
+* restrict: 'A',
+* scope: true,
+* </pre>
+*
+* Has the following set of methods:
+* - link: (scope, element, attrs)
+*
+###
+
 app.directive  'bbSlotGrouper', () ->
   restrict: 'A'
   scope: true
   link: (scope, element, attrs) ->
     slots = scope.$eval(attrs.slots)
-    return if !slots 
+    return if !slots
     scope.grouped_slots = []
     for slot in slots
       scope.grouped_slots.push(slot) if slot.time >= scope.$eval(attrs.startTime) && slot.time < scope.$eval(attrs.endTime)
@@ -96,8 +185,33 @@ app.directive  'bbSlotGrouper', () ->
 
 
 # bbForm
-# Adds behaviour to select first invalid input 
+# Adds behaviour to select first invalid input
 # TODO more all form behaviour to this directive, initilising options as parmas
+
+###**
+* @ngdoc directive
+* @name BB.Directives:bbForm
+* @restrict A
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:bbForm
+*
+* <pre>
+* restrict: 'A',
+* require: '^form',
+* </pre>
+*
+* Has the following set of methods:
+* - link: (scope, elem, attrs, ctrls)
+*
+* @requires $bbug
+* @requires $windows
+* @requires BB.Services:SettingsService
+*
+###
+
 app.directive 'bbForm', ($bbug, $window, SettingsService) ->
   restrict: 'A'
   require: '^form'
@@ -106,11 +220,11 @@ app.directive 'bbForm', ($bbug, $window, SettingsService) ->
     # set up event handler on the form element
     elem.on "submit", ->
       invalid_form_group = elem.find('.has-error:first')
-      
+
       if invalid_form_group && invalid_form_group.length > 0
         if 'parentIFrame' of $window
           parentIFrame.scrollToOffset(0, invalid_form_group.offset().top - SettingsService.getScrollOffset())
-        else 
+        else
           $bbug("html, body").animate
             scrollTop: invalid_form_group.offset().top
             , 1000
@@ -122,7 +236,32 @@ app.directive 'bbForm', ($bbug, $window, SettingsService) ->
 
 
 # bbAddressMap
-# Adds behaviour to select first invalid input 
+# Adds behaviour to select first invalid input
+
+###**
+* @ngdoc directive
+* @name BB.Directives:bbAddressMap
+* @restrict A
+*
+* @scope true
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:bbAddressMap
+*
+* <pre>
+* restrict: 'A',
+* scope: true,
+* </pre>
+*
+* Has the following set of methods:
+* - controller: ($scope, $element, $attrs)
+*
+* @requires $document
+*
+###
+
 app.directive 'bbAddressMap', ($document) ->
   restrict: 'A'
   scope: true
@@ -132,16 +271,16 @@ app.directive 'bbAddressMap', ($document) ->
     $scope.isDraggable = $document.width() > 480
 
     $scope.$watch $attrs.bbAddressMap, (new_val, old_val) ->
-      
+
       return if !new_val
 
       map_item = new_val
 
-      $scope.map = { 
-        center: { 
-          latitude: map_item.lat, 
-          longitude: map_item.long 
-        }, 
+      $scope.map = {
+        center: {
+          latitude: map_item.lat,
+          longitude: map_item.long
+        },
         zoom: 15
       }
 
@@ -158,6 +297,27 @@ app.directive 'bbAddressMap', ($document) ->
         }
       }
 
+###**
+* @ngdoc directive
+* @name BB.Directives:bbMergeDuplicateQuestions
+* @restrict A
+*
+* @scope true
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:bbMergeDuplicateQuestions
+*
+* <pre>
+* restrict: 'A',
+* scope: true,
+* </pre>
+*
+* Has the following set of methods:
+* - controller: ($scope, $rootScope)
+*
+###
 
 angular.module('BB.Directives').directive 'bbMergeDuplicateQuestions', () ->
   restrict: 'A'

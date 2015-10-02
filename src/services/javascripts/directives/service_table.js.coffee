@@ -1,3 +1,29 @@
+###**
+* @ngdoc directive
+* @name BBAdminServices.Directives:serviceTable
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BBAdminServices.Directives:serviceTable
+*
+* # Has the following set of methods:
+*
+* - controller($scope)
+* - $scope.getServices()
+* - $scope.newService()
+* - $scope.delete(service)
+* - $scope.edit(service)
+* - link(scope, element, attrs)
+*
+* @requires BBAdmin.Services:AdminCompanyService
+* @requires BBAdmin.Services:AdminServiceService
+* @requires $modal
+* @requires $log
+* @requires BB.Services:ModalForm
+*
+###
+
 angular.module('BBAdminServices').directive 'serviceTable', (AdminCompanyService,
     AdminServiceService, $modal, $log, ModalForm) ->
 

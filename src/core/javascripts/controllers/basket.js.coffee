@@ -3,13 +3,51 @@
 
 # TODO: Try and get all the baset logic into a service. The basket list
 # doesn't look like it's used anywhere.
+
+###**
+* @ngdoc directive
+* @name BB.Directives:bbMiniBasket
+* @restrict AE
+* @scope true
+*
+* @description
+* Directive BB.Directives:bbMiniBasket
+*
+* See Controller {@link BB.Controllers:MiniBasket MiniBasket}
+*
+* <pre>
+* restrict: 'AE'
+* replace: true
+* scope : true
+* controller : 'MiniBasket'
+* </pre>
+*
+*
+###
 angular.module('BB.Directives').directive 'bbMiniBasket', () ->
   restrict: 'AE'
   replace: true
   scope : true
   controller : 'MiniBasket'
 
-
+###**
+* @ngdoc controller
+* @name BB.Controllers:MiniBasket
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller MiniBasket
+*
+* # Has the following set of methods:
+* - $scope.basketDescribe(nothing, single, plural)
+*
+* @requires $scope
+* @requires $q
+* @requires $rootScope
+* @requires BB.Services:BasketService
+*
+###
 angular.module('BB.Controllers').controller 'MiniBasket', ($scope,  $rootScope, BasketService, $q) ->
   $scope.controller = "public.controllers.MiniBasket"
   $scope.setUsingBasket(true)
@@ -34,6 +72,53 @@ angular.module('BB.Directives').directive 'bbBasketList', () ->
   controller : 'BasketList'
 
 
+###**
+* @ngdoc controller
+* @name BB.Controllers:BasketList
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller BasketList
+*
+* # Has the following set of methods:
+*
+* - $scope.addAnother(route)
+* - $scope.checkout (route)
+* - $scope.applyCoupon(coupon)
+* - $scope.applyDeal(deal_code)
+* - $scope.removeDeal(deal_code)
+* - $scope.setReady
+*
+* @param {object} $scope Scope is an object that refers to the application mode.
+* <br>
+* {@link https://docs.angularjs.org/guide/scope read more}
+*
+* @param {object} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope read more}
+*
+* @param {service} BasketService Info
+* <br>
+* {@link BB.Services:BasketService more}
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {service} AlertService Info
+* <br>
+* {@link BB.Services:AlertService more}
+*
+* @param {service} ErrorService Info
+* <br>
+* {@link BB.Services:ErrorService more}
+*
+* @param {service} FormDataStoreService Info
+* <br>
+* {@link BB.Services:FormDataStoreService more}
+*
+###
 angular.module('BB.Controllers').controller 'BasketList', ($scope,  $rootScope, BasketService, $q, AlertService, ErrorService, FormDataStoreService) ->
   $scope.controller = "public.controllers.BasketList"
   $scope.setUsingBasket(true)
@@ -120,4 +205,4 @@ angular.module('BB.Controllers').controller 'BasketList', ($scope,  $rootScope, 
       $scope.setReadyToCheckout(true)
     else
       AlertService.add 'info', ErrorService.getError('EMPTY_BASKET_FOR_CHECKOUT')
-      
+

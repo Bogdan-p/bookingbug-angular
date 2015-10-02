@@ -1,3 +1,54 @@
+###**
+* @ngdoc directive
+* @name BBAdminDashboard.Directives:bbResourceCalendar
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BBAdminDashboard.Directives:bbResourceCalendar
+*
+* # Has the following set of methods:
+*
+* - controller($scope, $attrs)
+* - events(start, end, timezone, callback)
+* - eventDrop(event, delta, revertFunc)
+* - eventClick(event, jsEvent, view)
+* - resourceRender(resource, resourceTDs, dataTDs)
+* - eventRender(event, element)
+* - eventAfterRender(event, elements, view)
+* - select(start, end, jsEvent, view, resource)
+* - viewRender(view, element)
+* - eventResize(event, delta, revertFunc, jsEvent, ui, view)
+* - resources: (callback)
+* - $scope.getPeople(callback)
+* - $scope.updateBooking(booking)
+* - $scope.editBooking(booking)
+* - $scope.pusherSubscribe()
+* - $scope.openDatePicker($event)
+* - $scope.updateDate(date)
+* - scope.getCompanyPromise()
+* - link(scope, element, attrs)
+*
+* @requires uiCalendarConfig 
+* @requires BBAdmin.Services:AdminCompanyService
+* @requires BBAdmin.Services:AdminBookingService
+* @requires BBAdmin.Services:AdminPersonService
+* @requires $q
+* @requires $sessionStorage
+* @requires BB.Services:ModalForm
+* @requires BB.Models:BBModel
+* @requires BB.Directives:AdminBookingPopup
+* @requires $window
+* @requires $bbug
+* @requires BBAdmin.Services:ColorPalette
+* @requires AppConfig
+* @requires BB.Services:Dialog
+* @requires $timeout
+* @requires $compile
+* @requires $templateCache
+*
+###
+
 angular.module('BBAdminDashboard').directive 'bbResourceCalendar', (
     uiCalendarConfig, AdminCompanyService, AdminBookingService,
     AdminPersonService, $q, $sessionStorage, ModalForm, BBModel,

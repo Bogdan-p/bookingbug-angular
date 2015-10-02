@@ -1,3 +1,29 @@
+###**
+* @ngdoc directive
+* @name BBAdminServices.Directives:scheduleTable
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BBAdminServices.Directives:scheduleTable
+*
+* # Has the following set of methods:
+*
+* - controller($scope)
+* - $scope.getSchedules()
+* - $scope.newSchedule()
+* - $scope.delete(schedule)
+* - $scope.edit(schedule)
+* - link(scope, element, attrs)
+*
+* @requires BBAdmin.Services:AdminCompanyService
+* @requires BBAdmin.Services:AdminScheduleService
+* @requires $modal
+* @requires $log
+* @requires BB.Services:ModalForm
+*
+###
+
 angular.module('BBAdminServices').directive 'scheduleTable', (AdminCompanyService,
     AdminScheduleService, $modal, $log, ModalForm) ->
 

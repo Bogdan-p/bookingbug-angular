@@ -5,13 +5,70 @@ angular.module('BB.Directives').directive 'bbClientDetails', () ->
   scope : true
   controller : 'ClientDetails'
 
+###**
+* @ngdoc controller
+* @name BB.Controllers:ClientDetails
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller ClientDetails
+*
+* # Has the following set of methods:
+*
+* - $scope.validateClient(client_form, route)
+* - $scope.clientLogin()
+* - $scope.setReady()
+* - $scope.clientSearch()
+* - $scope.switchNumber(to)
+* - $scope.getQuestion(id)
+* - $scope.useClient(client)
+* - $scope.recalc_question()
+*
+* @param {object} $scope Scope is an object that refers to the application mode.
+* <br>
+* {@link https://docs.angularjs.org/guide/scope read more}
+*
+* @param {object} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope read more}
+*
+* @param {service} ClientDetailsService Info
+* <br>
+* {@link BB.Services:ClientDetailsService more}
+*
+* @param {service} ClientService Info
+* <br>
+* {@link BB.Services:ClientService more}
+*
+* @param {service} LoginService Info
+* <br>
+* {@link BB.Services:LoginService more}
+*
+* @param {model} BBModel Info
+* <br>
+* {@link BB.Models:BBModel more}
+*
+* @param {service} ValidatorService Info
+* <br>
+* {@link BB.Services:ValidatorService more}
+*
+* @param {service} QuestionService Info
+* <br>
+* {@link BB.Services:QuestionService more}
+*
+* @param {service} AlertService Info
+* <br>
+* {@link BB.Services:AlertService more}
+*
+###
 angular.module('BB.Controllers').controller 'ClientDetails', ($scope,  $rootScope, ClientDetailsService, ClientService, LoginService, BBModel, ValidatorService, QuestionService, AlertService) ->
   $scope.controller = "public.controllers.ClientDetails"
   $scope.notLoaded $scope
   $scope.validator = ValidatorService
   $scope.existing_member = false
   $scope.login_error = false
-  
+
   $rootScope.connection_started.then =>
 
     if !$scope.client.valid() && LoginService.isLoggedIn()
@@ -29,7 +86,7 @@ angular.module('BB.Controllers').controller 'ClientDetails', ($scope,  $rootScop
       $scope.client_details = $scope.client.client_details
       QuestionService.checkConditionalQuestions($scope.client_details.questions) if $scope.client_details.questions
       $scope.setLoaded $scope
-    else 
+    else
       ClientDetailsService.query($scope.bb.company).then (details) =>
         $scope.client_details = details
         $scope.client.pre_fill_answers($scope.client_details) if $scope.client
@@ -61,7 +118,7 @@ angular.module('BB.Controllers').controller 'ClientDetails', ($scope,  $rootScop
       $scope.existing_member = false
       $scope.decideNextPage(route)
     , (err) ->
-      if err.data.error == "Please login" 
+      if err.data.error == "Please login"
         $scope.existing_member = true
         AlertService.danger({msg: "You have already registered with this email address. Please login or reset your password using the Forgot Password link below."})
       $scope.setLoaded $scope
@@ -88,7 +145,7 @@ angular.module('BB.Controllers').controller 'ClientDetails', ($scope,  $rootScop
       if client.waitingQuestions
         client.gotQuestions.then () ->
           $scope.client_details = client.client_details
-     
+
     , (err) ->  $scope.setLoadedAndShowError($scope, err, 'Sorry, something went wrong')
 
     return true
@@ -127,7 +184,7 @@ angular.module('BB.Controllers').controller 'ClientDetails', ($scope,  $rootScop
 
   $scope.useClient = (client) ->
     $scope.setClient(client)
-    
+
 
   $scope.recalc_question = () ->
     QuestionService.checkConditionalQuestions($scope.client_details.questions) if $scope.client_details.questions

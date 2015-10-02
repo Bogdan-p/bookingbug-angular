@@ -1,13 +1,61 @@
 'use strict';
 
+###**
+* @ngdoc directive
+* @name BB.Directives:bbPackagePicker
+* @restrict AE
+* @scope true
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
 
+* Directive BB.Directives:bbPackagePicker
+*
+* See Controller {@link BB.Controllers:PackagePicker PackagePicker}
+*
+* <pre>
+* restrict: 'AE'
+* replace: true
+* scope : true
+* controller : 'PackagePicker'
+* </pre>
+*
+###
 angular.module('BB.Directives').directive 'bbPackagePicker', () ->
   restrict: 'AE'
   replace: true
   scope : true
   controller : 'PackagePicker'
 
-
+###**
+* @ngdoc controller
+* @name BB.Controllers:PackagePicker
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller PackagePicker
+*
+* # Has the following set of methods:
+*
+* - $scope.loadDay()
+* - $scope.selectSlot(sel_item, slot)
+* - $scope.hasAvailability(slots, start_time, end_time)
+* - $scope.confirm()
+*
+* @param {service} $scope Scope is an object that refers to the application mode.
+* <br>
+* {@link https://docs.angularjs.org/guide/scope more}
+*
+* @param {service} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope more}
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+###
 angular.module('BB.Controllers').controller 'PackagePicker', ($scope,  $rootScope, $q, TimeService, BBModel) ->
   $scope.controller = "public.controllers.PackagePicker"
 

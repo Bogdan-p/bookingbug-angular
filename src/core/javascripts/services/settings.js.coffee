@@ -1,3 +1,18 @@
+###**
+* @ngdoc service
+* @name BB.Services:SettingsService
+*
+* @description
+* Factory SettingsService
+*
+@returns {Promise} This service has the following set of methods:
+*
+* - enableInternationalizaton()
+* - isInternationalizatonEnabled()
+* - setScrollOffset()
+* - getScrollOffset()
+*
+###
 angular.module('BB.Services').factory 'SettingsService', () ->
 
   i18n = false

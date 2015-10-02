@@ -1,8 +1,44 @@
-
-
+###**
+* @ngdoc service
+* @name  BBAdmin.Services:AdminTimeService
+*
+* @description
+* Factory AdminTimeService
+*
+ @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q read more}
+*
+* @param {object} $window A reference to the browser's window object.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$window read more}
+*
+* @param {model} halClient Info
+*
+* @param {model} BBModel Info
+* <br>
+* {@link BB.Models:BBModel more}
+*
+* @param {model} UriTemplate Info
+* <br>
+* {@link UriTemplate more}
+*
+###
 angular.module('BBAdmin.Services').factory 'AdminTimeService', ($q, $window,
     halClient, BBModel, UriTemplate) ->
 
+  ###**
+  * @ngdoc method
+  * @name query
+  * @methodOf BBAdmin.Services:AdminTimeService
+  *
+  * @description
+  * Method query
+  *
+  * @param {object} prms Info
+  *
+  * @returns {Promise} defer.reject(err) or deferred.promise
+  ###
   query: (prms) ->
     if prms.day
       prms.date = prms.day.date

@@ -1,3 +1,30 @@
+###**
+* @ngdoc service
+* @name BB.Services:PurchaseService
+*
+* @description
+* Factory PurchaseService
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {service} $window A reference to the browser's window object.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$window more}
+*
+* @param {model} halClient Info
+*
+* @param {model} BBModel Info
+* <br>
+* {@link BB.Models:BBModel more}
+*
+* @returns {Promise} This service has the following set of methods:
+*
+* - query(params)
+* - more mthods
+*
+###
 angular.module('BB.Services').factory "PurchaseService", ($q, halClient, BBModel, $window, UriTemplate) ->
 
   query: (params) ->

@@ -1,5 +1,6 @@
 'use strict';
 
+
 adminbookingapp = angular.module('BBAdminBooking', [
   'BB',
   'BBAdmin.Services',

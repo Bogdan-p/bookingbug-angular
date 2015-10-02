@@ -1,3 +1,30 @@
+###**
+* @ngdoc service
+* @name BB.Services:AddressListService
+*
+* @description
+* Factory AddressListService
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {service} $window A reference to the browser's window object.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$window more}
+*
+* @param {model} halClient Info
+*
+* @param {model} UriTemplate Info
+* <br>
+* {@link UriTemplate more}
+*
+* @returns {Promise} This service has the following set of methods:
+*
+* - query(prms)
+* - getAddress(prms)
+*
+###
 angular.module('BB.Services').factory "AddressListService", ($q, $window, halClient, UriTemplate) ->
  query: (prms) ->
 

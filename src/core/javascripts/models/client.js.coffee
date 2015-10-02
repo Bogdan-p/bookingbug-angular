@@ -1,6 +1,55 @@
 
 'use strict';
 
+###**
+* @ngdoc object
+* @name BB.Models:ClientModel
+*
+* @description
+* This is ClientModel in BB.Models module that creates Client object.
+*
+* <pre>
+* //Creates class Client that extends BaseModel
+* class Client extends BaseModel
+* </pre>
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* * <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {model} BBModel Info
+* <br>
+* {@link BB.Models:BBModel more}
+*
+* @param {model} BaseModel Info
+* <br>
+* {@link BB.Models:BaseModel more}
+*
+* @param {model} LocaleService Info
+* <br>
+* {@link BB.Services:LocaleService more}
+*
+* @returns {object} Newly created Client object with the following set of methods:
+*
+* - constructor(data)
+* - setClientDetails(details)
+* - setDefaults(values)
+* - pre_fill_answers(details)
+* - getName()
+* - addressSingleLine()
+* - hasAddres()
+* - addressCsvLine()
+* - addressMultiLine()
+* - getPostData()
+* - valid()
+* - setValid(val)
+* - hasServerId()
+* - setAskedQuestions()
+* - fullMobile()
+* - remove_prefix()
+* - getPrePaidBookingsPromise(params)
+*
+###
 angular.module('BB.Models').factory "ClientModel", ($q, BBModel, BaseModel, LocaleService) ->
 
   class Client extends BaseModel

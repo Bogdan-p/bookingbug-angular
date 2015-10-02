@@ -1,5 +1,37 @@
 'use strict';
 
+###**
+* @ngdoc object
+* @name BB.Models:Member.BookingModel
+*
+* @description
+* This is Member.BookingModel in BB.Models module that creates Member Booking object.
+*
+* <pre>
+* //Creates class Member_Booking that extends BaseModel
+* class Member_Booking extends BaseModel
+* </pre>
+*
+* @requires $q
+* @requires $window
+* @requires BB.Models:BBModel
+* @requires BB.Models:BaseModel
+* @requires $bbug
+*
+* @returns {object} Newly created Member Booking object with the following set of methods:
+*
+* - constructor(data)
+* - getGroup()
+* - getColour()
+* - getCompany()
+* - getAnswers()
+* - printed_price()
+* - getMemberPromise()
+* - canCancel()
+* - canMove()
+*
+###
+
 angular.module('BB.Models').factory "Member.BookingModel", ($q, $window, BBModel, BaseModel, $bbug) ->
 
   class Member_Booking extends BaseModel

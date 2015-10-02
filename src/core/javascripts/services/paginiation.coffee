@@ -1,9 +1,22 @@
+###**
+* @ngdoc service
+* @name BB.Services:PaginationService
+*
+* @description
+* Factory PaginationService
+*
+* @returns {Promise} This service has the following set of methods:
+*
+* - initialise(options)
+* - update(paginator, length)
+*
+###
 angular.module('BB.Services').factory "PaginationService", () ->
 
   initialise: (options) ->
     return if !options
     paginator = {current_page: 1, page_size: options.page_size, num_pages: null, max_size: options.max_size, num_items: null}
-    return paginator 
+    return paginator
 
 
   update: (paginator, length) ->

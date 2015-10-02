@@ -1,4 +1,3 @@
-
 class window.Collection.Client extends window.Collection.Base
 
 

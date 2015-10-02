@@ -1,6 +1,37 @@
+###**
+* @ngdoc service
+* @name BBQueue.Services:PusherQueue
+*
+* @description
+* Factory PusherQueue
+*
+* @requires $sessionStorage
+* @requires $pusher
+* @requires AppConfig
+*
+* @returns {Promise} This service has the following set of methods:
+*
+* - subscribe(comapy)
+*
+###
+
 angular.module('BBQueue.Services').factory 'PusherQueue', ($sessionStorage, $pusher, AppConfig) ->
 
   class PusherQueue
+
+    ###**
+    * @ngdoc method
+    * @name this.subscribe
+    * @methodOf BBQueue.Services:PusherQueue
+    *
+    * @description
+    * Method this.subscribe
+    *
+    * @param {object} company company
+    *
+    * @returns {object} this.pusher.subscribe
+    *
+    ###
 
     @subscribe: (company) ->
       if company? && Pusher?

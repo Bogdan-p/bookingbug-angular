@@ -1,3 +1,34 @@
+###**
+* @ngdoc directive
+* @name BBAdminServices.Directives:scheduleWeekdays
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BBAdminServices.Directives:scheduleWeekdays
+*
+* # Has the following set of methods:
+*
+* - controller($scope, $attrs)
+* - events(start, end, timezone, callback)
+* - $scope.getCalendarEvents(start, end)
+* - select(start, end, jsEvent, view)
+* - eventResizeStop(event, jsEvent, ui, view)
+* - eventDrop(event, delta, revertFunc, jsEvent, ui, view)
+* - eventClick(event, jsEvent, view)
+* - $scope.render()
+* - link(scope, element, attrs, ngModel)
+* - scheduleRules ()
+* - scope.getEvents()
+* - scope.addRange(start, end)
+* - scope.removeRange(start, end)
+* - ngModel.$render()
+*
+* @requires uiCalendarConfig
+* @requires BB.Models:ScheduleRules
+*
+###
+
 angular.module('BBAdminServices').directive 'scheduleWeekdays', (uiCalendarConfig, ScheduleRules) ->
 
   controller = ($scope, $attrs) ->

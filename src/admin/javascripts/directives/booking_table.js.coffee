@@ -1,3 +1,39 @@
+###**
+* @ngdoc directive
+* @name BBAdmin.Directives:bookingTable
+* @restrict E
+*
+* @description
+* Directive bookingTable
+*
+* @param {service} $modal $modal is a service to quickly create AngularJS-powered modal windows. Creating custom modals is straightforward: create a partial view, its controller and reference them when using the service.
+* <br>
+* {@link https://github.com/angular-ui/bootstrap/tree/master/src/modal/docs read more}
+*
+* @param {service} $log Simple service for logging.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$log read more}
+*
+* @param {service} AdminCompanyService Service AdminCompanyService
+* @param {service} AdminBookingService Service AdminBookingService
+* @param {service} ModalForm Service ModalForm
+*
+* @example Example that demonstrates basic bookingTable.
+  <example>
+    <file name="index.html">
+      <div class="my-example">
+      </div>
+    </file>
+
+    <file name="style.css">
+      .my-example {
+        background: green;
+        widht: 200px;
+        height: 200px;
+      }
+    </file>
+  </example>
+###
 angular.module('BBAdmin').directive 'bookingTable', (AdminCompanyService,
     AdminBookingService, $modal, $log, ModalForm) ->
 

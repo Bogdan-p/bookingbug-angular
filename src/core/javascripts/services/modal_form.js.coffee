@@ -1,3 +1,34 @@
+###**
+* @ngdoc service
+* @name BB.Services:ModalForm
+*
+* @description
+* Factory ModalForm
+*
+* @param {service} $modal is a service to quickly create AngularJS-powered modal windows. Creating custom modals is straightforward: create a partial view, its controller and reference them when using the service.
+* <br>
+* {@link https://github.com/angular-ui/bootstrap/tree/master/src/modal/docs more}
+*
+* @param {service} $log Simple service for logging.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$log more}
+*
+* @param {model} Dialog Info
+* <br>
+* {@link BB.Services:Dialog more}
+*
+* @returns {Promise} This service has the following set of methods:
+*
+* - $scope.submit(form)
+* - $scope.cancel
+* - editForm($scope, $modalInstance, model, title, success, fail)
+* - $scope.submit(form)
+* - $scope.cancel(event)
+* - $scope.cancelBooking(event)
+* - new(config)
+* - edit(config)
+*
+###
 angular.module('BB.Services').factory 'ModalForm', ($modal, $log, Dialog) ->
 
   newForm = ($scope, $modalInstance, company, title, new_rel, post_rel,

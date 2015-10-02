@@ -1,3 +1,37 @@
+###**
+* @ngdoc service
+* @name BB.Services:BasketService
+*
+* @description
+* Factory BasketService
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {service} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope more}
+*
+* @param {model} BBModel Info
+* <br>
+* {@link BB.Models:BBModel more}
+*
+* @returns {Promise} This service has the following set of methods:
+*
+* - addItem(company, params)
+* - applyCoupon(company, params)
+* - updateBasket(company, params)
+* - checkPrePaid(company, event, pre_paid_bookings)
+* - query(company, params)
+* - deleteItem(item, company, params)
+* - checkout(company, basket, params)
+* - empty(bb)
+* - memberCheckout(basket, params)
+* - applyDeal(company, params)
+* - removeDeal(company, params)
+*
+###
 angular.module('BB.Services').factory "BasketService", ($q, $rootScope, BBModel, MutexService) ->
 
   addItem: (company, params) ->
@@ -60,23 +94,23 @@ angular.module('BB.Services').factory "BasketService", ($q, $rootScope, BBModel,
     deferred.promise
 
 
-  
+
 
 
   # add several items at onece - params should have an array of items:
   updateBasket: (company, params) ->
     deferred = $q.defer()
-    
+
     data = {entire_basket: true, items:[]}
 
     for item in params.items
-      lnk = item.book_link if item.book_link 
-      xdata = item.getPostData() 
+      lnk = item.book_link if item.book_link
+      xdata = item.getPostData()
       # force the date into utc
 #      d = item.date.date._a
 #      date = new Date(Date.UTC(d[0], d[1], d[2]))
 #      xdata.date = date
-      data.items.push(xdata)  
+      data.items.push(xdata)
 
     if !lnk
       deferred.reject("rel book not found for event")
@@ -104,7 +138,7 @@ angular.module('BB.Services').factory "BasketService", ($q, $rootScope, BBModel,
         MutexService.unlock(mutex)
         deferred.reject(err)
 
-    deferred.promise 
+    deferred.promise
 
 
   checkPrePaid: (company, event, pre_paid_bookings) ->
@@ -207,7 +241,7 @@ angular.module('BB.Services').factory "BasketService", ($q, $rootScope, BBModel,
       , (err) ->
         deferred.reject(err)
     deferred.promise
-  
+
   applyDeal: (company, params) ->
     deferred = $q.defer()
 

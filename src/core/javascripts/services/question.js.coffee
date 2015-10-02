@@ -1,7 +1,39 @@
 'use strict';
 
+###**
+* @ngdoc service
+* @name BB.Services:QuestionService
+*
+* @description
+* Factory QuestionService
+*
+* @param {service} $window A reference to the browser's window object.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$window more}
+*
+* @param {model} QueryStringService Info
+* <br>
+* {@link BB.Services:QueryStringService more}
+*
+* @param {model} $bbug Releases the hold on the $ shortcut identifier, so that other scripts can use it.
+* <br>
+* {@link $bbug more}
+*
+* @returns {Promise} This service has the following set of methods:
+*
+* - convertDates(obj)
+* - addAnswersById(questions)
+* - convertToSnakeCase(str)
+* - addDynamicAnswersByName(questions)
+* - addAnswersByName(obj, keys)
+* - addAnswersFromDefaults(questions, answers)
+* - storeDefaults(obj)
+* - checkConditionalQuestions(questions)
+* - findByQuestionId(questions, qid)
+*
+###
 angular.module('BB.Services').factory 'QuestionService', ($window, QueryStringService, $bbug) ->
-  
+
   # grab url params
   defaults = QueryStringService() or {}
 
@@ -33,7 +65,7 @@ angular.module('BB.Services').factory 'QuestionService', ($window, QueryStringSe
         if !question.answer and defaults[id]
           question.answer = defaults[id]
     else
-      
+
       questions.answer = defaults[questions.id + ''] if defaults[questions.id + '']
 
 
@@ -92,7 +124,7 @@ angular.module('BB.Services').factory 'QuestionService', ($window, QueryStringSe
     for question in questions
       name = question.help_text
       question.answer = answers[name] if answers[name]
-      question.answer = answers[question.id + ''] if answers[question.id + ''] 
+      question.answer = answers[question.id + ''] if answers[question.id + '']
 
 
   storeDefaults = (obj) ->
@@ -102,7 +134,7 @@ angular.module('BB.Services').factory 'QuestionService', ($window, QueryStringSe
   checkConditionalQuestions = (questions) ->
     for q in questions
       if q.settings && q.settings.conditional_question
-        cond = findByQuestionId(questions, parseInt(q.settings.conditional_question)) 
+        cond = findByQuestionId(questions, parseInt(q.settings.conditional_question))
         if cond
           # check if the question has an answer which means "show"
           ans = cond.getAnswerId()

@@ -1,5 +1,60 @@
 'use strict'
 
+###**
+* @ngdoc directive
+* @name BB.Directives:bbPayForm
+* @restrict AE
+* @scope true
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+
+* Directive BB.Directives:bbPayForm
+*
+* See Controller {@link BB.Controllers:PayForm PayForm}
+*
+* <pre>
+* restrict: 'AE'
+* replace: true
+* scope: true
+* controller: 'PayForm'
+* link: linker
+* </pre>
+*
+* @param {service} $window A reference to the browser's window object.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$window more}
+*
+* @param {service} $timeout Angular's wrapper for window.setTimeout.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$timeout more}
+*
+* @param {service} $sce $sce is a service that provides Strict Contextual Escaping services to AngularJS.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$sce more}
+*
+* ===== $http =====
+* @param {service}  $http The $http service is a core Angular service that facilitates communication with the remote HTTP servers via the browser's XMLHttpRequest object or via JSONP.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$http more}
+*
+* @param {service} $compile Compiles an HTML string or DOM into a template and produces a template function, which can then be used to link scope and the template together.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$compile more}
+*
+* @param {service} $document A jQuery or jqLite wrapper for the browser's window.document object.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$document more}
+*
+* @param {service} $location The $location service parses the URL in the browser address bar
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$location more}
+*
+* @param {service} SettingsService Info
+* <br>
+* {@link BB.Services:SettingsService more}
+*
+###
 angular.module('BB.Directives').directive 'bbPayForm', ($window, $timeout, $sce, $http, $compile, $document, $location, SettingsService) ->
 
   applyCustomPartials = (custom_partial_url, scope, element) ->
@@ -29,11 +84,11 @@ angular.module('BB.Directives').directive 'bbPayForm', ($window, $timeout, $sce,
       link.href = href
       link.media = 'all'
       head.appendChild link
-      
+
       # listen to load of css and trigger resize
       link.onload = ->
         parentIFrame.size() if 'parentIFrame' of $window
-      
+
 
   linker = (scope, element, attributes) ->
 
@@ -60,6 +115,33 @@ angular.module('BB.Directives').directive 'bbPayForm', ($window, $timeout, $sce,
     link: linker
   }
 
+###**
+* @ngdoc controller
+* @name BB.Controllers:PayForm
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller PayForm
+*
+* # Has the following set of methods:
+*
+* - $scope.setTotal(total)
+* - $scope.setCard(card)
+* - sendSubmittingEvent()
+* - submitPaymentForm()
+* - $scope.submitAndSendMessage(event)
+*
+* @param {service} $scope Scope is an object that refers to the application mode.
+* <br>
+* {@link https://docs.angularjs.org/guide/scope more}
+*
+* @param {service} $location The $location service parses the URL in the browser address bar
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$location more}
+*
+*
+###
 angular.module('BB.Controllers').controller 'PayForm', ($scope, $location) ->
 
   $scope.controller = "public.controllers.PayForm"

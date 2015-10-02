@@ -1,3 +1,20 @@
+###**
+* @ngdoc service
+* @name BB.Services:GeolocationService
+*
+* @description
+* Factory GeolocationService
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @returns {Promise} This service has the following set of methods:
+*
+* - haversine(position1, position2)
+* - geocode(address, prms = {})
+*
+###
 angular.module('BB.Services').factory 'GeolocationService', ($q) ->
 
   haversine: (position1, position2) ->

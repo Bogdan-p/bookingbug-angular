@@ -1,6 +1,60 @@
 
 'use strict';
 
+###**
+* @ngdoc object
+* @name BB.Models:EventModel
+*
+* @description
+* This is EventModel in BB.Models module that creates Event object.
+*
+* <pre>
+* //Creates class Event that extends BaseModel
+* class Event extends BaseModel
+* </pre>
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* * <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {model} BBModel Info
+* <br>
+* {@link BB.Models:BBModel more}
+*
+* @param {model} BaseModel Info
+* <br>
+* {@link BB.Models:BaseModel more}
+*
+* @param {model} DateTimeUlititiesService Info
+* <br>
+* {@link BB.Services:DateTimeUlititiesService more}
+*
+* @returns {object} Newly created Event object with the following set of methods:
+*
+* - constructor(data)
+* - getGroup()
+* - getChain()
+* - getDate()
+* - dateString()
+* - getDuration()
+* - printDuration()
+* - getDescription()
+* - getColour()
+* - getPerson()
+* - getPounds()
+* - getPrice()
+* - getPence()
+* - vgetNumBooked()
+* - getSpacesLeft(pool = null)
+* - hasSpace()
+* - hasWaitlistSpace()
+* - getRemainingDescription()
+* - select()
+* - unselect()
+* - prepEvent()
+* - updatePrice()
+*
+###
 angular.module('BB.Models').factory "EventModel", ($q, BBModel, BaseModel, DateTimeUlititiesService) ->
 
 

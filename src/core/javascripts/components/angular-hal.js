@@ -1,7 +1,5 @@
+angular.module('angular-hal', []).provider('data_cache', function() {
 
-angular
-.module('angular-hal', []).provider('data_cache', function() {
- 
     this.$get = function() {
       data = [];
 
@@ -26,7 +24,7 @@ angular
         },
         delMatching: function(str)
         {
-          for (var k in data) {      
+          for (var k in data) {
             if (k.indexOf(str) != -1)
               delete data[k]
           }
@@ -34,7 +32,7 @@ angular
 
       }
     };
- 
+
 })
 .provider('shared_header', function() {
    this.$get = function() {
@@ -65,6 +63,24 @@ angular
     };
 
 })
+
+/***
+* @ngdoc object
+* @name angular-hal:halClient
+*
+* @description
+* This is halClient in angular-hal module.
+*
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* * <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {service}  $http The $http service is a core Angular service that facilitates communication with the remote HTTP servers via the browser's XMLHttpRequest object or via JSONP.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$http more}
+*
+*/
 .factory('halClient', [
   '$http', '$q', 'data_cache', 'shared_header', 'UriTemplate', function(
     $http, $q, data_cache, shared_header, UriTemplate
@@ -108,7 +124,7 @@ angular
         return parseHal(data)
       }//parse
     };
-  
+
     function BaseResource(href, options, data){
       if(!options) options = {};
       var links = {};
@@ -186,7 +202,7 @@ angular
         Object
         .keys(data._links)
         .forEach(function(rel){
-          var link = data._links[rel];          
+          var link = data._links[rel];
           link = normalizeLink(href, link);
           links[rel] = link;
         }, this)
@@ -222,7 +238,7 @@ angular
         if(angular.isArray(resource)) return resource.map(function(resource){
           return embedResource(resource);
         });
-        
+
         var href = resource.$href('self');
 
         embedded.set(href, $q.when(resource));
@@ -248,11 +264,11 @@ angular
 
         if(method === 'GET') {
           if(embedded.has(linkHref)) return embedded.get(linkHref);
-          
+
           return embedded.set(linkHref, callService(method, linkHref, options, data));
         }
         else {
-          return callService(method, linkHref, options, data);  
+          return callService(method, linkHref, options, data);
         }
 
       }//callLink
@@ -293,7 +309,7 @@ angular
         link.href = resolveUrl(baseHref, link.href);
       }
       else {
-        link = { href: baseHref };      
+        link = { href: baseHref };
       }
 
       return link;

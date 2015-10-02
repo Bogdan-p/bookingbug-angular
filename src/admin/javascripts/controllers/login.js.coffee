@@ -1,4 +1,27 @@
+###**
+* @ngdoc directive
+* @name BBAdmin.Directives:bbAdminLogin
+* @restrict AE
+*
+* @description
+* Directive bbAdminLogin
+*
+* @example Example that demonstrates basic bookingTable.
+  <example>
+    <file name="index.html">
+      <div class="my-example">
+      </div>
+    </file>
 
+    <file name="style.css">
+      .my-example {
+        background: green;
+        widht: 200px;
+        height: 200px;
+      }
+    </file>
+  </example>
+###
 angular.module('BBAdmin.Directives').directive 'bbAdminLogin', () ->
 
   restrict: 'AE'
@@ -12,7 +35,32 @@ angular.module('BBAdmin.Directives').directive 'bbAdminLogin', () ->
   controller: 'AdminLogin'
   template: '<div ng-include="login_template"></div>'
 
-
+###**
+* @ngdoc controller
+* @name BBAdmin.Controllers:AdminLogin
+*
+* @description
+* Controller AdminLogin
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q read more}
+*
+* @param {object} $scope Scope is an object that refers to the application mode.
+* <br>
+* {@link https://docs.angularjs.org/guide/scope read more}
+*
+* @param {object} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope read more}
+*
+* @param {object} $sessionStorage The $location service parses the URL in the browser address bar
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$location read more}
+*
+* @param {service} AdminLoginService Service.
+*
+###
 angular.module('BBAdmin.Controllers').controller 'AdminLogin', ($scope,
     $rootScope, AdminLoginService, $q, $sessionStorage) ->
 

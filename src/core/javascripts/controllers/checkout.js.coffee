@@ -8,6 +8,60 @@ angular.module('BB.Directives').directive 'bbCheckout', () ->
   controller : 'Checkout'
 
 
+###**
+* @ngdoc controller
+* @name BB.Controllers:Checkout
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller Checkout
+*
+* # Has the following set of methods:
+*
+* - $scope.print()
+* - $scope.printElement(id, stylesheet)
+* -
+*
+* @param {object} $scope Scope is an object that refers to the application mode.
+* <br>
+* {@link https://docs.angularjs.org/guide/scope read more}
+*
+* @param {object} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope read more}
+*
+* @param {service} $attrs Info
+*
+* @param {service} BasketService Info
+* <br>
+* {@link BB.Services:BasketService more}
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {service} $location The $location service parses the URL in the browser address bar
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$location more}
+*
+* @param {service} $window A reference to the browser's window object.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$window more}
+*
+* @param {model} $bbug Releases the hold on the $ shortcut identifier, so that other scripts can use it.
+* <br>
+* {@link $bbug more}
+*
+* @param {service} FormDataStoreService Info
+* <br>
+* {@link BB.Services:FormDataStoreService more}
+*
+* @param {service} $timeout Angular's wrapper for window.setTimeout.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$timeout more}
+*
+###
 angular.module('BB.Controllers').controller 'Checkout', ($scope, $rootScope, $attrs, BasketService, $q, $location, $window, $bbug, FormDataStoreService, $timeout) ->
   $scope.controller = "public.controllers.Checkout"
   $scope.notLoaded $scope
@@ -22,7 +76,7 @@ angular.module('BB.Controllers').controller 'Checkout', ($scope, $rootScope, $at
     $scope.loadingTotal = BasketService.checkout($scope.bb.company, $scope.bb.basket, {bb: $scope.bb})
     $scope.loadingTotal.then (total) =>
       $scope.total = total
-   
+
       # if no payment is required, route to the next step unless instructed otherwise
       if !total.$has('new_payment')
         $scope.$emit("checkout:success", total)

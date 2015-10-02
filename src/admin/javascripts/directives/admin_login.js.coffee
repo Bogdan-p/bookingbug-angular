@@ -1,3 +1,42 @@
+###**
+* @ngdoc directive
+* @name BBAdmin.Directives:adminLogin
+* @restrict E
+*
+* @description
+* <br> ---------------------------------------------------------------------------------
+* <br> NOTE
+* <br> This is the TEST file.
+* <br> Formatting of the documentation for this kind of functionality should be done first here
+* <br> !To avoid repetition and to mentain consistency.
+* <br> After the documentation for TEST file it is defined other files that have the same pattern can be also documented
+* <br> This should be the file that sets the STANDARD.
+* <br> ---------------------------------------------------------------------------------
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q read more}
+*
+* @param {service} $modal $modal is a service to quickly create AngularJS-powered modal windows. Creating custom modals is straightforward: create a partial view, its controller and reference them when using the service.
+* <br>
+* {@link https://github.com/angular-ui/bootstrap/tree/master/src/modal/docs read more}
+*
+* @param {service} $log Simple service for logging.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$log read more}
+*
+* @param {object} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope read more}
+*
+* @param {service} $templateCache $templateCache
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$templateCachee read more}
+*
+* @param {service} AdminLoginService Service AdminLoginService
+* @requires $http
+*
+###
 angular.module('BBAdmin.Directives').directive 'adminLogin', ($modal, $log, $rootScope,
     AdminLoginService, $templateCache, $q) ->
 

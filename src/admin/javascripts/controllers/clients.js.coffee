@@ -1,8 +1,29 @@
 'use strict';
 
+###**
+* @ngdoc directive
+* @name BBAdmin.Directives:bbAdminClients
+* @restrict AE
+*
+* @description
+* Directive bbAdminClients
+*
+* @example Example that demonstrates basic bookingTable.
+  <example>
+    <file name="index.html">
+      <div class="my-example">
+      </div>
+    </file>
 
-
-
+    <file name="style.css">
+      .my-example {
+        background: green;
+        widht: 200px;
+        height: 200px;
+      }
+    </file>
+  </example>
+###
 angular.module('BBAdmin.Directives').directive 'bbAdminClients', () ->
   restrict: 'AE'
   replace: true
@@ -11,11 +32,34 @@ angular.module('BBAdmin.Directives').directive 'bbAdminClients', () ->
   link : (scope, element, attrs) ->
     return
 
-
+###**
+* @ngdoc controller
+* @name BBAdmin.Controllers:AdminClients
+*
+* @description
+* Controller AdminClients
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q read more}
+*
+* @param {object} $scope Scope is an object that refers to the application mode.
+* <br>
+* {@link https://docs.angularjs.org/guide/scope read more}
+*
+* @param {object} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope read more}
+*
+* @param {service} AdminClientService service
+* @param {service} ClientDetailsService Service.
+* @param {service} AlertService Service.
+*
+###
 angular.module('BBAdmin.Controllers').controller 'AdminClients', ($scope,  $rootScope, $q, AdminClientService, ClientDetailsService, AlertService) ->
 
   $scope.clientDef = $q.defer()
-  $scope.clientPromise = $scope.clientDef.promise 
+  $scope.clientPromise = $scope.clientDef.promise
   $scope.per_page = 15
   $scope.total_entries = 0
   $scope.clients = []
@@ -45,7 +89,7 @@ angular.module('BBAdmin.Controllers').controller 'AdminClients', ($scope,  $root
         $scope.total_entries = clients.total_entries
         console.log ($scope.clients)
         clientDef.resolve(clients.items)
-      , (err) ->  
+      , (err) ->
         clientDef.reject(err)
         $scope.setLoadedAndShowError($scope, err, 'Sorry, something went wrong')
     true

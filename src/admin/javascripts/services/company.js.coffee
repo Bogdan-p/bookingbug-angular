@@ -1,6 +1,42 @@
+###**
+* @ngdoc service
+* @name  BBAdmin.Services:AdminCompanyService
+*
+* @description
+* Factory AdminCompanyService
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q read more}
+*
+* @param {object} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope read more}
+*
+* @param {model} BBModel Info
+* <br>
+* {@link BBAdmin.Services:AdminBookingService more }
+*
+* @param {model} AdminLoginService Info
+*
+* @param {object} $sessionStorage Info
+*
+###
 angular.module('BBAdmin.Services').factory 'AdminCompanyService', ($q,
     BBModel, AdminLoginService, $rootScope, $sessionStorage) ->
 
+  ###**
+  * @ngdoc method
+  * @name query
+  * @methodOf BBAdmin.Services:AdminCompanyService
+  *
+  * @description
+  * Method query
+  *
+  * @param {object} params Info
+  *
+  * @returns {Promise} deferred.promise
+  ###
   query: (params) ->
     defer = $q.defer()
     $rootScope.bb ||= {}

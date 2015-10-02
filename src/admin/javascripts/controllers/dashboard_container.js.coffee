@@ -1,4 +1,27 @@
-
+###**
+* @ngdoc controller
+* @name BBAdmin.Controllers:DashboardContainer
+*
+* @description
+* Controller DashboardContainer
+*
+* @param {object} $scope Scope is an object that refers to the application mode.
+* <br>
+* {@link https://docs.angularjs.org/guide/scope read more}
+*
+* @param {object} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope read more}
+*
+* @param {service} $location The $location service parses the URL in the browser address bar
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$location read more}
+*
+* @param {service} $modal is a service to quickly create AngularJS-powered modal windows. Creating custom modals is straightforward: create a partial view, its controller and reference them when using the service.
+* <br>
+* {@link https://github.com/angular-ui/bootstrap/tree/master/src/modal/docs read more}
+*
+###
 angular.module('BBAdmin.Controllers').controller 'DashboardContainer', ($scope,  $rootScope, $location, $modal) ->
 
   $scope.selectedBooking = null
@@ -19,7 +42,7 @@ angular.module('BBAdmin.Controllers').controller 'DashboardContainer', ($scope, 
         items: () => {booking: booking};
       }
     }
-    
+
     modalInstance.result.then (selectedItem) =>
       $scope.selected = selectedItem;
     , () =>
@@ -48,4 +71,4 @@ angular.module('BBAdmin.Controllers').controller 'DashboardContainer', ($scope, 
         items: () => prms;
       }
     }
-    
+

@@ -1,5 +1,26 @@
 'use strict'
 
+###**
+* @ngdoc directive
+* @name BB.Directives:bbEvents
+* @restrict AE
+* @scope true
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+
+* Directive BB.Directives:bbEvents
+*
+* See Controller {@link BB.Controllers:EventList EventList}
+*
+* <pre>
+* restrict: 'AE'
+* replace: true
+* scope : true
+* controller : 'EventList'
+* </pre>
+*
+###
 angular.module('BB.Directives').directive 'bbEvents', () ->
   restrict: 'AE'
   replace: true
@@ -20,6 +41,71 @@ angular.module('BB.Directives').directive 'bbEvents', () ->
     return
 
 
+###**
+* @ngdoc controller
+* @name BB.Controllers:EventList
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller EventList
+*
+* # Has the following set of methods:
+*
+* - $scope.initialise()
+* - $scope.loadEventSummary()
+* - $scope.loadEventChainData(comp)
+* - $scope.loadEventData(comp)
+* - isFullyBooked()
+* - $scope.showDay(day)
+* - $scope.selectItem(item, route)
+* - $scope.setReady()
+* - $scope.filterEvents(item)
+* - filterEventsWithDynamicFilters(item)
+* - $scope.filterDateChanged()
+* - $scope.resetFilters()
+* - buildDynamicFilters(questions)
+* - sort()
+* - $scope.filterChanged()
+* - $scope.pageChanged()
+*
+* @param {service} $scope Scope is an object that refers to the application mode.
+* <br>
+* {@link https://docs.angularjs.org/guide/scope more}
+*
+* @param {service} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope more}
+*
+* @param {service} EventService Info
+* <br>
+* {@link BB.Services:EventService more}
+*
+* @param {service} EventChainService Info
+* <br>
+* {@link BB.Services:EventChainService more}
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {service} PageControllerService Info
+* <br>
+* {@link BB.Services:PageControllerService more}
+*
+* @param {service} FormDataStoreService Info
+* <br>
+* {@link BB.Services:FormDataStoreService more}
+*
+* @param {service} $filter Filters are used for formatting data displayed to the user.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$filter more}
+*
+* @param {service} PaginationService Info
+* <br>
+* {@link BB.Services:PaginationService more}
+*
+###
 angular.module('BB.Controllers').controller 'EventList', ($scope, $rootScope, EventService, EventChainService, $q, PageControllerService, FormDataStoreService, $filter, PaginationService) ->
   $scope.controller = "public.controllers.EventList"
   $scope.notLoaded $scope
@@ -38,7 +124,7 @@ angular.module('BB.Controllers').controller 'EventList', ($scope, $rootScope, Ev
     'event_group_id',
     'event_group_manually_set'
   ]
-  
+
   $rootScope.connection_started.then ->
     if $scope.bb.company
       # if there's a default event, skip this step
@@ -53,9 +139,9 @@ angular.module('BB.Controllers').controller 'EventList', ($scope, $rootScope, Ev
         , (err) -> $scope.setLoadedAndShowError($scope, err, 'Sorry, something went wrong')
       else
         $scope.initialise()
-      
+
   , (err) -> $scope.setLoadedAndShowError($scope, err, 'Sorry, something went wrong')
-  
+
 
   $scope.initialise = () ->
     $scope.notLoaded $scope
@@ -95,7 +181,7 @@ angular.module('BB.Controllers').controller 'EventList', ($scope, $rootScope, Ev
 
     # event data promise
     if $scope.mode is 1 or $scope.mode is 2
-      promises.push($scope.loadEventData()) 
+      promises.push($scope.loadEventData())
     else
       promises.push($q.when([]))
 
@@ -122,7 +208,7 @@ angular.module('BB.Controllers').controller 'EventList', ($scope, $rootScope, Ev
       delete $scope.bb.current_item.event_chain
       delete $scope.bb.current_item.event_chain_id
 
-    comp = $scope.bb.company 
+    comp = $scope.bb.company
     params = {item: $scope.bb.current_item, start_date:$scope.start_date.toISODate(), end_date:$scope.end_date.toISODate()}
     params.event_chain_id = $scope.bb.item_defaults.event_chain if $scope.bb.item_defaults.event_chain
 
@@ -134,20 +220,20 @@ angular.module('BB.Controllers').controller 'EventList', ($scope, $rootScope, Ev
         for item in items
           d = moment(item)
           item_dates.push({
-            date   : d, 
-            idate  : parseInt(d.format("YYYYDDDD")), 
-            count  : 1, 
+            date   : d,
+            idate  : parseInt(d.format("YYYYDDDD")),
+            count  : 1,
             spaces : 1,
           })
 
-        $scope.item_dates = item_dates.sort (a,b) -> (a.idate - b.idate) 
+        $scope.item_dates = item_dates.sort (a,b) -> (a.idate - b.idate)
 
         # TODO clear the selected date if the event group has changed (but only when event group has been explicity set)
         # if $scope.current_item? and $scope.current_item.event_group?
         #   if $scope.current_item.event_group.id != $scope.event_group_id
         #     $scope.showDay($scope.item_dates[0].date)
         #   $scope.event_group_id = $scope.current_item.event_group.id
-        
+
         # if the selected date is within range of the dates loaded, show it, else show the first day loaded
         if $scope.mode is 0
           if ($scope.selected_date and ($scope.selected_date.isAfter($scope.item_dates[0].date) or $scope.selected_date.isSame($scope.item_dates[0].date)) and ($scope.selected_date.isBefore($scope.item_dates[$scope.item_dates.length-1].date) || $scope.selected_date.isSame($scope.item_dates[$scope.item_dates.length-1].date)))
@@ -159,7 +245,7 @@ angular.module('BB.Controllers').controller 'EventList', ($scope, $rootScope, Ev
 
     , (err) -> deferred.reject()
     return deferred.promise
- 
+
 
 
   $scope.loadEventChainData = (comp) ->
@@ -169,7 +255,7 @@ angular.module('BB.Controllers').controller 'EventList', ($scope, $rootScope, Ev
       deferred.resolve([])
     else
       $scope.notLoaded $scope
-      comp ||= $scope.bb.company 
+      comp ||= $scope.bb.company
 
       params = {item: $scope.bb.current_item, start_date:$scope.start_date.toISODate(), end_date:$scope.end_date.toISODate()}
 
@@ -179,7 +265,7 @@ angular.module('BB.Controllers').controller 'EventList', ($scope, $rootScope, Ev
       , (err) ->  deferred.reject()
 
     return deferred.promise
-    
+
 
   $scope.loadEventData = (comp) ->
     deferred = $q.defer()
@@ -187,7 +273,7 @@ angular.module('BB.Controllers').controller 'EventList', ($scope, $rootScope, Ev
     current_event = $scope.current_item.event
 
     $scope.notLoaded $scope
-    comp ||= $scope.bb.company 
+    comp ||= $scope.bb.company
 
     # de-select the event chain if there's one already picked - as it's hiding other events in the same group
     if $scope.bb.current_item && ($scope.bb.current_item.event_chain_id || $scope.bb.current_item.event_chain)
@@ -207,14 +293,14 @@ angular.module('BB.Controllers').controller 'EventList', ($scope, $rootScope, Ev
         $scope.events[key] = value
 
       $scope.items = _.flatten(_.toArray($scope.events))
-      
+
       chains.then () ->
         # get more event details
         for item in $scope.items
           item.prepEvent()
           # check if the current item already has the same event selected
-          if $scope.mode is 0 and current_event and current_event.self == item.self 
-            item.select() 
+          if $scope.mode is 0 and current_event and current_event.self == item.self
+            item.select()
             $scope.event = item
 
         # only build item_dates if we're in 'next 100 event' mode
@@ -300,7 +386,7 @@ angular.module('BB.Controllers').controller 'EventList', ($scope, $rootScope, Ev
 
     $scope.filterChanged()
 
-   
+
   $scope.$watch 'pick.date', (new_val, old_val) =>
     if new_val
       $scope.start_date = moment(new_val)
@@ -327,14 +413,14 @@ angular.module('BB.Controllers').controller 'EventList', ($scope, $rootScope, Ev
 
 
   $scope.setReady = () ->
-    return false if !$scope.event 
+    return false if !$scope.event
     $scope.bb.current_item.setEvent($scope.event)
     return true
 
 
   $scope.filterEvents = (item) ->
     result = (item.date.isSame(moment($scope.filters.date), 'day') or !$scope.filters.date?) and
-      (($scope.filters.event_group and item.service_id == $scope.filters.event_group.id) or !$scope.filters.event_group?) and 
+      (($scope.filters.event_group and item.service_id == $scope.filters.event_group.id) or !$scope.filters.event_group?) and
       (($scope.filters.price? and (item.price_range.from <= $scope.filters.price)) or !$scope.filters.price?) and
       (($scope.filters.hide_sold_out_events and item.getSpacesLeft() != 0) or !$scope.filters.hide_sold_out_events) and
       filterEventsWithDynamicFilters(item)
@@ -356,7 +442,7 @@ angular.module('BB.Controllers').controller 'EventList', ($scope, $rootScope, Ev
             for i in item.chain.extra[name]
               filter = ($scope.dynamic_filters.values[dynamic_filter.name] and i is $scope.dynamic_filters.values[dynamic_filter.name].name) or !$scope.dynamic_filters.values[dynamic_filter.name]?
               break if filter
-          else if (item.chain.extra[name] is undefined && (_.isEmpty($scope.dynamic_filters.values) || !$scope.dynamic_filters.values[dynamic_filter.name]?))
+          else if (item.chain.extra[name] is undefined && item.chain?)
             filter = true;
           result = result and filter
       else
@@ -387,7 +473,7 @@ angular.module('BB.Controllers').controller 'EventList', ($scope, $rootScope, Ev
 
   # TODO build price filter by determiniug price range, if range is large enough, display price filter
   # buildPriceFilter = () ->
-  #   for item in items 
+  #   for item in items
 
 
   sort = () ->

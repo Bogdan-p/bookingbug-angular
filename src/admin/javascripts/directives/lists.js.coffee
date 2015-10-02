@@ -1,6 +1,29 @@
 'use strict';
 
+###**
+* @ngdoc directive
+* @name BBAdmin.Directives:bbPeopleList
+* @restrict AE
+*
+* @description
+* Directive bbPeopleList
+*
+* @example Example that demonstrates basic bookingTable.
+  <example>
+    <file name="index.html">
+      <div class="my-example">
+      </div>
+    </file>
 
+    <file name="style.css">
+      .my-example {
+        background: green;
+        widht: 200px;
+        height: 200px;
+      }
+    </file>
+  </example>
+###
 angular.module('BBAdmin.Directives').directive 'bbPeopleList', ($rootScope) ->
   restrict: 'AE'
   replace: true
@@ -22,7 +45,31 @@ angular.module('BBAdmin.Directives').directive 'bbPeopleList', ($rootScope) ->
 
 
 
+###**
+* @ngdoc directive
+* @name BBAdmin.Directives:bbBookingList
+* @restrict AE
+*
+* @description
+* Directive bbBookingList
+*
+*
+* @example Example that demonstrates basic bookingTable.
+  <example>
+    <file name="index.html">
+      <div class="my-example">
+      </div>
+    </file>
 
+    <file name="style.css">
+      .my-example {
+        background: green;
+        widht: 200px;
+        height: 200px;
+      }
+    </file>
+  </example>
+###
 angular.module('BBAdmin.Directives').directive 'bbBookingList', ->
   restrict: 'AE'
   replace: true
@@ -38,14 +85,14 @@ angular.module('BBAdmin.Directives').directive 'bbBookingList', ->
   controller: ($scope, $filter) ->
     $scope.title = $scope.params.title
     status = $scope.params.status
-    
+
     $scope.$watch ->
       $scope.bookings
     , ->
       bookings = $scope.bookings
       cancelled = $scope.cancelled
       cancelled ?= false
-      
+
       if (bookings?)
         bookings = $filter('filter') bookings, (booking) ->
           ret = (booking.is_cancelled == cancelled)
@@ -55,7 +102,7 @@ angular.module('BBAdmin.Directives').directive 'bbBookingList', ->
             ret &= (!booking.multi_status? || Object.keys(booking.multi_status).length == 0)
           ret &= (booking.status == 4)
           return ret
-        
+
         $scope.relevantBookings = $filter('orderBy')(bookings, 'datetime')
-      
+
       $scope.relevantBookings ?= []

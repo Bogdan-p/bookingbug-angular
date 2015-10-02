@@ -1,10 +1,50 @@
 'use strict'
 
+###**
+* @ndgoc directive
+* @name BB.Directives:bbTotal
+*
+* @restrict AE
+* @scope true
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:bbTotal
+*
+* # Has the following set of methods:
+*
+###
+
 angular.module('BB.Directives').directive 'bbTotal', () ->
   restrict: 'AE'
   replace: true
   scope : true
   controller : 'Total'
+
+###**
+* @ngdoc controller
+* @name BB.Controllers:Total
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller Total
+*
+* # Has the following set of methods:
+*
+* - $scope.print()
+*
+* @requires $scope
+* @requires $rootScope
+* @requires $q
+* @requires $location
+* @requires $window
+* @requires BB.Services:PurchaseService
+* @requires BB.Services:QueryStringService
+*
+###
+
 
 angular.module('BB.Controllers').controller 'Total', ($scope,  $rootScope, $q, $location, $window, PurchaseService, QueryStringService) ->
 

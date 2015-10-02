@@ -1,5 +1,28 @@
 'use strict';
 
+###**
+* @ngdoc directive
+* @name BB.Directives:bbAccordianRangeGroup
+* @restrict AE
+* @scope true
+*
+* @description
+{@link https://docs.angularjs.org/guide/directive more about Directives}
+
+* Directive BB.Directives:bbAccordianRangeGroup
+*
+* <pre>
+* restrict: 'AE'
+* replace: true
+* scope: true
+* </pre>
+*
+* # Has the following set of methods:
+*
+* - link: (scope, element, attrs, ctrl)
+*
+###
+
 angular.module('BB.Directives').directive 'bbAccordianRangeGroup', () ->
   restrict: 'AE'
   replace: true
@@ -11,6 +34,32 @@ angular.module('BB.Directives').directive 'bbAccordianRangeGroup', () ->
     scope.options.using_stacked_items = ctrl?
 
 
+###**
+* @ngdoc controller
+* @name BB.Controllers:AccordianRangeGroup
+*
+* @description
+*{@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller AccordianRangeGroup
+*
+* # Has the following set of methods:
+* - $scope.setFormDataStoreId(id)
+* - $scope.init(start_time, end_time, options)
+* - $scope.setRange(start_time, end_time)
+* - setData()
+* - updateAvailability(day, slot)
+* - hasAvailability()
+* - $scope.$on 'slotChanged', (event, day, slot)
+* - $scope.$on 'dataReloaded', (event, earliest_slot)
+*
+* @requires $scope
+* @requires $rootScope
+* @requires BB.Services:FormDataStoreService
+* @requires $q
+* @requires $attrs
+*
+###
 angular.module('BB.Controllers').controller 'AccordianRangeGroup',
 ($scope, $attrs, $rootScope, $q, FormDataStoreService) ->
 
@@ -64,14 +113,14 @@ angular.module('BB.Controllers').controller 'AccordianRangeGroup',
       updateAvailability()
 
 
-  updateAvailability = (day, slot) ->   
+  updateAvailability = (day, slot) ->
     $scope.selected_slot = null
     $scope.has_availability = hasAvailability() if $scope.accordian_slots
 
     # if a day and slot has been provided, check if the slot is in range
     if day and slot
       $scope.selected_slot = slot if day.date.isSame($scope.day.date) and slot.time >= $scope.start_time and slot.time < $scope.end_time
-    else 
+    else
       for slot in $scope.accordian_slots
         if slot.selected
           $scope.selected_slot = slot
@@ -83,7 +132,7 @@ angular.module('BB.Controllers').controller 'AccordianRangeGroup',
       $scope.is_open = false if $scope.collaspe_when_time_selected
     else
       $scope.is_selected = false
-      $scope.is_open = false if $scope.collaspe_when_time_selected      
+      $scope.is_open = false if $scope.collaspe_when_time_selected
 
 
   hasAvailability = ->
@@ -93,7 +142,7 @@ angular.module('BB.Controllers').controller 'AccordianRangeGroup',
     return false
 
 
-  $scope.$on 'slotChanged', (event, day, slot) ->  
+  $scope.$on 'slotChanged', (event, day, slot) ->
     if day and slot
       updateAvailability(day, slot)
     else

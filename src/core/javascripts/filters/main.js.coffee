@@ -3,6 +3,26 @@ app = angular.module 'BB.Filters'
 
 # strips the postcode from the end of the address. i.e.
 # '15 some address, somwhere, SS1 4RP' becomes '15 some address, somwhere'
+
+###**
+* @ngdoc filter
+* @name BB.Filters:stripPostcode
+*
+* @description
+* BB.Filters:stripPostcode
+* 
+* <pre>
+* if match
+*   address = address.substr(0, match.index)
+*   address = $.trim(address)
+*   if /,$/.test(address)
+*     address = address.slice(0, -1)
+* </pre>
+*
+* @return {String} address
+*
+###
+
 app.filter 'stripPostcode', ->
   (address) ->
     # test to see if the address contains a postcode by searching for a any

@@ -1,11 +1,42 @@
 'use strict';
 
-#
-# Basket Directive
-# Example usage;
-# <div bb-basket></div>
-# <div bb-basket mini></div>
-#
+###**
+* @ngdoc directive
+* @name BB.Directives:bbBasket
+* @restrict A
+* @scope true
+*
+* @description
+{@link https://docs.angularjs.org/guide/directive more about Directives}
+
+* Directive BB.Directives:bbBasket
+*
+* <pre>
+* restrict: 'A'
+* replace: true
+* scope : true
+* templateUrl : (element, attrs) ->
+*   if _.has attrs, 'mini'
+*   then PathSvc.directivePartial "_basket_mini"
+*   else PathSvc.directivePartial "basket"
+* controllerAs : 'BasketCtrl'
+* </pre>
+*
+* # Has the following set of methods:
+*
+* - templateUrl(element, attrs)
+* - controller($scope, $modal, BasketService)
+* - link : (scope, element, attrs)
+* <br>
+* Stop the default action of links inside directive. You can pass the $event
+* object in from the view to the function bound to ng-click but this keeps
+* the markup tidier.
+*
+* @param {service} PathSvc Info
+* <br>
+* {@link BB.Services:PathSvc more}
+*
+###
 angular.module('BB.Directives').directive 'bbBasket', (PathSvc) ->
   restrict: 'A'
   replace: true
@@ -28,12 +59,12 @@ angular.module('BB.Directives').directive 'bbBasket', (PathSvc) ->
     $scope.showBasketDetails = () ->
       if ($scope.bb.current_page == "basket") || ($scope.bb.current_page == "checkout")
         return false
-      else            
+      else
         modalInstance = $modal.open
           templateUrl: $scope.getPartial "_basket_details"
           scope: $scope
           controller: BasketInstanceCtrl
-          resolve: 
+          resolve:
             basket: ->
               $scope.bb.basket
 
@@ -62,7 +93,25 @@ angular.module('BB.Directives').directive 'bbBasket', (PathSvc) ->
     element.bind 'click', (e) ->
       e.preventDefault()
 
-
+###**
+* @ngdoc directive
+* @name BB.Directives:bbMinSpend
+* @restrict A
+* @scope true
+*
+* @description
+* Directive BB.Directives:bbMinSpend
+*
+* <pre>
+* restrict: 'A'
+* scope: true
+* </pre>
+*
+* # Has the following set of methods:
+*
+* - controller($scope, $element, $attrs, AlertService)
+*
+###
 angular.module('BB.Directives').directive 'bbMinSpend', () ->
   restrict: 'A'
   scope: true

@@ -3,7 +3,30 @@
 # Directives
 app = angular.module 'BB.Directives'
 
-
+###**
+* @ngdoc directive
+* @name BB.Directives:bbQuestionLine
+* @restrict A
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:bbQuestionLine
+*
+* <pre>
+* transclude: false,
+* restrict: 'A',
+* </pre>
+*
+* # Has the following set of methods:
+*
+* - link(scope, element, attrs)
+*
+* @param {service} $compile Compiles an HTML string or DOM into a template and produces a template function, which can then be used to link scope and the template together.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$compile more}
+*
+###
 app.directive 'bbQuestionLine', ($compile) ->
   transclude: false,
   restrict: 'A',
@@ -17,14 +40,43 @@ app.directive 'bbQuestionLine', ($compile) ->
       element.html(elm)
 
     # are we using a completely custom question
-    if scope.idmaps and ((scope.idmaps[scope.question.detail_type] and scope.idmaps[scope.question.detail_type].block) or 
+    if scope.idmaps and ((scope.idmaps[scope.question.detail_type] and scope.idmaps[scope.question.detail_type].block) or
       (scope.idmaps[scope.question.id] && scope.idmaps[scope.question.id].block))
         index = if scope.idmaps[scope.question.id] then scope.question.id else scope.question.detail_type
         html = scope.$parent.idmaps[index].html
         e = $compile(html) scope, (cloned, scope) =>
           element.replaceWith(cloned)
 
-
+###**
+* @ngdoc directive
+* @name BB.Directives:bbQuestion
+* @restrict A
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:bbQuestion
+*
+* <pre>
+* priority: 0,
+* replace: true,
+* transclude: false,
+* restrict: 'A',
+* </pre>
+*
+* # Has the following set of methods:
+*
+* - compile(el,attr,trans)
+*
+* @param {service} $compile Compiles an HTML string or DOM into a template and produces a template function, which can then be used to link scope and the template together.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$compile more}
+*
+* @param {service} $timeout Angular's wrapper for window.setTimeout.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$timeout more}
+*
+###
 app.directive 'bbQuestion', ($compile, $timeout) ->
   priority: 0,
   replace: true,
@@ -33,12 +85,12 @@ app.directive 'bbQuestion', ($compile, $timeout) ->
   compile: (el,attr,trans) ->
       pre: (scope, element, attrs) ->
         adminRequired = attrs.bbAdminRequired ? false
-        
+
         scope.$watch attrs.bbQuestion, (question) ->
           if question
             html = ''
             lastName = ''
-            
+
             scope.recalc = () =>
               if angular.isDefined(scope.recalc_price)
                 scope.recalc_price() if !question.outcome
@@ -96,7 +148,28 @@ app.directive 'bbQuestion', ($compile, $timeout) ->
       post: (scope, $e, $a, parentControl) ->
 
 
-
+###**
+* @ngdoc directive
+* @name BB.Directives:bbQuestionSetup
+* @restrict A
+* @priority 1000
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:bbQuestionSetup
+*
+* <pre>
+* restrict: 'A'
+* terminal: true
+* priority: 1000
+* </pre>
+*
+* # Has the following set of methods:
+*
+* - link(scope, element, attrs)
+*
+###
 app.directive 'bbQuestionSetup', ->
   restrict: 'A'
   terminal: true
@@ -118,8 +191,31 @@ app.directive 'bbQuestionSetup', ->
     element.replaceWith("")
 
 
-# Directive for testing if a input is focused
+###**
+* @ngdoc directive
+* @name BB.Directives:bbFocus
+* @restrict A
+* @priority 1000
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:bbFocus
+*
+* Directive for testing if a input is focused
+*
 # Provided by http://www.ng-newsletter.com/posts/validations.html
+*
+* <pre>
+* restrict: "A",
+* require: "ngModel",
+* </pre>
+*
+* # Has the following set of methods:
+*
+* - link(scope, element, attrs, ctrl)
+*
+###
 app.directive "bbFocus", [->
     FOCUS_CLASS = "bb-focused"
     {
@@ -140,14 +236,38 @@ app.directive "bbFocus", [->
 ]
 
 
-# Min/Max directives for use with number inputs
-# Although angular provides min/max directives when using a HTML number input, the control does not validate if the field is actually a number
-# so we have to use a text input with a ng-pattern that only allows numbers.
-# http://jsfiddle.net/g/s5gKC/
+
 
 isEmpty = (value) ->
   angular.isUndefined(value) or value is "" or value is null or value isnt value
 
+###**
+* @ngdoc directive
+* @name BB.Directives:ngMin
+* @restrict A
+* @priority 1000
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:ngMin
+*
+* Min directives for use with number inputs.
+* Although angular provides min/max directives when using a HTML number input, the control does not validate if the field is actually a number
+* So we have to use a text input with a ng-pattern that only allows numbers.
+*
+* http://jsfiddle.net/g/s5gKC/
+*
+* <pre>
+* restrict: "A"
+* require: "ngModel"
+* </pre>
+*
+* # Has the following set of methods:
+*
+* - link(scope, elem, attr, ctrl)
+*
+###
 app.directive "ngMin", ->
   restrict: "A"
   require: "ngModel"
@@ -169,6 +289,33 @@ app.directive "ngMin", ->
     ctrl.$formatters.push minValidator
     return
 
+###**
+* @ngdoc directive
+* @name BB.Directives:ngMax
+* @restrict A
+* @priority 1000
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:ngMax
+*
+* Max directives for use with number inputs.
+* Although angular provides min/max directives when using a HTML number input, the control does not validate if the field is actually a number
+* So we have to use a text input with a ng-pattern that only allows numbers.
+*
+* http://jsfiddle.net/g/s5gKC/
+*
+* <pre>
+* restrict: "A"
+* require: "ngModel"
+* </pre>
+*
+* # Has the following set of methods:
+*
+* - link(scope, elem, attr, ctrl)
+*
+###
 app.directive "ngMax", ->
   restrict: "A"
   require: "ngModel"
@@ -190,7 +337,32 @@ app.directive "ngMax", ->
     ctrl.$formatters.push maxValidator
     return
 
-
+###**
+* @ngdoc directive
+* @name BB.Directives:creditCardNumber
+* @restrict C
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:creditCardNumber
+*
+* <pre>
+* restrict: "C"
+* require: "ngModel"
+* link: linker
+* scope: {
+*   'cardType': '='
+* }
+* </pre>
+*
+* # Has the following set of methods:
+*
+* - getCardType(ccnumber)
+* - isValid(ccnumber)
+* - linker(scope, element, attributes, ngModel)
+*
+###
 app.directive "creditCardNumber", ->
 
   getCardType = (ccnumber) ->
@@ -258,6 +430,29 @@ app.directive "creditCardNumber", ->
     }
   }
 
+###**
+* @ngdoc directive
+* @name BB.Directives:cardSecurityCode
+* @restrict C
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:cardSecurityCode
+*
+* <pre>
+* restrict: "C"
+* link: linker
+* scope: {
+*   'cardType': '='
+* }
+* </pre>
+*
+* # Has the following set of methods:
+*
+* - linker(scope, element, attributes)
+*
+###
 app.directive "cardSecurityCode", ->
 
   linker = (scope, element, attributes) ->
@@ -277,8 +472,27 @@ app.directive "cardSecurityCode", ->
     }
   }
 
-# bbInputGroupManager
-# Allows you you register inputs
+###**
+* @ngdoc directive
+* @name BB.Directives:bbInputGroupManager
+* @restrict A
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:bbInputGroupManager
+*
+* Allows you you register inputs
+*
+* <pre>
+* restrict: 'A'
+* </pre>
+*
+* # Has the following set of methods:
+*
+* - controller($scope, $element, $attrs)
+*
+###
 app.directive 'bbInputGroupManager', (ValidatorService) ->
   restrict: 'A'
   controller: ($scope, $element, $attrs) ->
@@ -300,7 +514,7 @@ app.directive 'bbInputGroupManager', (ValidatorService) ->
           @input_groups[name] = {
             inputs : [],
             valid  : false
-          } 
+          }
 
         @input_groups[name].inputs.push(input)
 
@@ -310,21 +524,46 @@ app.directive 'bbInputGroupManager', (ValidatorService) ->
           is_valid = input.$modelValue
           break if is_valid
 
-        if is_valid is not @input_groups[name].valid 
+        if is_valid is not @input_groups[name].valid
 
           for input in @input_groups[name].inputs
             input.$setValidity(input.$name,is_valid)
 
           @input_groups[name].valid = is_valid
-          
+
     }
 
     # on form submit, validate all input groups
-    $element.on "submit", ->  
+    $element.on "submit", ->
       for input_group of $scope.input_manger.input_groups
         $scope.input_manger.validateInputGroup(input_group)
 
-
+###**
+* @ngdoc directive
+* @name BB.Directives:bbInputGroup
+* @restrict A
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:bbInputGroup
+*
+* Return if the input has already been registered.
+*
+* Register the input.
+*
+* Watch the input for changes
+*
+* <pre>
+* restrict: "A",
+* require: 'ngModel',
+* </pre>
+*
+* # Has the following set of methods:
+*
+* - link(scope, elem, attrs, ngModel)
+*
+###
 app.directive "bbInputGroup", () ->
   restrict: "A",
   require: 'ngModel',
@@ -340,9 +579,31 @@ app.directive "bbInputGroup", () ->
     scope.$watch attrs.ngModel, (newval, oldval) ->
       scope.input_manger.validateInputGroup(attrs.bbInputGroup) if newval is not oldval
 
-
-
-
+###**
+* @ngdoc directive
+* @name BB.Directives:bbQuestionLabel
+* @restrict A
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:bbQuestionLabel
+*
+* <pre>
+* transclude: false,
+* restrict: 'A',
+* scope: false,
+* </pre>
+*
+* # Has the following set of methods:
+*
+* - link(scope, element, attrs)
+*
+* @param {service} $compile Compiles an HTML string or DOM into a template and produces a template function, which can then be used to link scope and the template together.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$compile more}
+*
+###
 app.directive 'bbQuestionLabel', ($compile) ->
   transclude: false,
   restrict: 'A',
@@ -354,6 +615,32 @@ app.directive 'bbQuestionLabel', ($compile) ->
           element.html("")
 
 
+###**
+* @ngdoc directive
+* @name BB.Directives:bbQuestionLink
+* @restrict A
+* @scope true
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:bbQuestionLink
+*
+* <pre>
+* transclude: false,
+* restrict: 'A',
+* scope: true,
+* </pre>
+*
+* # Has the following set of methods:
+*
+* - link(scope, element, attrs)
+*
+* @param {service} $compile Compiles an HTML string or DOM into a template and produces a template function, which can then be used to link scope and the template together.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$compile more}
+*
+###
 app.directive 'bbQuestionLink', ($compile) ->
   transclude: false,
   restrict: 'A',
@@ -370,6 +657,32 @@ app.directive 'bbQuestionLink', ($compile) ->
             $compile(element)(scope)
 
 
+###**
+* @ngdoc directive
+* @name BB.Directives:bbQuestionSet
+* @restrict A
+* @scope true
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:bbQuestionSet
+*
+* <pre>
+* transclude: false,
+* restrict: 'A',
+* scope: true,
+* </pre>
+*
+* # Has the following set of methods:
+*
+* - link(scope, element, attrs)
+*
+* @param {service} $compile Compiles an HTML string or DOM into a template and produces a template function, which can then be used to link scope and the template together.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$compile more}
+*
+###
 app.directive 'bbQuestionSet', ($compile) ->
   transclude: false,
   restrict: 'A',
@@ -384,6 +697,30 @@ app.directive 'bbQuestionSet', ($compile) ->
 
 
 # Input match test
+###**
+* @ngdoc directive
+* @name BB.Directives:bbMatchInput
+* @restrict A
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:bbMatchInput
+*
+* <pre>
+* restrict: "A"
+* require: 'ngModel'
+* </pre>
+*
+* # Has the following set of methods:
+*
+* - link(scope, element, attrs, ctrl, ngModel)
+*
+* @param {service} $compile Compiles an HTML string or DOM into a template and produces a template function, which can then be used to link scope and the template together.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$compile more}
+*
+###
 app.directive "bbMatchInput", ->
   restrict: "A"
   require: 'ngModel'

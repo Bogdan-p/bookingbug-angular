@@ -1,5 +1,5 @@
 
-angular.module('ngLocalData', ['angular-hal']).
+angular.module('ngLocalData', ['angular-hal', 'ngLocalData']).
  factory('$localCache', ['halClient', '$q', function( halClient, $q) {
     data = {};
 
@@ -10,21 +10,21 @@ angular.module('ngLocalData', ['angular-hal']).
     storage = function()
     {
       return sessionStorage
-    } 
+    }
     localSave = function(key, item){
-      storage().setItem(key, item.$toStore())   
-    } 
+      storage().setItem(key, item.$toStore())
+    }
     localLoad = function(key){
       res =  jsonData(storage().getItem(key))
       if (res)
-      {  
+      {
         r = halClient.createResource(res)
         def = $q.defer()
         def.resolve(r)
         return def.promise
       }
       return null
-    } 
+    }
     localDelete = function(key) {
       storage().removeItem(key)
     }
@@ -54,13 +54,13 @@ angular.module('ngLocalData', ['angular-hal']).
       has: function(key)
       {
         if (!data[key])
-        { 
+        {
           res = localLoad(key)
           if (res)
             data[key] = res
         }
         return (key in data)
-      }      
+      }
     }
 
 }]).
@@ -77,7 +77,7 @@ angular.module('ngLocalData', ['angular-hal']).
       LocalData.prototype.storage = function()
       {
         return sessionStorage
-      }  
+      }
 
       LocalData.prototype.localSave = function(item)
       {
@@ -121,7 +121,7 @@ angular.module('ngLocalData', ['angular-hal']).
 
      //   channel.bind('add', function(data) {
      //     ds.data_store.push(data);
-     //     $rootScope.$broadcast("Refresh_" + ds.store_name, "Updated");          
+     //     $rootScope.$broadcast("Refresh_" + ds.store_name, "Updated");
      //   });
 
       }
@@ -143,6 +143,6 @@ angular.module('ngLocalData', ['angular-hal']).
     };
 
 
-    
+
     return LocalDataFactory
 }]);

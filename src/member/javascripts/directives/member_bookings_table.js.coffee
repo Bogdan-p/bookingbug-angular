@@ -1,3 +1,30 @@
+###**
+* @ngdoc directive
+* @name BBMember.Directives:memberBookingsTable
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BBMember.Directives:memberBookingsTable
+*
+* # Has the following set of methods:
+*
+* - controller($scope, $modal)
+* - $scope.edit(id)
+* - getBookings($scope, member)
+* - link(scope, element, attrs)
+*
+* @requires $modal
+* @requires $log
+* @requires $rootScope
+* @requires BBMember.Services:MemberLoginService
+* @requires BB.Services:MemberBookingService
+* @requires $compile
+* @requires $templateCache
+* @requires BB.Services:ModalForm
+*
+###
+
 angular.module('BBMember').directive 'memberBookingsTable', ($modal, $log, $rootScope,
     MemberLoginService, MemberBookingService, $compile, $templateCache, ModalForm) ->
 

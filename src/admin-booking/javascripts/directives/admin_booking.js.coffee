@@ -1,3 +1,28 @@
+###**
+* @ndgoc directive
+* @name BBAdminBooking.Directives:bbAdminBooking
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BBAdminBooking.Directives:bbAdminBooking
+*
+* # Has the following set of methods:
+*
+* - getTemplate(template)
+* - renderTemplate(scope, element, design_mode, template)
+* - link(scope, element, attrs) 
+*
+* @requires BBAdmin.Services:AdminCompanyService
+* @requires $log
+* @requires $compile
+* @requires $q
+* @requires BB.Services:PathSvc
+* @requires $templateCache
+* @requires $http
+*
+###
+
 angular.module('BBAdminBooking').directive 'bbAdminBooking', (AdminCompanyService,
   $log, $compile, $q, PathSvc, $templateCache, $http) ->
 

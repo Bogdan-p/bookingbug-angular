@@ -1,6 +1,41 @@
+
 angular.module('BB').config ($logProvider, $injector) ->
     $logProvider.debugEnabled true
 
+###**
+* @ngdoc service
+* @name BB.Services:DebugUtilsService
+*
+* @description
+* Factory DebugUtilsService
+*
+* @param {model} BBModel Info
+* <br>
+* {@link BB.Models:BBModel more}
+*
+* @param {service} $log Simple service for logging.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$log more}
+*
+* @param {service} $window A reference to the browser's window object.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$window more}
+*
+* @param {service} $location The $location service parses the URL in the browser address bar
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$location more}
+*
+* @param {service} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope more}
+*
+* @returns {Promise} This service has the following set of methods:
+*
+* - query(prms)
+* - logObjectKeys(obj, showValue)
+* - showScopeChain()
+*
+###
 angular.module('BB.Services').factory "DebugUtilsService",
 ($rootScope, $location, $window, $log, BBModel) ->
   # logs a scopes key names and values

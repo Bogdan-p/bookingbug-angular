@@ -1,10 +1,64 @@
 'use strict';
 
+###**
+* @ndgoc directive
+* @name BB.Directives:bbTimes
+*
+* @restrict AE
+* @scope true
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:bbTimes
+*
+* # Has the following set of methods:
+*
+###
+
 angular.module('BB.Directives').directive 'bbTimes', () ->
   restrict: 'AE'
   replace: true
   scope : true
   controller : 'TimeList'
+
+###**
+* @ngdoc controller
+* @name BB.Controllers:TimeList
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller TimeList
+*
+* # Has the following set of methods:
+*
+* - $scope.setDate(date)
+* - $scope.setDay(dayItem)
+* - $scope.setDataSource(source)
+* - $scope.setItemLinkSource(source)
+* - $scope.$on 'dateChanged', (event, newdate)
+* - $scope.$on "currentItemUpdate", (event)
+* - $scope.format_date(fmt)
+* - $scope.selectSlot(slot, route)
+* - $scope.highlightSlot(slot)
+* - $scope.status(slot)
+* - $scope.add(type, amount)
+* - $scope.subtract(type, amount)
+* - $scope.loadDay()
+* - $scope.padTimes(times)
+* - $scope.setReady()
+*
+* @requires $attrs
+* @requires $element
+* @requires $scope
+* @requires $rootScope
+* @requires $q
+* @requires BB.Services:TimeService
+* @requires BB.Services:AlertService
+* @requires BB.Models:BBModel
+*
+###
 
 angular.module('BB.Controllers').controller 'TimeList', ($attrs, $element, $scope,  $rootScope, $q, TimeService, AlertService, BBModel) ->
   $scope.controller = "public.controllers.TimeList"
@@ -172,13 +226,49 @@ angular.module('BB.Controllers').controller 'TimeList', ($attrs, $element, $scop
       else
         return true
 
-
+###**
+* @ndgoc directive
+* @name BB.Directives:bbAccordianGroup
+*
+* @restrict AE
+* @scope true
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:bbAccordianGroup
+*
+* # Has the following set of methods:
+*
+###
 
 angular.module('BB.Directives').directive 'bbAccordianGroup', () ->
   restrict: 'AE'
   scope : true
   controller : 'AccordianGroup'
 
+###**
+* @ngdoc controller
+* @name BB.Controllers:AccordianGroup
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller AccordianGroup
+*
+* # Has the following set of methods:
+*
+* - $scope.init(start_time, end_time, options)
+* - updateAvailability()
+* - hasAvailability()
+* - $scope.$on 'slotChanged', (event)
+* - $scope.$on 'slotsUpdated', (event)
+*
+* @requires $scope
+* @requires $rootScope
+* @requires $q
+*
+###
 
 angular.module('BB.Controllers').controller 'AccordianGroup', ($scope,  $rootScope, $q) ->
   $scope.accordian_slots             = []

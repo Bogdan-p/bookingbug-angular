@@ -1,6 +1,27 @@
-
 'use strict';
 
+###**
+* @ngdoc controller
+* @name BBAdmin.Controllers:DashDayList
+*
+* @description
+* Controller DashDayList
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q read more}
+*
+* @param {object} $scope Scope is an object that refers to the application mode.
+* <br>
+* {@link https://docs.angularjs.org/guide/scope read more}
+*
+* @param {object} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope read more}
+*
+* @param {service} AdminDayService service.
+*
+###
 angular.module('BBAdmin.Controllers').controller 'DashDayList', ($scope,  $rootScope, $q, AdminDayService) ->
 
 
@@ -32,7 +53,7 @@ angular.module('BBAdmin.Controllers').controller 'DashDayList', ($scope,  $rootS
 
   $scope.format_date = (fmt) =>
     $scope.current_date.format(fmt)
- 
+
   $scope.selectDay = (day, dayBlock, e) =>
     if (day.spaces == 0)
       return false
@@ -47,9 +68,9 @@ angular.module('BBAdmin.Controllers').controller 'DashDayList', ($scope,  $rootS
     $scope.service_id = dayBlock.service_id
     $scope.service = {id: dayBlock.service_id, name: dayBlock.name}
     $scope.selected_day = day
-    if xelm.length== 0 
+    if xelm.length== 0
       $scope.inline_items = "/view/dash/time_small"
-    else   
+    else
       xelm.scope().init(day)
 
   $scope.$watch 'current_date', (newValue, oldValue) =>

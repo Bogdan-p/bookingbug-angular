@@ -1,3 +1,31 @@
+###**
+* @ngdoc directive
+* @name BBAdminEvents.Directives:eventChainTable
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directives BBAdminEvents.Directives:eventChainTable
+*
+* # Has the following set of methods:
+*
+* - controller($scope)
+* - $scope.getEventChains()
+* - $scope.newEventChain()
+* - $scope.delete(id)
+* - editSuccess(updated)
+* - $scope.edit(id)
+* - link(scope, element, attrs)
+* 
+* @requires BBAdmin.Services:AdminCompanyService
+* @requires BBAdminEvents.Services:AdminEventChainService
+* @requires $modal
+* @requires $log
+* @requires BB.Services:ModalForm
+* @requires $timeout
+*
+###
+
 angular.module('BBAdminEvents').directive 'eventChainTable', (AdminCompanyService,
     AdminEventChainService, $modal, $log, ModalForm, $timeout) ->
 

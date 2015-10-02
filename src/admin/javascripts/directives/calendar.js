@@ -1,5 +1,3 @@
-
-
 angular.module('BBAdmin.Directives').controller('CalController', function($scope) {
     /* config object */
     $scope.calendarConfig = {

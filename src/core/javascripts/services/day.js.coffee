@@ -1,4 +1,23 @@
-
+###**
+* @ngdoc service
+* @name BB.Services:DayService
+*
+* @description
+* Factory DayService
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {model} BBModel Info
+* <br>
+* {@link BB.Models:BBModel more}
+*
+* @returns {Promise} This service has the following set of methods:
+*
+* - query(prms)
+*
+###
 angular.module('BB.Services').factory "DayService", ($q, BBModel) ->
   query: (prms) ->
     deferred = $q.defer()
@@ -6,7 +25,7 @@ angular.module('BB.Services').factory "DayService", ($q, BBModel) ->
     if prms.cItem.days_link
       extra = {}
       extra.month = prms.month
-      extra.date = prms.date 
+      extra.date = prms.date
       extra.edate = prms.edate
       extra.location = prms.client.addressCsvLine() if prms.client
       extra.person_id = prms.cItem.person.id if prms.cItem.person && !prms.cItem.anyPerson()
@@ -17,7 +36,7 @@ angular.module('BB.Services').factory "DayService", ($q, BBModel) ->
         days = []
         for i in afound
           if (i.type == prms.item)
-            days.push(new BBModel.Day(i))  
+            days.push(new BBModel.Day(i))
         deferred.resolve(days)
       , (err) =>
         deferred.reject(err)

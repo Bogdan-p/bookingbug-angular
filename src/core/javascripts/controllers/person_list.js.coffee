@@ -1,6 +1,26 @@
 'use strict';
 
+###**
+* @ngdoc directive
+* @name BB.Directives:bbPeople
+* @restrict AE
+* @scope true
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
 
+* Directive BB.Directives:bbPeople
+*
+* See Controller {@link BB.Controllers:PersonList PersonList}
+*
+* <pre>
+* restrict: 'AE'
+* replace: true
+* scope: true
+* controller: 'PersonList'
+* </pre>
+*
+###
 angular.module('BB.Directives').directive 'bbPeople', () ->
   restrict: 'AE'
   replace: true
@@ -12,7 +32,42 @@ angular.module('BB.Directives').directive 'bbPeople', () ->
     return
 
 
-
+###**
+* @ngdoc controller
+* @name BB.Controllers:PersonList
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller PersonList
+*
+* # Has the following set of methods:
+*
+* - loadData()
+* - setPerson(people)
+* - getItemFromPerson(person)
+* - $scope.selectItem(item, route)
+* - $scope.selectAndRoute(item, route)
+* - $scope.$watch 'person',(newval, oldval)
+* - $scope.setReady()
+*
+* @param {service} $scope Scope is an object that refers to the application mode.
+* <br>
+* {@link https://docs.angularjs.org/guide/scope more}
+*
+* @param {service} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope more}
+*
+* @param {service} PageControllerService Info
+* <br>
+* {@link BB.Services:PageControllerService more}
+*
+* @param {service} PersonService Info
+* <br>
+* {@link BB.Services:PersonService more}
+*
+###
 angular.module('BB.Controllers').controller 'PersonList',
 ($scope,  $rootScope, PageControllerService, PersonService, ItemService, $q, BBModel, PersonModel, FormDataStoreService) ->
 

@@ -1,6 +1,97 @@
 
 'use strict';
 
+###**
+* @ngdoc object
+* @name BB.Models:BasketItemModel
+*
+* @description
+* This is BasketItemModel in BB.Models module that creates BasketItem object.
+*
+* <pre>
+* //Creates class BasketItem that extends BaseModel
+* class BasketItem extends BaseModel
+* </pre>
+*
+* @requires {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @requires {service} $window A reference to the browser's window object.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$window more}
+*
+* @requires {model} $bbug Releases the hold on the $ shortcut identifier, so that other scripts can use it.
+* <br>
+* {@link $bbug more}
+*
+* @requires {model} BBModel Info
+* <br>
+* {@link BB.Models:BBModel more}
+*
+* @requires {model} BaseModel Info
+* <br>
+* {@link BB.Models:BaseModel more}
+*
+* @requires {model} BookableItemModel Info
+* <br>
+* {@link BB.Models:BookableItemModel more}
+*
+* @returns {object} Newly created BasketItem object with the following set of methods:
+*
+* - constructor(data, bb)
+* - setDefaults(defaults)
+* - storeDefaults(defaults)
+* - defaultService()
+* - requestedTimeUnavailable
+* - setSlot(slot)
+* - setCompany(company)
+* - clearExistingItem()
+* - setItem(item)
+* - setService(serv, default_questions = null)
+* - setEventGroup(event_group)
+* - setEventChain(event_chain, default_questions = null)
+* - setEvent(event)
+* - setCategory(cat)
+* - setPerson: (per, set_selected = true)
+* - setResource(res, set_selected = true)
+* - setDuration(dur)
+* - print_time()
+* - print_end_time()
+* - print_time12(show_suffix = true)
+* - print_end_time12(show_suffix = true)
+* - setTime(time)
+* - setDate(date)
+* - clearDateTime()
+* - clearTime()
+* - setGroup(group)
+* - setAskedQuestions()
+* - getPostData()
+* - setPrice(nprice)
+* - getStep()
+* - loadStep(step)
+* - describe()
+* - booking_date(format)
+* - booking_time(seperator = '-')
+* - duePrice()
+* - isWaitlist()
+* - start_datetime()
+* - end_datetime()
+* - setSrcBooking(booking)
+* - anyPerson()
+* - anyResource()
+* - isMovingBooking()
+* - setCloneAnswers(otherItem)
+* - questionPrice()
+* - getQty()
+* - totalPrice()
+* - fullPrice()
+* - setProduct(product)
+* - setDeal(deal)
+* - hasPrice()
+* - getAttachment()
+*
+###
 angular.module('BB.Models').factory "BasketItemModel",
 ($q, $window, BBModel, BookableItemModel, BaseModel, $bbug) ->
 
@@ -19,7 +110,7 @@ angular.module('BB.Models').factory "BasketItemModel",
       @has_questions = false
 
       if bb
-        @reserve_without_questions = bb.reserve_without_questions        
+        @reserve_without_questions = bb.reserve_without_questions
 
       # if we were given an id then the item is ready - we need to fake a few items
       if @time
@@ -339,10 +430,10 @@ angular.module('BB.Models').factory "BasketItemModel",
       @num_book = event.qty
       if @event.getSpacesLeft() <= 0 && !@company.settings
         @status = 8 if @company.getSettings().has_waitlists
-      else if @event.getSpacesLeft() <= 0 && @company.settings && @company.settings.has_waitlists 
+      else if @event.getSpacesLeft() <= 0 && @company.settings && @company.settings.has_waitlists
         @status = 8
 
- 
+
 
 
     # if someone sets a category - we may then later restrict the service list by category
@@ -405,9 +496,9 @@ angular.module('BB.Models').factory "BasketItemModel",
         @base_price = @service.getPriceByDuration(dur)
       if @time && @time.price
         @base_price = @time.price
-      if @price && (@price != @base_price) 
+      if @price && (@price != @base_price)
         @setPrice(@price)
-      else 
+      else
          @setPrice(@base_price)
 
 
@@ -438,7 +529,7 @@ angular.module('BB.Models').factory "BasketItemModel",
           @datetime.hour(hours)
           @datetime.minutes(mins)
 
-        if @price && @time.price && (@price != @time.price) 
+        if @price && @time.price && (@price != @time.price)
           @setPrice(@price)
         else if @price && !@time.price
          @setPrice(@price)
@@ -473,7 +564,7 @@ angular.module('BB.Models').factory "BasketItemModel",
     clearTime: () ->
       delete @time
       @ready = false
-      @reserve_ready = false  
+      @reserve_ready = false
 
 
     setGroup: (group) ->
@@ -538,7 +629,7 @@ angular.module('BB.Models').factory "BasketItemModel",
       data.pre_paid_booking_id = @pre_paid_booking_id if @pre_paid_booking_id?
       data.event_chain_id = @event_chain_id
       data.event_group_id = @event_group_id
-      data.qty = @qty   
+      data.qty = @qty
       data.status = @status if @status
       data.num_resources = parseInt(@num_resources) if @num_resources?
       data.product = @product
@@ -629,7 +720,7 @@ angular.module('BB.Models').factory "BasketItemModel",
 
     booking_time: (seperator = '-') ->
       return null if !@time
-      duration = if @listed_duration then @listed_duration else @duration 
+      duration = if @listed_duration then @listed_duration else @duration
       @time.print_time() + " " + seperator + " " +  @time.print_end_time(duration)
 
     # prints the amount due - which might be different if it's a waitlist
@@ -651,7 +742,7 @@ angular.module('BB.Models').factory "BasketItemModel",
     # get booking end datetime
     end_datetime: () ->
       return null if !@date || !@time || (!@listed_duration && !@duration)
-      duration = if @listed_duration then @listed_duration else @duration 
+      duration = if @listed_duration then @listed_duration else @duration
       end_datetime = moment(@date.date.toISODate())
       end_datetime.minutes(@time.time + duration)
       end_datetime
@@ -664,7 +755,7 @@ angular.module('BB.Models').factory "BasketItemModel",
 
     anyPerson: () ->
       @person && (typeof @person == 'boolean')
- 
+
     anyResource: () ->
       @resource && (typeof @resource == 'boolean')
 

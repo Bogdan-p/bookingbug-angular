@@ -1,3 +1,23 @@
+###**
+* @ngdoc directive
+* @name BBMember.Directives:memberSsoLogin
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BBMember.Directives:memberSsoLogin
+*
+* # Has the following set methods:
+*
+* - link(scope, element, attrs)
+*
+* @requires $rootScope
+* @requires BBMember.Services:MemberLoginService
+* @requires $sniffer
+* @requires $timeout
+*
+###
+
 angular.module('BBMember').directive 'memberSsoLogin', ($rootScope, LoginService, $sniffer, $timeout) ->
 
   link = (scope, element, attrs) ->

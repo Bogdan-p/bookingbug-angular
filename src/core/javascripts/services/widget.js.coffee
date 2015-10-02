@@ -1,8 +1,72 @@
 'use strict';
 
-
 # This class contrains handy functions and variables used in building and displaying a booking widget
+###**
+* @ngdoc object
+* @name BB.Models:BBWidget
+*
+* @description
+* Factory BBWidget
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {service} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope more}
+*
+* @param {service} $window A reference to the browser's window object.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$window more}
+*
+* @param {service} $location The $location service parses the URL in the browser address bar
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$location more}
+*
+* @param {model} BBModel Info
+* <br>
+* {@link BB.Models:BBModel more}
+*
+* @param {service} BasketService Info
+* <br>
+* {@link BB.Services:BasketService more}
+*
+* @param {service} BreadcrumbService Info
+* <br>
+* {@link BB.Services:BreadcrumbService more}
+*
+* @param {service} Factory for UrlMatcher instances. The factory is also available to providers under the name $urlMatcherFactoryProvider.
+* <br>
+* {@link http://angular-ui.github.io/ui-router/site/#/api/ui.router.util.$urlMatcherFactory more}
+*
+@returns {object} Newly created BBWidget object with the following set of methods:
 
+* - constructor()
+* - pageURL(route)
+* - updateRoute(page)
+* - setRouteFormat(route)
+* - matchURLToStep()
+* - convertToDashSnakeCase(str)
+* - recordCurrentPage()
+* - recordStep(step, title)
+* - calculatePercentageComplete(step_number)
+* - setRoute(rdata)
+* - setBasicRoute(routes)
+* - waitForRoutes()
+* - stackItem(item)
+* - setStackedItems(items)
+* - sortStackedItems()
+* - deleteStackedItem(item)
+* - removeItemFromStack(item)
+* - deleteStackedItemByService(item)
+* - emptyStackedItems()
+* - pushStackToBasket()
+* - totalStackedItemsDuration()
+* - clearStackedItemsDateTime()
+* - clearAddress()
+*
+###
 angular.module('BB.Models').factory "BBWidget", ($q, BBModel, BasketService, $urlMatcherFactory, $location, BreadcrumbService, $window, $rootScope) ->
 
 
@@ -39,7 +103,7 @@ angular.module('BB.Models').factory "BBWidget", ($q, BBModel, BasketService, $ur
         event_group = @convertToDashSnakeCase(@current_item.event_group.name) if @current_item.event_group
         date = @current_item.date.date.toISODate() if @current_item.date
         time = @current_item.time.time if @current_item.time
-        company = @convertToDashSnakeCase(@current_item.company.name) if @current_item.company 
+        company = @convertToDashSnakeCase(@current_item.company.name) if @current_item.company
       prms = angular.copy(@route_values) if @route_values
       prms ||= {}
       angular.extend(prms,{page: page, company: company, service: service_name, event_group: event_group, date: date, time: time})
@@ -132,9 +196,9 @@ angular.module('BB.Models').factory "BBWidget", ($q, BBModel, BasketService, $ur
     recordStep: (step, title) =>
       @steps[step-1] = {
         url: @updateRoute(@current_page),
-        current_item: @current_item.getStep(), 
-        page: @current_page, 
-        number: step, 
+        current_item: @current_item.getStep(),
+        page: @current_page,
+        number: step,
         title: title,
         stacked_length: @stacked_items.length
         }

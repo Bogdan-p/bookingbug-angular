@@ -1,5 +1,21 @@
-
-
+###**
+* @ngdoc service
+* @name BB.Services:BB.Service.address
+*
+* @description
+* Factory MyService
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {model} BBModel Info
+* <br>
+* {@link BB.Models:BBModel more}
+*
+* @returns {Promise} This service has the following set of methods:
+*
+###
 angular.module('BB.Services').factory "BB.Service.address", ($q, BBModel) ->
   unwrap: (resource) ->
     return new BBModel.Address(resource)
@@ -202,8 +218,8 @@ angular.module('BB.Services').factory "BB.Service.event_chains", ($q, BBModel) -
 angular.module('BB.Services').factory "BB.Service.parent", ($q, BBModel) ->
   unwrap: (resource) ->
     return new BBModel.Company(resource)
-    
-    
+
+
 angular.module('BB.Services').factory "BB.Service.company_questions", ($q, BBModel) ->
   promise: true
   unwrap: (resource) ->

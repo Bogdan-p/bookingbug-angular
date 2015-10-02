@@ -1,3 +1,26 @@
+###**
+* @ngdoc directive
+* @name BB.Directives:datetimepicker
+*
+* @description
+* Directive BB.Directives:datetimepicker
+*
+* # Has the following set of methods:
+*
+* -  controller($scope)
+* - link(scope, element, attrs, ngModel)
+*
+* <pre>
+* require: 'ngModel'
+* link: link
+* controller: controller
+* scope:
+* schemaValidate: '='
+* templateUrl: 'datetimepicker.html'
+* <pre>
+*
+*
+###
 angular.module('BB.Directives').directive 'datetimepicker', ()->
 
   controller = ($scope) ->
@@ -9,7 +32,7 @@ angular.module('BB.Directives').directive 'datetimepicker', ()->
 
     $scope.$watch '$$value$$', (value) ->
       $scope.updateModel(value) if value?
-        
+
 
   link = (scope, element, attrs, ngModel) ->
 

@@ -1,6 +1,23 @@
-
-
-
+###**
+* @ngdoc controller
+* @name BBAdmin.Controllers:TimeOptions
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller TimeOptions
+*
+* # Has the following set of methods:
+*
+* - $scope.block
+*
+* @requires $scope
+* @requires $location
+* @requires $rootScope
+* @requires BBAdmin.Services:AdminResourceService
+* @requires BBAdmin.Services:AdminPersonService
+*
+###
 
 
 angular.module('BBAdmin.Controllers').controller 'TimeOptions', ($scope,  $location, $rootScope, AdminResourceService, AdminPersonService) ->

@@ -1,5 +1,26 @@
 'use strict';
 
+###**
+* @ngdoc directive
+* @name BB.Directives:bbItemDetails
+* @restrict AE
+* @scope true
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+
+* Directive BB.Directives:bbItemDetails
+*
+* See Controller {@link BB.Controllers:ItemDetails ItemDetails}
+*
+* <pre>
+* restrict: 'AE'
+* replace: true
+* scope : true
+* controller : 'ItemDetails'
+* </pre>
+*
+###
 angular.module('BB.Directives').directive 'bbItemDetails', () ->
   restrict: 'AE'
   replace: true
@@ -12,13 +33,85 @@ angular.module('BB.Directives').directive 'bbItemDetails', () ->
     return
 
 
+###**
+* @ngdoc controller
+* @name BB.Controllers:ItemDetails
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller ItemDetails
+*
+* # Has the following set of methods:
+*
+* - $scope.loadItem(item)
+* - setItemDetails(details)
+* - $scope.recalc_price
+* - $scope.confirm(form, route)
+* - $scope.setReady()
+* - $scope.confirm_move(route)
+* - $scope.openTermsAndConditions()
+* - $scope.getQuestion(id)
+* - $scope.updateItem()
+* - $scope.editItem()
+* - $scope.onFileSelect(item, $file, existing)
+*
+* @param {service} $scope Scope is an object that refers to the application mode.
+* <br>
+* {@link https://docs.angularjs.org/guide/scope more}
+*
+* @param {service} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope more}
+*
+* @param {service} $attrs Info
+*
+* @param {service} ItemDetailsService Info
+* <br>
+* {@link BB.Services:ItemDetailsService more}
+*
+* @param {service} PurchaseBookingService Info
+* <br>
+* {@link BB.Services:PurchaseBookingService more}
+*
+* @param {service} AlertService Info
+* <br>
+* {@link BB.Services:AlertService more}
+*
+* @param {model} BBModel Info
+* <br>
+* {@link BB.Models:BBModel more}
+*
+* @param {service} FormDataStoreService Info
+* <br>
+* {@link BB.Services:FormDataStoreService more}
+*
+* @param {service} ValidatorService Info
+* <br>
+* {@link BB.Services:ValidatorService more}
+*
+* @param {service} QuestionService Info
+* <br>
+* {@link BB.Services:QuestionService more}
+*
+* @param {service} $modal is a service to quickly create AngularJS-powered modal windows. Creating custom modals is straightforward: create a partial view, its controller and reference them when using the service.
+* <br>
+* {@link https://github.com/angular-ui/bootstrap/tree/master/src/modal/docs more}
+*
+* @param {service} $location The $location service parses the URL in the browser address bar
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$location more}
+*
+* @param {service} $atuploadtrs Info
+*
+###
 angular.module('BB.Controllers').controller 'ItemDetails', ($scope, $attrs, $rootScope, ItemDetailsService, PurchaseBookingService, AlertService, BBModel, FormDataStoreService, ValidatorService, QuestionService, $modal, $location, $upload) ->
 
   $scope.controller = "public.controllers.ItemDetails"
 
   $scope.suppress_basket_update = $attrs.bbSuppressBasketUpdate?
   $scope.item_details_id = $scope.$eval $attrs.bbSuppressBasketUpdate
- 
+
   # if instructed to suppress basket updates (i.e. when the directive is invoked multiple times
   # on the same page), create a form store for each instance of the directive
   if $scope.suppress_basket_update
@@ -68,7 +161,7 @@ angular.module('BB.Controllers').controller 'ItemDetails', ($scope, $attrs, $roo
         $scope.recalc_price()
         $scope.setLoaded $scope
       , (err) ->  $scope.setLoadedAndShowError($scope, err, 'Sorry, something went wrong')
-    
+
 
   # compare the questions stored in the data store to the new questions and if
   # any of them match then copy the answer value. we're doing it like this as
@@ -133,11 +226,11 @@ angular.module('BB.Controllers').controller 'ItemDetails', ($scope, $attrs, $roo
       $scope.notLoaded $scope
       PurchaseBookingService.update($scope.item).then (booking) ->
         b = new BBModel.Purchase.Booking(booking)
-	
+
         if $scope.bb.purchase
           for oldb, _i in $scope.bb.purchase.bookings
             $scope.bb.purchase.bookings[_i] = b if oldb.id == b.id
-	    
+
         $scope.setLoaded $scope
         $scope.item.move_done = true
         $rootScope.$broadcast "booking:moved"
@@ -196,13 +289,13 @@ angular.module('BB.Controllers').controller 'ItemDetails', ($scope, $attrs, $roo
     att_id = existing if existing
     method = "POST"
     method = "PUT" if att_id
-    url = item.$href('add_attachment') 
+    url = item.$href('add_attachment')
     $scope.upload = $upload.upload({
       url: url,
       method: method,
       data: {attachment_id: att_id},
-      file: file, 
-    }).progress (evt) -> 
+      file: file,
+    }).progress (evt) ->
       if $scope.upload_progress < 100
         $scope.upload_progress = parseInt(99.0 * evt.loaded / evt.total)
     .success (data, status, headers, config) ->

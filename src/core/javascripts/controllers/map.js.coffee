@@ -1,12 +1,96 @@
 
 'use strict';
 
+###**
+* @ngdoc directive
+* @name BB.Directives:bbMap
+* @restrict AE
+* @scope true
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+
+* Directive BB.Directives:bbMap
+*
+* See Controller {@link BB.Controllers:MapCtrl MapCtrl}
+*
+* <pre>
+* restrict: 'AE'
+* replace: true
+* scope : true
+* controller : 'MapCtrl'
+* </pre>
+*
+###
 angular.module('BB.Directives').directive 'bbMap', () ->
   restrict: 'AE'
   replace: true
   scope : true
   controller : 'MapCtrl'
 
+###**
+* @ngdoc controller
+* @name BB.Controllers:MapCtrl
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller MapCtrl
+*
+* # Has the following set of methods:
+*
+* - $rootScope.connection_started.then
+* - $scope.map_init.then
+* - $scope.init(options)
+* - checkDataStore
+* - scope.title
+* - $scope.searchAddress(prms)
+* - searchPlaces(prms)
+* - searchSuccess(result)
+* - searchFailed()
+* - $scope.validateAddress(form)
+* - $scope.showClosestMarkers(latlong)
+* - $scope.openMarkerInfo(marker)
+* - $scope.selectItem(item, route)
+* - $scope.roundNumberUp(num, places)
+* - $scope.geolocate()
+* - geolocateFail(error)
+* - reverseGeocode(position)
+* - $scope.increaseRange()
+* - $scope.$watch 'display.xs', (new_value, old_value)
+* - $rootScope.$on 'widget:restart', ()
+*
+* @param {service} $scope Scope is an object that refers to the application mode.
+* <br>
+* {@link https://docs.angularjs.org/guide/scope more}
+*
+* @param {service} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope more}
+*
+* @param {function} angular.element Wraps a raw DOM element or HTML string as a jQuery element.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/function/angular.element more}
+*
+* @param {service} $attrs Info
+*
+* @param {service} AlertService Info
+* <br>
+* {@link BB.Services:AlertService more}
+*
+* @param {service} ErrorService Info
+* <br>
+* {@link BB.Services:ErrorService more}
+*
+* @param {service} FormDataStoreService Info
+* <br>
+* {@link BB.Services:FormDataStoreService more}
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+###
 angular.module('BB.Controllers').controller 'MapCtrl',
 ($scope, $element, $attrs, $rootScope, AlertService, ErrorService, FormDataStoreService, $q, $window, $timeout) ->
 
@@ -20,7 +104,7 @@ angular.module('BB.Controllers').controller 'MapCtrl',
 
   # init vars
   options = $scope.$eval($attrs.bbMap) or {}
-  
+
   map_ready_def               = $q.defer()
   $scope.mapLoaded            = $q.defer()
   $scope.mapReady             = map_ready_def.promise
@@ -36,7 +120,7 @@ angular.module('BB.Controllers').controller 'MapCtrl',
   $scope.address              = $scope.$eval $attrs.bbAddress if !$scope.address && $attrs.bbAddress
   $scope.error_msg            = options.error_msg or "You need to select a store"
   $scope.notLoaded $scope
-  
+
   # setup geolocation shim
   webshim.setOptions({'waitReady': false, 'loadStyles': false})
   webshim.polyfill("geolocation")
@@ -107,7 +191,7 @@ angular.module('BB.Controllers').controller 'MapCtrl',
       $scope.notLoaded $scope
       if $scope.search_prms
         $scope.searchAddress $scope.search_prms
-      else 
+      else
         $scope.geolocate()
       google.maps.event.addListenerOnce($scope.myMap, 'idle', ->
         _.each $scope.mapMarkers, (marker) ->
@@ -129,7 +213,7 @@ angular.module('BB.Controllers').controller 'MapCtrl',
 
   $scope.searchAddress = (prms) ->
 
-    # if a reverse geocode has been performed and the address 
+    # if a reverse geocode has been performed and the address
     # is no  different to one the entered, abort the search
     return false if $scope.reverse_geocode_address && $scope.reverse_geocode_address == $scope.address
 
@@ -156,7 +240,7 @@ angular.module('BB.Controllers').controller 'MapCtrl',
 
           if !$scope.geocoder_result or ($scope.geocoder_result and $scope.geocoder_result.partial_match)
             searchPlaces(req)
-            return 
+            return
           else if $scope.geocoder_result
             searchSuccess($scope.geocoder_result)
           else
@@ -167,17 +251,17 @@ angular.module('BB.Controllers').controller 'MapCtrl',
 
 
   searchPlaces = (prms) ->
-    
+
     req = {
       query : prms.address
       types: ['shopping_mall', 'store', 'embassy']
     }
 
-    req.bounds = prms.bounds if prms.bounds 
+    req.bounds = prms.bounds if prms.bounds
 
     service = new google.maps.places.PlacesService($scope.myMap)
     service.textSearch req, (results, status) ->
-      if results.length > 0 and status is 'OK'      
+      if results.length > 0 and status is 'OK'
         searchSuccess(results[0])
       else if $scope.geocoder_result
         searchSuccess($scope.geocoder_result)
@@ -314,7 +398,7 @@ angular.module('BB.Controllers').controller 'MapCtrl',
   geolocateFail = (error) ->
     switch error.code
       # if the geocode failed because the position was unavailable or the request timed out, raise an alert
-      when 2, 3 
+      when 2, 3
         $scope.setLoaded $scope
         AlertService.danger(ErrorService.getError('GEOLOCATION_ERROR'))
       else
@@ -330,8 +414,8 @@ angular.module('BB.Controllers').controller 'MapCtrl',
       if results.length > 0 and status is 'OK'
         $scope.geocoder_result = results[0]
 
-        for ac in $scope.geocoder_result.address_components 
-          $scope.reverse_geocode_address = ac.long_name if ac.types.indexOf("route") >= 0  
+        for ac in $scope.geocoder_result.address_components
+          $scope.reverse_geocode_address = ac.long_name if ac.types.indexOf("route") >= 0
           $scope.reverse_geocode_address += ', ' + ac.long_name if ac.types.indexOf("locality") >= 0
           $scope.address = $scope.reverse_geocode_address
         searchSuccess($scope.geocoder_result)

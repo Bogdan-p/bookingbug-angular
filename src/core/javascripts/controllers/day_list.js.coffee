@@ -1,11 +1,80 @@
 'use strict';
 
+###**
+* @ngdoc directive
+* @name BB.Directives:bbMonthAvailability
+* @restrict AE
+* @scope true
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+
+* Directive BB.Directives:bbMonthAvailability
+*
+* See Controller {@link BB.Controllers:DayList DayList}
+*
+* <pre>
+* restrict: 'AE'
+* replace: true
+* scope : true
+* controller : 'DayList'
+* </pre>
+*
+###
 angular.module('BB.Directives').directive 'bbMonthAvailability', () ->
   restrict: 'A'
   replace: true
   scope : true
   controller : 'DayList'
 
+###**
+* @ngdoc controller
+* @name BB.Controllers:DayList
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller DayList
+*
+* # Has the following set of methods:
+*
+* - $scope.setCalType(type)
+* - $scope.setDataSource(source)
+* - $scope.format_date(fmt)
+* - $scope.format_start_date(fmt)
+* - $scope.format_end_date(fmt)
+* - $scope.selectDay(day, route, force)
+* - $scope.setMonth(month, year)
+* - $scope.setWeek(week, year)
+* - $scope.add(type, amount)
+* - $scope.subtract(type, amount)
+* - $scope.isPast()
+* - $scope.loadData
+* - $scope.loadMonth
+* - $scope.loadWeek
+* - $scope.setReady
+*
+* @param {service} $scope Scope is an object that refers to the application mode.
+* <br>
+* {@link https://docs.angularjs.org/guide/scope more}
+*
+* @param {service} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope more}
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {service} DayService Info
+* <br>
+* {@link BB.Services:DayService more}
+*
+* @param {service} AlertService Info
+* <br>
+* {@link BB.Services:AlertService more}
+*
+###
 angular.module('BB.Controllers').controller 'DayList', ($scope,  $rootScope, $q, DayService, AlertService) ->
   $scope.controller = "public.controllers.DayList"
   $scope.notLoaded $scope
@@ -109,11 +178,11 @@ angular.module('BB.Controllers').controller 'DayList', ($scope,  $rootScope, $q,
       , (err) ->  $scope.setLoadedAndShowError($scope, err, 'Sorry, something went wrong')
     else
       $scope.setLoaded $scope
-   
+
   $scope.loadWeek = =>
     date = $scope.current_date
     $scope.notLoaded $scope
- 
+
     edate = moment(date).add(7, 'days')
     $scope.end_date = moment(edate).add(-1, 'days')
     if $scope.data_source

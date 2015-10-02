@@ -1,9 +1,30 @@
-#  the default behavior for the 'click' event for the popover is to hide the
-#  popover if the click occurs on the element but it doesn't hide if you click
-#  anywhere else as the event has to occur on the element. so we add additional
-#  check on the container to check if the popover is still open on a click
-#  event. clearly this will fail if the event propogation is stopped in the
-#  code, but that is bad practise so shouldn't be happening.
+
+###**
+* @ngdoc directive
+* @name BB.Directives:popover
+* @restrict EA
+* @priority: -1000
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:popover
+*
+*  The default behavior for the 'click' event for the popover is to hide the
+*  popover if the click occurs on the element but it doesn't hide if you click
+*  anywhere else as the event has to occur on the element. So we add additional
+*  check on the container to check if the popover is still open on a click
+*  event. Clearly this will fail if the event propogation is stopped in the
+*  code, but that is bad practise so shouldn't be happening.
+*
+* <pre>
+* restrict: 'EA',
+* priority: -1000,
+* </pre>
+* - link(scope, element)
+*
+
+###
 angular.module('BB.Directives').directive 'popover', () ->
   openElement = null
   openScope = null

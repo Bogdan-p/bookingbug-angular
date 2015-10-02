@@ -1,3 +1,58 @@
+###**
+* @ngdoc directive
+* @name BB.Directives:bbPaymentButton
+* @restrict EA
+* @replace true
+* @scope true
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:bbPaymentButton
+*
+* Has the following set of methods:
+*
+* - getTemplate(type, scope)
+* - getButtonFormTemplate(scope)
+* - setClassAndValue(scope, element, attributes)
+* - linker(scope, element, attributes)
+*
+* <pre>
+* restrict: 'EA'
+* replace: true
+* scope: {
+*   total: '='
+*   bb: '='
+*   decideNextPage: '='
+* }
+* link: linker
+* </pre>
+*
+* @param {service} $compile Compiles an HTML string or DOM into a template and produces a template function, which can then be used to link scope and the template together.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$compile more}
+*
+* @param {service} $sce $sce is a service that provides Strict Contextual Escaping services to AngularJS.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$sce more}
+*
+* @param {service}  $http The $http service is a core Angular service that facilitates communication with the remote HTTP servers via the browser's XMLHttpRequest object or via JSONP.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$http more}
+*
+* @param {service} $templateCache $templateCache
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$templateCachee more}
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {service} $log Simple service for logging.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$log more}
+*
+###
 angular.module('BB.Directives').directive 'bbPaymentButton', ($compile, $sce, $http, $templateCache, $q, $log) ->
 
   getTemplate = (type, scope) ->
@@ -55,6 +110,65 @@ angular.module('BB.Directives').directive 'bbPaymentButton', ($compile, $sce, $h
     link: linker
   }
 
+###**
+* @ngdoc directive
+* @name BB.Directives:bbPaypalExpressButton
+* @restrict A
+* @replace true
+* @scope true
+*
+* @description
+* BB.Directives:bbPaypalExpressButton
+*
+* <pre>
+* restrict: 'EA'
+* replace: true
+* template: """
+*   <a ng-href="{{href}}" ng-click="showLoader()">Pay</a>
+* """
+* scope: {
+*   total: '='
+*   bb: '='
+*   decideNextPage: '='
+*   paypalOptions: '=bbPaypalExpressButton'
+*   notLoaded: '='
+* }
+* link: linker
+* </pre>
+* @param {service} $compile Compiles an HTML string or DOM into a template and produces a template function, which can then be used to link scope and the template together.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$compile more}
+*
+* @param {service} $sce $sce is a service that provides Strict Contextual Escaping services to AngularJS.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$sce more}
+*
+* @param {service}  $http The $http service is a core Angular service that facilitates communication with the remote HTTP servers via the browser's XMLHttpRequest object or via JSONP.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$http more}
+*
+* @param {service} $templateCache $templateCache
+* <br>
+* {@link https://docs.angularjFs.org/api/ng/service/$templateCachee more}
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {service} $log Simple service for logging.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$log more}
+*
+* ===== $window =====
+* @param {service} $window A reference to the browser's window object.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$window more}
+*
+* @param {model} UriTemplate Info
+* <br>
+* {@link UriTemplate more}
+*
+###
 angular.module('BB.Directives').directive 'bbPaypalExpressButton', ($compile, $sce, $http, $templateCache, $q, $log, $window, UriTemplate) ->
 
   linker = (scope, element, attributes) ->

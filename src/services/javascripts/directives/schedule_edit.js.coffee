@@ -1,3 +1,19 @@
+###**
+* @ngdoc directive
+* @name BBAdminServices.Directives:scheduleEdit
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BBAdminServices.Directives:scheduleEdit
+*
+* # Has the following set of methods:
+*
+* - link (scope, element, attrs, ngModel)
+* - ngModel.$render ()
+* 
+###
+
 angular.module('BBAdminServices').directive 'scheduleEdit', () ->
 
   link = (scope, element, attrs, ngModel) ->

@@ -14,6 +14,17 @@ class window.Collection.Booking extends window.Collection.Base
     return false if !@params.include_cancelled && item.is_cancelled
     return true
 
+###**
+* @ngdoc object
+* @name BB.Services:BookingCollections
+*
+* @description
+* It creates new Booking Collections
+*
+* # Has the following set of methods:
+* - $get
+*
+###
 
 angular.module('BB.Services').provider "BookingCollections", () ->
   $get: ->

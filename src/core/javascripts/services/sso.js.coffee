@@ -1,3 +1,26 @@
+###**
+* @ngdoc service
+* @name BB.Services:SSOService
+*
+* @description
+* Factory SSOService
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {service} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope more}
+*
+* @param {model} halClient Info
+*
+* @returns {Promise} This service has the following set of methods:
+*
+* - memberLogin(options)
+* - adminLogin: (options)
+*
+###
 angular.module('BB.Services').factory "SSOService", ($q, $rootScope, halClient, LoginService) ->
 
   memberLogin: (options) ->

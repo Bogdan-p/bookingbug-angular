@@ -2,6 +2,41 @@
 
 'use strict';
 
+###**
+* @ngdoc object
+* @name BB.Models:EventTicketModel
+*
+* @description
+* This is EventTicketModel in BB.Models module that creates EventTicket object.
+*
+* <pre>
+* //Creates class EventTicket that extends BaseModel
+* class EventTicket extends BaseModel
+* </pre>
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* * <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {model} BBModel Info
+* <br>
+* {@link BB.Models:BBModel more}
+*
+* @param {model} BaseModel Info
+* <br>
+* {@link BB.Models:BaseModel more}
+*
+* @returns {object} Newly created EventTicket object with the following set of methods:
+*
+* - constructor(data)
+* - fullName()
+* - getRange(cap)
+* - totalQty()
+* - getMax(cap, ev = null)
+* - add(value)
+* - subtract(value)
+*
+###
 angular.module('BB.Models').factory "EventTicketModel", ($q, BBModel, BaseModel) ->
 
   class EventTicket extends BaseModel
@@ -36,7 +71,7 @@ angular.module('BB.Models').factory "EventTicketModel", ($q, BBModel, BaseModel)
 
     totalQty: () ->
       return 0 if !@qty
-      return @qty if !@counts_as  
+      return @qty if !@counts_as
       return @qty * @counts_as
 
 
@@ -65,7 +100,7 @@ angular.module('BB.Models').factory "EventTicketModel", ($q, BBModel, BaseModel)
     add: (value) ->
       @qty = 0 if !@qty
       @qty = parseInt(@qty)
-      
+
       return if angular.isNumber(@qty) and (@qty >= @max and value > 0) or (@qty is 0 and value < 0)
       @qty += value
 

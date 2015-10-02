@@ -1,3 +1,19 @@
+###**
+* @ngdoc service
+* @name BB.Services:Dialog
+*
+* @description
+* Factory Dialog
+*
+* @param {service} $modal is a service to quickly create AngularJS-powered modal windows. Creating custom modals is straightforward: create a partial view, its controller and reference them when using the service.
+* <br>
+* {@link https://github.com/angular-ui/bootstrap/tree/master/src/modal/docs more}
+*
+* @param {service} $log Simple service for logging.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$log more}
+*
+###
 angular.module('BB.Services').factory 'Dialog', ($modal, $log) ->
 
   controller = ($scope, $modalInstance, model, title, success, fail, body) ->

@@ -1,8 +1,75 @@
+###**
+* @ndgoc directive
+* @name BB.Directives:bbSurveyQuestions
+*
+* @restrict AE
+* @scope true
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:bbSurveyQuestions
+*
+* # Has the following set of methods:
+*
+###
+
 angular.module('BB.Directives').directive 'bbSurveyQuestions', () ->
   restrict: 'AE'
   replace: true
   scope: true
   controller : 'SurveyQuestions'
+
+###**
+* @ngdoc controller
+* @name BB.Controllers:SurveyQuestions
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller SurveyQuestions
+*
+* # Has the following set of methods:
+*
+* - $scope.init(comp)
+* - $scope.checkIfLoggedIn()
+* - $scope.loadSurvey(purchase)
+* - $scope.submitSurveyLogin(form)
+* - $scope.loadSurveyFromPurchaseID(id)
+* - $scope.loadSurveyFromBookingRef(id)
+* - $scope.submitSurvey(form)
+* - $scope.submitBookingRef(form)
+* - $scope.storeBookingCookie()
+* - showLoginError()
+* - getMember()
+* - setPurchaseCompany(company)
+* - getBookingRef()
+* - getPurchaseID()
+* - getBookingAndSurvey()
+*
+* @requires $scope
+* @requires $rootScope
+* @requires BB.Services:CompanyService
+* @requires BB.Services:PurchaseService
+* @requires BB.Services:ClientService
+* @requires $modal
+* @requires $location
+* @requires $timeout
+* @requires BB.Models:BBWidget
+* @requires BB.Models:BBModel
+* @requires $q
+* @requires BB.Services:QueryStringService
+* @requires BB.Services:SSOService
+* @requires BB.Services:AlertService
+* @requires BB.Services:LoginService
+* @requires $window
+* @requires $upload
+* @requires BB.Services:ServiceService
+* @requires BB.Services:ValidatorService
+* @requires BB.Services:PurchaseBookingService
+* @requires $sessionStorage
+*
+###
 
 angular.module('BB.Controllers').controller 'SurveyQuestions', ($scope,  $rootScope,
     CompanyService, PurchaseService, ClientService, $modal, $location, $timeout,

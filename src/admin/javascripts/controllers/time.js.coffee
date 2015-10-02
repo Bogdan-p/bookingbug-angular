@@ -1,5 +1,34 @@
 'use strict';
 
+###**
+* @ngdoc controller
+* @name BBAdmin.Controllers:DashTimeList
+*
+* @description
+* Controller DashTimeList
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* @param {object} $scope Scope is an object that refers to the application mode.
+* <br>
+* {@link https://docs.angularjs.org/guide/scope read more}
+*
+* @param {object} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope read more}
+*
+* @param {service} $location The $location service parses the URL in the browser address bar
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$location read more}
+*
+*@param {object} $element....
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$location read more}
+*
+*
+* @param {service} AdminTimeService Service.
+*
+###
 angular.module('BBAdmin.Controllers').controller 'DashTimeList', ($scope,  $rootScope, $location, $q, $element, AdminTimeService) ->
 
   $loaded = null # has somethign been loaded

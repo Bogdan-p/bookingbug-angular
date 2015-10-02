@@ -1,8 +1,46 @@
-
-
+###**
+* @ngdoc service
+* @name  BBAdmin.Services:AdminSlotService
+*
+* @description
+* Factory AdminSlotService
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q read more}
+*
+* @param {object} $window A reference to the browser's window object.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$window read more}
+*
+* @param {model} halClient Info
+*
+* @param {model} SlotCollections Info
+*
+* @param {model} BBModel Info
+* <br>
+* {@link BB.Models:BBModel more}
+*
+* @param {model} UriTemplate Info
+* <br>
+* {@link UriTemplate more}
+*
+###
 angular.module('BBAdmin.Services').factory 'AdminSlotService', ($q, $window,
     halClient, SlotCollections, BBModel, UriTemplate) ->
 
+  ###**
+  * @ngdoc method
+  * @name query
+  * @methodOf BBAdmin.Services:AdminSlotService
+  *
+  * @description
+  * Method query
+  *
+  * @param {object} prms Info
+  *
+  * @returns {Promise} defer.reject(err) or deferred.promise
+  ###
   query: (prms) ->
     deferred = $q.defer()
 
@@ -37,7 +75,20 @@ angular.module('BBAdmin.Services').factory 'AdminSlotService', ($q, $window,
 
     deferred.promise
 
-
+  ###**
+  * @ngdoc method
+  * @name create
+  * @methodOf BBAdmin.Services:AdminSlotService
+  *
+  * @description
+  * Method create
+  *
+  * @param {object} prms Info
+  *
+  * @param {object} data Info
+  *
+  * @returns {Promise} deferred.reject(err) or deferred.promise
+  ###
   create: (prms, data) ->
 
     url = ""
@@ -56,6 +107,18 @@ angular.module('BBAdmin.Services').factory 'AdminSlotService', ($q, $window,
 
     deferred.promise
 
+  ###**
+  * @ngdoc method
+  * @name delete
+  * @methodOf BBAdmin.Services:AdminSlotService
+  *
+  * @description
+  * Method delete
+  *
+  * @param {object} item Info
+  *
+  * @returns {Promise} deferred.reject(err) or deferred.promise
+  ###
   delete: (item) ->
 
     deferred = $q.defer()
@@ -68,6 +131,20 @@ angular.module('BBAdmin.Services').factory 'AdminSlotService', ($q, $window,
 
     deferred.promise
 
+  ###**
+  * @ngdoc method
+  * @name update
+  * @methodOf BBAdmin.Services:AdminSlotService
+  *
+  * @description
+  * Method update
+  *
+  * @param {object} item Info
+  *
+  * @param {object} data Info
+  *
+  * @returns {Promise} deferred.reject(err) or deferred.promise
+  ###
   update: (item, data) ->
 
     deferred = $q.defer()

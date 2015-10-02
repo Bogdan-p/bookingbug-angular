@@ -1,5 +1,26 @@
 'use strict';
 
+###**
+* @ngdoc directive
+* @name BB.Directives:bbEventGroups
+* @restrict AE
+* @scope true
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+
+* Directive BB.Directives:bbEventGroups
+*
+* See Controller {@link BB.Controllers:EventGroupList EventGroupList}
+*
+* <pre>
+* restrict: 'AE'
+* replace: true
+* scope : true
+* controller : 'EventGroupList'
+* </pre>
+*
+###
 angular.module('BB.Directives').directive 'bbEventGroups', () ->
   restrict: 'AE'
   replace: true
@@ -13,6 +34,57 @@ angular.module('BB.Directives').directive 'bbEventGroups', () ->
     return
 
 
+###**
+* @ngdoc controller
+* @name BB.Controllers:EventGroupList
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller EventGroupList
+*
+* # Has the following set of methods:
+*
+* - $scope.init(comp)
+* - setEventGroupItem(items)
+* - $scope.selectItem(item, route)
+* - $scope.setReady()
+*
+* @param {service} $scope Scope is an object that refers to the application mode.
+* <br>
+* {@link https://docs.angularjs.org/guide/scope more}
+*
+* @param {service} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope more}
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {service} $attrs Info
+*
+* @param {service} ItemService Info
+* <br>
+* {@link BB.Services:ItemService more}
+*
+* @param {service} FormDataStoreService Info
+* <br>
+* {@link BB.Services:FormDataStoreService more}
+*
+* @param {service} ValidatorService Info
+* <br>
+* {@link BB.Services:ValidatorService more}
+*
+* @param {service} PageControllerService Info
+* <br>
+* {@link BB.Services:PageControllerService more}
+*
+* @param {model} halClient Info
+* <br>
+* {@link angular-hal:halClient more}
+*
+###
 angular.module('BB.Controllers').controller 'EventGroupList',
 ($scope,  $rootScope, $q, $attrs, ItemService, FormDataStoreService, ValidatorService,
   PageControllerService, halClient) ->

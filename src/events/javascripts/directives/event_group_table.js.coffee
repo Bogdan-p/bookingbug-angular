@@ -1,3 +1,29 @@
+###**
+* @ngdoc directive
+* @name BBAdminEvents.Directives:eventGroupTable
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directives BBAdminEvents.Directives:eventGroupTable
+*
+* # Has the following set of methods:
+*
+* - controller($scope)
+* - $scope.getEventGroups()
+* - $scope.newEventGroup()
+* - $scope.delete(id)
+* - $scope.edit(id)
+* - link(scope, element, attrs)
+*
+* @requires BBAdmin.Services:AdminCompanyService
+* @requires BBAdminEvents.Services:AdminEventGroupService
+* @requires $modal
+* @requires $log
+* @requires BB.Services:ModalForm
+*
+###
+
 angular.module('BBAdminEvents').directive 'eventGroupTable', (AdminCompanyService,
     AdminEventGroupService, $modal, $log, ModalForm) ->
 

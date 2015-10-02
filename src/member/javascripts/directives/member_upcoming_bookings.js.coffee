@@ -1,3 +1,20 @@
+###**
+* @ngdoc directive
+* @name BBMember.Directives:bbMemberUpcomingBookings
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BBMember.Directives:bbMemberUpcomingBookings
+*
+* # Has the following set of methods:
+*
+* - link(scope, element, attrs)
+*
+* @requires $rootScope
+*
+###
+
 angular.module('BBMember').directive 'bbMemberUpcomingBookings', ($rootScope) ->
 
   link = (scope, element, attrs) ->

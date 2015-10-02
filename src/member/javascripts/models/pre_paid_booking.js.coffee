@@ -1,3 +1,26 @@
+###**
+* @ngdoc object
+* @name BB.Models:Member.PrePaidBookingModel
+*
+* @description
+* This is Member.PrePaidBookingModel in BB.Models module that creates PrePaidBookingModel object.
+*
+* <pre>
+* //Creates class Member_PrePaidBooking that extends BaseModel
+* class Member_PrePaidBooking extends BaseModel
+* </pre>
+*
+* @requires $q
+* @requires BB.Models:BBModel
+* @requires BB.Models:BaseModel
+*
+* @returns {object} Newly created PrePaidBookingModel object with the following set of methods:
+*
+* - constructor(data)
+* - checkValidity(event)
+*
+###
+
 angular.module('BB.Models').factory "Member.PrePaidBookingModel", ($q, BBModel,
     BaseModel) ->
 

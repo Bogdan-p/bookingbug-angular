@@ -1,4 +1,24 @@
-
+###**
+* @ngdoc service
+* @name BB.Services:ItemService
+*
+* @description
+* Factory ItemService
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {model} BBModel Info
+* <br>
+* {@link BB.Models:BBModel more}
+*
+* @returns {Promise} This service has the following set of methods:
+*
+* - query(prms)
+* - build_items(base_items, prms, deferred)
+*
+###
 angular.module('BB.Services').factory "ItemService", ($q, BBModel) ->
   query: (prms) ->
     deferred = $q.defer()
@@ -14,7 +34,7 @@ angular.module('BB.Services').factory "ItemService", ($q, BBModel) ->
           @build_items(base_item.$get('items'), prms, deferred)
       else
         @build_items(prms.cItem.resource.$get('items'), prms, deferred)
-    
+
     else if prms.cItem.person && !prms.cItem.anyPerson() && prms.item != 'person'
       if !prms.cItem.person.$has('items')
         prms.cItem.person.$get('item').then (base_item) =>
@@ -23,7 +43,7 @@ angular.module('BB.Services').factory "ItemService", ($q, BBModel) ->
         @build_items(prms.cItem.person.$get('items'), prms, deferred)
     else
       deferred.reject("No service link found")
-  
+
     deferred.promise
 
   build_items: (base_items, prms, deferred) ->

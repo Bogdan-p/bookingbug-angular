@@ -1,6 +1,21 @@
-
-
-
+###**
+* @ngdoc directive
+* @name BBAdminDashboard.Directives:bbIfLogin
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BBAdminDashboard.Directives:bbIfLogin
+*
+* @requires $modal
+* @requires $log 
+* @requires $rootScope
+* @requires $compile
+* @requires $templateCache
+* @requires BB.Services:ModalForm
+* @requires BB.Models:BBModel
+*
+###
 
 angular.module('BBAdminDashboard').directive 'bbIfLogin', ($modal, $log, $q,
   $rootScope, AdminCompanyService, $compile, $templateCache,

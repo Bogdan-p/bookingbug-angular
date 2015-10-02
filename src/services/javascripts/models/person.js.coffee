@@ -1,13 +1,65 @@
 'use strict';
 
+###**
+* @ngdoc object
+* @name BB.Models:Admin.PersonModel
+*
+* @description
+* path: src/services/javascripts/models/person.js.coffee
+*
+* Creates Admin_Person object.
+*
+* <pre>
+* angular.module('BB.Models').factory "Admin.PersonModel", ($q, BBModel, BaseModel, PersonModel) ->
+*   class Admin_Person extends PersonModel
+* </pre>
+*
+* ## Returns newly created Admin_Clinic object with the following set of methods:
+* - constructor(data)
+* - setResourcesAndPeople()
+* - setTimes()
+* - getPostData()
+* - save()
+*
+* @requires $q
+* @requires BB.Models:BBModel
+* @requires BB.Models:BaseModel
+*
+###
 angular.module('BB.Models').factory "Admin.PersonModel", ($q, BBModel, BaseModel, PersonModel) ->
 
   class Admin_Person extends PersonModel
+
+    ###**
+    * @ngdoc method
+    * @name constructor
+    * @methodOf BB.Models:Admin.PersonModel
+    *
+    * @description
+    * constructor
+    *
+    * @param {object} data data
+    *
+    * @returns {function} this.setCurrentCustomer()
+    *
+    ###
 
     constructor: (data) ->
       super(data)
       unless @queuing_disabled
         @setCurrentCustomer()
+
+    ###**
+    * @ngdoc method
+    * @name setCurrentCustomer
+    * @methodOf BB.Models:Admin.PersonModel
+    *
+    * @description
+    * setCurrentCustomer
+    *
+    * @returns {Promise} defeder.promise
+    *
+    ###
 
     setCurrentCustomer: () ->
       defer = $q.defer()
@@ -21,6 +73,20 @@ angular.module('BB.Models').factory "Admin.PersonModel", ($q, BBModel, BaseModel
         defer.resolve()
       defer.promise
 
+    ###**
+    * @ngdoc method
+    * @name setAttendance
+    * @methodOf BB.Models:Admin.PersonModel
+    *
+    * @description
+    * setCurrentCustomer
+    *
+    * @param {object} status status
+    *
+    * @returns {Promise} defeder.promise
+    *
+    ###
+
     setAttendance: (status) ->
       defer = $q.defer()
       @$put('attendance', {}, {status: status}).then  (p) =>
@@ -29,6 +95,18 @@ angular.module('BB.Models').factory "Admin.PersonModel", ($q, BBModel, BaseModel
       , (err) =>
         defer.reject(err)
       defer.promise
+
+    ###**
+    * @ngdoc method
+    * @name finishServing
+    * @methodOf BB.Models:Admin.PersonModel
+    *
+    * @description
+    * finishServing
+    *
+    * @returns {Promise} defeder.promise
+    *
+    ###
 
     finishServing: () ->
       defer = $q.defer()
@@ -44,12 +122,27 @@ angular.module('BB.Models').factory "Admin.PersonModel", ($q, BBModel, BaseModel
         defer.reject('finish_serving link not available')
       defer.promise
 
+    ###**
+    * @ngdoc method
+    * @name isAvailable
+    * @methodOf BB.Models:Admin.PersonModel
+    *
+    * @description
+    * isAvailable
+    *
+    * @param {object} start start
+    * @param {object} end end
+    *
+    * @returns {array} this.availability[str]
+    *
+    ###
+
     # look up a schedule for a time range to see if this available
     # currently just checks the date - but chould really check the time too
     isAvailable: (start, end) ->
       str = start.format("YYYY-MM-DD") + "-" + end.format("YYYY-MM-DD")
       @availability ||= {}
-      
+
       return @availability[str] if @availability[str]
       @availability[str] = "-"
 
@@ -61,7 +154,21 @@ angular.module('BB.Models').factory "Admin.PersonModel", ($q, BBModel, BaseModel
       else
         @availability[str] = "Yes"
 
-      return @availability[str]  
+      return @availability[str]
+
+    ###**
+    * @ngdoc method
+    * @name startServing
+    * @methodOf BB.Models:Admin.PersonModel
+    *
+    * @description
+    * startServing
+    *
+    * @param {object} queuer queuer
+    *
+    * @returns {Promise} defeder.promise
+    *
+    ###
 
     startServing: (queuer) ->
       defer = $q.defer()
@@ -78,6 +185,18 @@ angular.module('BB.Models').factory "Admin.PersonModel", ($q, BBModel, BaseModel
       else
         defer.reject('start_serving link not available')
       defer.promise
+
+    ###**
+    * @ngdoc method
+    * @name getQueuers
+    * @methodOf BB.Models:Admin.PersonModel
+    *
+    * @description
+    * getQueuers
+    *
+    * @returns {Promise} defeder.promise
+    *
+    ###  
 
     getQueuers: () ->
       defer = $q.defer()

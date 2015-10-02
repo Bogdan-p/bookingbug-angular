@@ -1,3 +1,17 @@
+###**
+* @ndgoc directive
+* @name BBAdminBooking.Directives:bbAdminBookingClients
+*
+* @restrict AE
+* @scope true
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BBAdminBooking.Directives:bbAdminBookingClients
+*
+###
+
 'use strict';
 
 angular.module('BBAdminBooking').directive 'bbAdminBookingClients', () ->
@@ -6,6 +20,35 @@ angular.module('BBAdminBooking').directive 'bbAdminBookingClients', () ->
   scope : true
   controller : 'adminBookingClients'
 
+###**
+* @ngdoc controller
+* @name BBAdminBooking.Controllers:adminBookingClients
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller adminBookingClients
+*
+* # Has the following set of methods:
+*
+* - $scope.showSearch()
+* - $scope.showClientForm()
+* - $scope.selectClient(client, route)
+* - $scope.checkSearch(search)
+* - $scope.createClient(route)
+* - $scope.getClients(currentPage, filterBy, filterByFields, orderBy, orderByReverse)
+* - $scope.edit(item)
+*
+* @requires $scope
+* @requires $rootScope
+* @requires $q
+* @requires BBAdmin.Services:AdminClientService
+* @requires BB.Services:ClientDetailsService
+* @requires BB.Services:AlertService
+* @requires BB.Services:ClientService
+* @requires BB.Services:ValidatorService
+*
+###
 
 angular.module('BBAdminBooking').controller 'adminBookingClients', ($scope,  $rootScope, $q, AdminClientService, ClientDetailsService, AlertService, ClientService, ValidatorService) ->
   
@@ -21,10 +64,29 @@ angular.module('BBAdminBooking').controller 'adminBookingClients', ($scope,  $ro
   $scope.search_error = false
 
 
+  ###**
+  * @ngdoc method
+  * @name $scope.showSearch
+  * @methodOf BBAdminBooking.Controllers:adminBookingClients
+  *
+  * @description
+  * Method $scope.showSearch
+  *
+  ###
+
   $scope.showSearch = () =>
     $scope.searchClients = true
     $scope.newClient = false
   
+  ###**
+  * @ngdoc method
+  * @name $scope.showClientForm
+  * @methodOf BBAdminBooking.Controllers:adminBookingClients
+  *
+  * @description
+  * Method $scope.showClientForm
+  *
+  ###
 
   $scope.showClientForm = () =>
     $scope.search_error = false
@@ -34,6 +96,18 @@ angular.module('BBAdminBooking').controller 'adminBookingClients', ($scope,  $ro
     # clear the client if one has already been selected
     $scope.clearClient()
   
+  ###**
+  * @ngdoc method
+  * @name $scope.selectClient
+  * @methodOf BBAdminBooking.Controllers:adminBookingClients
+  *
+  * @description
+  * Method $scope.selectClient
+  *
+  * @param {object} client client
+  * @param {object} client client
+  *
+  ###
 
   $scope.selectClient = (client, route) =>
     $scope.search_error = false
@@ -41,6 +115,19 @@ angular.module('BBAdminBooking').controller 'adminBookingClients', ($scope,  $ro
     $scope.setClient(client)
     $scope.client.setValid(true)
     $scope.decideNextPage(route)
+
+  ###**
+  * @ngdoc method
+  * @name $scope.checkSearch
+  * @methodOf BBAdminBooking.Controllers:adminBookingClients
+  *
+  * @description
+  * Method $scope.checkSearch
+  *
+  * @param {object} search search
+  * 
+  * @returns {object} true or false
+  ###
 
   $scope.checkSearch = (search) =>
     if search.length >= 3
@@ -50,6 +137,17 @@ angular.module('BBAdminBooking').controller 'adminBookingClients', ($scope,  $ro
       $scope.search_error = true
       return false
 
+  ###**
+  * @ngdoc method
+  * @name $scope.createClient
+  * @methodOf BBAdminBooking.Controllers:adminBookingClients
+  *
+  * @description
+  * Method $scope.createClient
+  *
+  * @param {object} route route
+  * 
+  ###
 
   $scope.createClient = (route) =>
     $scope.notLoaded $scope
@@ -64,6 +162,23 @@ angular.module('BBAdminBooking').controller 'adminBookingClients', ($scope,  $ro
       $scope.selectClient(client, route)
     , (err) -> $scope.setLoadedAndShowError($scope, err, 'Sorry, something went wrong')
    
+  ###**
+  * @ngdoc method
+  * @name $scope.getClients
+  * @methodOf BBAdminBooking.Controllers:adminBookingClients
+  *
+  * @description
+  * Method $scope.getClients
+  *
+  * @param {object} currentPage currentPage
+  * @param {object} filterBy filterBy
+  * @param {object} filterByFields filterByFields
+  * @param {object} orderBy orderBy
+  * @param {object} orderByReverse orderByReverse
+  *
+  * @returns {object} clientDef.reject(err)
+  *
+  ###
 
   $scope.getClients = (currentPage, filterBy, filterByFields, orderBy, orderByReverse) ->
     AlertService.clear()
@@ -85,6 +200,19 @@ angular.module('BBAdminBooking').controller 'adminBookingClients', ($scope,  $ro
         $scope.setLoadedAndShowError($scope, err, 'Sorry, something went wrong')
         clientDef.reject(err)
  
+  ###**
+  * @ngdoc method
+  * @name $scope.edit
+  * @methodOf BBAdminBooking.Controllers:adminBookingClients
+  *
+  * @description
+  * Method $scope.edit
+  *
+  * @param {object} item item
+  *
+  * @returns {string} console.log(item)
+  *
+  ###
 
   $scope.edit = (item) ->
     console.log item

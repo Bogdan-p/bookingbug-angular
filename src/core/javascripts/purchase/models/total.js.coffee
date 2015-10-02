@@ -1,5 +1,46 @@
 'use strict';
 
+###**
+* @ngdoc object
+* @name BB.Models:Purchase.TotalModel
+*
+* @description
+* This is TotalModel in BB.Models module that creates Total object.
+*
+* <pre>
+* //Creates class Purchase_Total that extends BaseModel
+* class Purchase_Total extends BaseModel
+* </pre>
+*
+* @requires $q
+* @requires $window
+* @requires BB.Models:BBModel
+* @requires BB.Models:BaseModel
+* @requires $sce
+*
+* @returns {Promise} Newly created Total object with the following set of methods:
+*
+* - constructor(data)
+* - id
+* - icalLink
+* - webcalLink
+* - gcalLink
+* - getItems
+* - getBookingsPromise
+* - getCourseBookingsPromise
+* - getPackages
+* - getProducts
+* - getDeals
+* - getMessages(booking_texts, msg_type)
+* - getClient
+* - getConfirmMessages()
+* - printed_total_price()
+* - newPaymentUrl()
+* - totalDuration()
+* - containsWaitlistItems()
+*
+###
+
 angular.module('BB.Models').factory "Purchase.TotalModel", ($q, $window, BBModel, BaseModel, $sce) ->
 
 

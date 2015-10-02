@@ -1,6 +1,47 @@
 # Filters
 "use strict"
 
+###**
+* @ngdoc service
+* @name BB.Services:FormDataStoreService
+*
+* @description
+* Factory FormDataStoreService
+*
+* @param {service} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope more}
+*
+* @param {service} $timeout Angular's wrapper for window.setTimeout.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$timeou tmore}
+*
+* @param {service} $log Simple service for logging.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$log more}
+*
+* @param {service} $parse Converts Angular expression into a function.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$parse more}
+*
+* @returns {Promise} This service has the following set of methods:
+*
+* - log()
+* - showInfo()
+* - setIfUndefined(keyName, val)
+* - resetValuesOnScope(scope, props)
+* - clear(scope, keepScopeValues)
+* - storeFormData()
+* - setValuesOnScope(currentPage, scope)
+* - getParentScope(scope)
+* - checkRegisteredWidgets(scope)
+* - checkForListeners(propsArr)
+* - setListeners(scope, listenerArr, currentPage)
+* - init(uid, scope, propsArr)
+* - removeWidget(scope)
+* - register(scope)
+*
+###
 angular.module('BB.Services').factory 'FormDataStoreService',
 ($rootScope, $window, $log, $parse) ->
 
@@ -235,10 +276,10 @@ angular.module('BB.Services').factory 'FormDataStoreService',
     # go up the scope chain to find the app's rootscope, which will be the scope
     # with the bbctrl property
 
-    # step down a scope first - just in case this is on the same as the widget and iot's isloated! 
+    # step down a scope first - just in case this is on the same as the widget and iot's isloated!
     if scope && scope.$$childHead
       scope = scope.$$childHead
-      
+
     while !_.has(scope, 'cid')
       scope = scope.$parent
 

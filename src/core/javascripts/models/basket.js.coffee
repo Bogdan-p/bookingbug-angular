@@ -1,5 +1,60 @@
 'use strict';
 
+###**
+* @ngdoc object
+* @name BB.Models:BasketModel
+*
+* @description
+* This is BasketModel in BB.Models module that creates Basket object.
+*
+* <pre>
+* //Creates class Basket that extends BaseModel
+* class Basket extends BaseModel
+* </pre>
+*
+* @requires {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @requires {model} BBModel Info
+* <br>
+* {@link BB.Models:BBModel more}
+*
+* @requires {model} BaseModel Info
+* <br>
+* {@link BB.Models:BaseModel more}
+*
+* @returns {object} Newly created Basket object with the following set of methods:
+*
+* - constructor(data, scope)
+* - addItem(item)
+* - clear()
+* - readyToCheckout()
+* - timeItems()
+* - couponItems()
+* - removeCoupons()
+* - setSettings(set)
+* - setClient(client)
+* - setClientDetails(client_details)
+* - getPostData()
+* - dueTotal()
+* - length()
+* - questionPrice(options)
+* - totalPrice(options)
+* - updateTotalPrice()
+* - fullPrice()
+* - hasCoupon()
+* - totalCoupons()
+* - totalDuration()
+* - containsDeal()
+* - hasDeal()
+* - getDealCodes()
+* - totalDeals()
+* - totalDealPaid()
+* - remainingDealBalance()
+* - hasWaitlistItem()
+*
+###
 angular.module('BB.Models').factory "BasketModel", ($q, BBModel, BaseModel) ->
 
   class Basket extends BaseModel
@@ -130,7 +185,7 @@ angular.module('BB.Models').factory "BasketModel", ($q, BBModel, BaseModel) ->
    # return the total coupon discount applied to the basket
     totalCoupons: ->
       @fullPrice() - @totalPrice() - @totalDealPaid()
-    
+
 
     totalDuration: ->
       duration = 0
@@ -175,4 +230,4 @@ angular.module('BB.Models').factory "BasketModel", ($q, BBModel, BaseModel) ->
       for item in @items
         return true if item.isWaitlist()
       return false
-      
+

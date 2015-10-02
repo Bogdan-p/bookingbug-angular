@@ -1,14 +1,30 @@
 'use strict';
 
-# Breadcrumb Directive
-
-# Example usage;
-# <div bb-breadcrumb></div>
-# <div bb-breadcrumb complex></div>
-
-# initialise options example
-# ng-init="setBasicRoute(['client','service_list'])"
-
+###**
+* @ngdoc directive
+* @name BB.Directives:bbBreadcrumb
+* @restrict A
+* @scope true
+*
+* @description
+* Directive BB.Directives:bbBreadcrumb
+*
+* <pre>
+* restrict: 'A'
+* replace: true
+* scope : true
+* controller : 'Breadcrumbs'
+* </pre>
+* # Has the following set of methods:
+*
+* - templateUrl(element, attrs)
+* - link(scope)
+*
+* @param {service} PathSvc Info
+* <br>
+* {@link BB.Services:PathSvc more}
+*
+###
 angular.module('BB.Directives').directive 'bbBreadcrumb', (PathSvc) ->
   restrict: 'A'
   replace: true
@@ -22,7 +38,35 @@ angular.module('BB.Directives').directive 'bbBreadcrumb', (PathSvc) ->
   link : (scope) ->
     return
 
-
+###**
+* @ngdoc directive
+* @name BB.Controllers:Breadcrumbs
+* @restrict A
+* @scope true
+*
+* @description
+* Directive Breadcrumbs
+* <br>
+* Used to load the application's content. It uses ng-include.
+*
+* <pre>
+* loadStep        = $scope.loadStep
+* $scope.steps    = $scope.bb.steps
+* $scope.allSteps = $scope.bb.allSteps
+* </pre>
+* # Has the following set of methods:
+*
+* - $scope.loadStep(number)
+* - lastStep()
+* - currentStep(step)
+* - atDisablePoint()
+* - $scope.isDisabledStep(step)
+*
+* @param {service} $scope Scope is an object that refers to the application mode.
+* <br>
+* {@link https://docs.angularjs.org/guide/scope more}
+*
+###
 angular.module('BB.Controllers').controller 'Breadcrumbs', ($scope) ->
   loadStep        = $scope.loadStep
   $scope.steps    = $scope.bb.steps

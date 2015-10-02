@@ -1,3 +1,50 @@
+###**
+* @ngdoc service
+* @name BB.Services:ValidatorService
+*
+* @description
+* Factory ValidatorService
+*
+* @param {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q more}
+*
+* @param {service} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope more}
+*
+* @param {model} BBModel Info
+* <br>
+* {@link BB.Models:BBModel more}
+*
+* @param {service} AlertService Info
+* <br>
+* {@link BB.Services:AlertService more}
+*
+* @param {model} $bbug Releases the hold on the $ shortcut identifier, so that other scripts can use it.
+* <br>
+* {@link $bbug more}
+*
+* @param {service} ErrorService Info
+* <br>
+* {@link BB.Services:ErrorService more}
+*
+* @returns {Promise} This service has the following set of methods:
+*
+* - getUKPostcodePattern()
+* - getNumberOnlyPattern()
+* - getAlphaNumbericPattern()
+* - getUKMobilePattern(strict = false)
+* - getMobilePattern()
+* - getUKLandlinePattern(strict = false)
+* - getIntPhonePattern()
+* - getGeocodeResult()
+* - validatePostcode(form, prms)
+* - validateForm(form)
+* - resetForm(form)
+* - resetForms(forms)
+*
+###
 angular.module('BB.Services').factory 'ValidatorService', ($rootScope, AlertService, ErrorService, BBModel, $q, $bbug) ->
 
   # Use http://regex101.com/ to test patterns
@@ -26,7 +73,7 @@ angular.module('BB.Services').factory 'ValidatorService', ($rootScope, AlertServ
   # UK landline regex (lenient)
   uk_landline_regex_lenient = /^(0|\+)([\d \(\)]{9,19})$/
 
-  # international number 
+  # international number
   international_number = /^(\+)([\d \(\)]{9,19})$/
 
   # alphanumeric
@@ -110,9 +157,9 @@ angular.module('BB.Services').factory 'ValidatorService', ($rootScope, AlertServ
       AlertService.danger(form.alert)
       return false
     else if form.$invalid and form.raise_alerts
-      AlertService.danger(ErrorService.getError('FORM_INVALID')) 
+      AlertService.danger(ErrorService.getError('FORM_INVALID'))
       return false
-    else if form.$invalid 
+    else if form.$invalid
       return false
     else
       return true

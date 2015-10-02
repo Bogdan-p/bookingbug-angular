@@ -1,3 +1,26 @@
+###**
+* @ngdoc object
+* @name BB.Models:Purchase.CourseBookingModel
+*
+* @description
+* This is Pourse Booking in BB.Models module that creates Course Booking object.
+*
+* <pre>
+* //Creates class Purchase_Course_Booking that extends BaseModel
+* class Purchase_Course_Booking extends BaseModel
+* </pre>
+*
+* @requires $q
+* @requires BB.Models:BBModel
+* @requires BB.Models:BaseModel
+*
+* @returns {Promise} Newly created Course Booking object with the following set of methods:
+*
+* - constructor(data)
+* - getBookings
+*
+###
+
 angular.module('BB.Models').factory "Purchase.CourseBookingModel", ($q, BBModel, BaseModel) ->
 
   class Purchase_Course_Booking extends BaseModel

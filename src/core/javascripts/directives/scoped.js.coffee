@@ -1,5 +1,35 @@
 # Adapted from https://github.com/PM5544/scoped-polyfill
 
+###**
+* @ngdoc directive
+* @name BB.Directives:scoped
+* @restrict A
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:scoped
+*
+* <pre>
+* restrict: 'A'
+* </pre>
+*
+* Has the following set of methods:
+*
+* - scopeIt(element)
+* - link(scope, element, attrs)
+* - controller($scope, $element, $timeout)
+*
+* @param {service} $document A jQuery or jqLite wrapper for the browser's window.document object.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$document more}
+*
+* @param {service} $timeout Angular's wrapper for window.setTimeout.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$timeout more}
+*
+*
+###
 angular.module("BB.Directives").directive  'scoped', ($document, $timeout) ->
 
   @compat = do ->

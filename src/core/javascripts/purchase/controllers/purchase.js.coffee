@@ -1,3 +1,21 @@
+###**
+* @ndgoc directive
+* @name BB.Directives:bbPurchase
+*
+* @restrict AE
+* @scope true
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:bbPurchase
+*
+* # Has the following set of methods:
+*
+* - link (scope, element, attrs)
+*
+###
+
 angular.module('BB.Directives').directive 'bbPurchase', () ->
   restrict: 'AE'
   replace: true
@@ -6,6 +24,63 @@ angular.module('BB.Directives').directive 'bbPurchase', () ->
   link : (scope, element, attrs) ->
     scope.init(scope.$eval( attrs.bbPurchase ))
     return
+
+###**
+* @ngdoc controller
+* @name BB.Controllers:Purchase
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller Purchase
+*
+* # Has the following set of methods:
+*
+* - setPurchaseCompany(company)
+* - failMsg()
+* - $scope.init(options)
+* - $scope.load(id)
+* - checkIfMoveBooking(bookings)
+* - checkIfWaitlistBookings(bookings)
+* - $scope.requireLogin(action)
+* - loginRequired()
+* - getCompanyID()
+* - getPurchaseID()
+* - $scope.move(booking, route, options = {})
+* - $scope.moveAll( route, options = {})
+* - $scope.bookWaitlistItem(booking)
+* - $scope.delete(booking)
+* - $scope.delete_all()
+* - $scope.isMovable(booking)
+* - $scope.onFileSelect(booking, $file, existing)
+* - $scope.createBasketItem(booking)
+* - $scope.checkAnswer(answer)
+* - ModalDelete($scope,  $rootScope, $modalInstance, booking)
+* - $scope.confirm_delete()
+* - $scope.cancel()
+* - ModalDeleteAll($scope,  $rootScope, $modalInstance, purchase)
+*
+* @requires $scope
+* @requires $rootScope
+* @requires BB.Services:CompanyService
+* @requires BB.Services:PurchaseService
+* @requires BB.Services:ClientService
+* @requires $modal
+* @requires $location
+* @requires $timeout
+* @requires BB.Models:BBWidget
+* @requires BB.Models:BBModel
+* @requires $q
+* @requires BB.Services:QueryStringService
+* @requires BB.Services:SSOService
+* @requires BB.Services:AlertService
+* @requires BB.Services:LoginService
+* @requires $window
+* @requires $upload
+* @requires BB.Services:ServiceService
+* @requires $sessionStorage
+*
+###
 
 angular.module('BB.Controllers').controller 'Purchase', ($scope,  $rootScope, CompanyService, PurchaseService, ClientService, $modal, $location, $timeout, BBWidget, BBModel, $q, QueryStringService, SSOService, AlertService, LoginService, $window, $upload, ServiceService, $sessionStorage) ->
 

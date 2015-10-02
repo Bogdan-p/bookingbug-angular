@@ -1,10 +1,23 @@
-
-
-# build a dynamic injector for each of the models!
-# This creates a service that is capable of creating any given model
-# It uses dynamic injection, to avoid a cuicular dependancy - as any model, needs to be able to create instances of other models
-
-
+###**
+* @ngdoc object
+* @name BB.Models:BBModel
+*
+* @description
+* Build a dynamic injector for each of the models.
+* This creates a service that is capable of creating any given model.
+* It uses dynamic injection, to avoid a cuicular dependancy -
+* as any model needs to be able to create instances of other models
+*
+* @requires {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q read more}
+*
+* @requires {service} $injector $injector is used to retrieve object instances as defined by provider, instantiate types, invoke methods, and load modules.
+* <br>
+* {@link https://docs.angularjs.org/api/auto/service/$injector read more}
+*
+*
+###
 angular.module('BB.Models').service "BBModel", ($q, $injector) ->
 
   # the top level models
@@ -18,8 +31,8 @@ angular.module('BB.Models').service "BBModel", ($q, $injector) ->
 
   funcs = {}
   for model in models
-    do (model) =>  
-      funcs[model] = (p1, p2) => 
+    do (model) =>
+      funcs[model] = (p1, p2) =>
         new ($injector.get(model + "Model"))(p1, p2)
 
 
@@ -27,8 +40,8 @@ angular.module('BB.Models').service "BBModel", ($q, $injector) ->
   purchase_models = ['Booking', 'Total', 'CourseBooking']
   pfuncs = {}
   for model in purchase_models
-    do (model) =>  
-      pfuncs[model] = (init) => 
+    do (model) =>
+      pfuncs[model] = (init) =>
         new ($injector.get("Purchase." + model + "Model"))(init)
   funcs['Purchase'] = pfuncs
 
@@ -36,8 +49,8 @@ angular.module('BB.Models').service "BBModel", ($q, $injector) ->
   member_models = ['Member', 'Booking', 'PrePaidBooking']
   mfuncs = {}
   for model in member_models
-    do (model) =>  
-      mfuncs[model] = (init) => 
+    do (model) =>
+      mfuncs[model] = (init) =>
         new ($injector.get("Member." + model + "Model"))(init)
   funcs['Member'] = mfuncs
 
@@ -46,8 +59,8 @@ angular.module('BB.Models').service "BBModel", ($q, $injector) ->
     'Resource', 'Person', 'Service', 'Login', 'EventChain', 'EventGroup', 'Event', 'Queuer', 'ClientQueue', 'Clinic']
   afuncs = {}
   for model in admin_models
-    do (model) =>  
-      afuncs[model] = (init) => 
+    do (model) =>
+      afuncs[model] = (init) =>
         new ($injector.get("Admin." + model + "Model"))(init)
   funcs['Admin'] = afuncs
 
@@ -62,6 +75,53 @@ angular.module('BB.Models').service "BBModel", ($q, $injector) ->
 
 # this provides some helpful functions to the models, that map various undelrying HAL resource functions
 
+###**
+* @ngdoc object
+* @name BB.Models:BaseModel
+*
+* @description
+* Build a dynamic injector for each of the models.
+* This creates a service that is capable of creating any given model.
+* It uses dynamic injection, to avoid a cuicular dependancy -
+* as any model needs to be able to create instances of other models
+*
+* @requires {service} $q A service that helps you run functions asynchronously, and use their return values (or exceptions) when they are done processing.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$q read more}
+*
+* @requires {service} $injector $injector is used to retrieve object instances as defined by provider, instantiate types, invoke methods, and load modules.
+* <br>
+* {@link https://docs.angularjs.org/api/auto/service/$injector more}
+*
+* @requires {service} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope more}
+*
+* @requires {service} $timeout Angular's wrapper for window.setTimeout.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$timeoutmore}
+*
+* @returns {object} Newly created Base object with the following set of methods:
+*
+* - constructor(data)
+* - updateModel(data)
+* - _snakeToCamel(s)
+* - $buildOject(link)
+* - $buildOjectPromise(link)
+* - get(ikey)
+* - set(ikey, value)
+* - $href(rel, params)
+* - $has(rel)
+* - $flush(rel, params)
+* - $get(rel, params)
+* - $post(rel, params, dat)
+* - $put(rel, params, dat)
+* - $patch(rel, params, dat)
+* - $del(rel, params)
+* - $links()
+* - $toStore()
+*
+###
 angular.module('BB.Models').service "BaseModel", ($q, $injector, $rootScope, $timeout) ->
 
   class Base
@@ -131,7 +191,7 @@ angular.module('BB.Models').service "BaseModel", ($q, $injector, $rootScope, $ti
       , (err) -> prom.reject(err)
 
       @__linkedPromises[link]
-    
+
 
     get: (ikey) ->
       return null if !@_data
@@ -139,7 +199,7 @@ angular.module('BB.Models').service "BaseModel", ($q, $injector, $rootScope, $ti
 
     set: (ikey, value) ->
       return null if !@_data
-      @_data[ikey] = value 
+      @_data[ikey] = value
 
 
     $href: (rel, params) ->

@@ -1,10 +1,38 @@
+###**
+* @ngdoc directive
+* @name BB.Directives:pricepicker
+* @link link
+*
+* @description
+* {@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:pricepicker
+*
+* <pre>
+* require: 'ngModel'
+* link: link
+* controller: controller
+* scope: {
+*   currency: '@'
+* }
+* template: """
+* </pre>
+*
+* Has the following set of methods:
+*
+* - controller($scope)
+* - link(scope, element, attrs, ngModel)
+* - ngModel.$render()
+* - scope.updateModel(value)
+*
+###
 angular.module('BB.Directives').directive 'pricepicker', ()->
 
   controller = ($scope) ->
 
     $scope.$watch 'price', (price) ->
       $scope.updateModel(price) if price?
-        
+
 
   link = (scope, element, attrs, ngModel) ->
 

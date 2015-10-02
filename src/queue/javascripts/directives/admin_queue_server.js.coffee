@@ -1,3 +1,25 @@
+###**
+* @ndgoc directive
+* @name BBQueue.Directives:bbQueueServer
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BBQueue.Directives:bbQueueServer
+*
+* # Has the following set of methods:
+*
+* - pusherListen(scope)
+* - controller($scope)
+* - link(scope, element, attrs)
+*
+* @requires BBQueue.Services:PusherQueue
+* @requires BBAdmin.Services:AdminCompanyService
+* @requires BB.Services:ModalForm
+* @requires BB.Models:BBModel
+*
+###
+
 angular.module('BBQueue').directive 'bbQueueServer', (BBModel,
     AdminCompanyService, PusherQueue, ModalForm) ->
 
@@ -37,6 +59,25 @@ angular.module('BBQueue').directive 'bbQueueServer', (BBModel,
     link: link
     controller: controller
   }
+
+###**
+* @ndgoc directive
+* @name BBQueue.Directives:bbQueueServerCustomer
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BBQueue.Directives:bbQueueServerCustomer
+*
+* # Has the following set of methods:
+*
+* - controller($scope)
+* - $scope.serveCustomer()
+* - $scope.serveNext()
+* - $scope.extendAppointment(mins)
+* - $scope.finishServing()
+*
+###  
 
 angular.module('BBQueue').directive 'bbQueueServerCustomer', () ->
 

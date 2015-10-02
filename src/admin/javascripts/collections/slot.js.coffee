@@ -17,6 +17,17 @@ class window.Collection.Slot extends window.Collection.Base
     return true
 
 
+###**
+* @ngdoc object
+* @name BB.Services:SlotCollections
+*
+* @description
+* It creates new Base Collections
+*
+* # Has the following set of methods:
+* - $get
+*
+###
 angular.module('BB.Services').provider "SlotCollections", () ->
   $get: ->
     new  window.BaseCollections()

@@ -1,5 +1,24 @@
 ## Address List
 
+###**
+* @ngdoc directive
+* @name BB.Directives:bbAddresses
+* @restrict AE
+* @scope true
+*
+* @description
+{@link https://docs.angularjs.org/guide/directive more about Directives}
+
+* Directive BB.Directives:bbAddresses
+*
+* <pre>
+*  restrict: 'AE'
+*  replace: true
+*  scope : true
+* </pre>
+*
+###
+
 angular.module('BB.Directives').directive 'bbAddresses', () ->
   restrict: 'AE'
   replace: true
@@ -7,6 +26,29 @@ angular.module('BB.Directives').directive 'bbAddresses', () ->
   controller : 'AddressList'
 
 
+###**
+* @ngdoc controller
+* @name BB.Controllers:AddressList
+*
+* @description
+*{@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller AddressList
+*
+* # Has the following set of methods:
+* - $scope.findByPostcode()
+* - $scope.showCompleteAddress()
+* - $scope.setManualPostcodeEntry(value)
+* - $scope.$on "client_details:reset_search", (event)
+*
+* @requires $scope
+* @requires $rootScope
+* @requires $sniffer
+* @requires $filter
+* @requires BB.Services:AddressListService
+* @requires BB.Services:FormDataStoreService
+*
+###
 angular.module('BB.Controllers').controller 'AddressList',
 ($scope,  $rootScope, $filter, $sniffer, AddressListService, FormDataStoreService) ->
 
@@ -21,8 +63,8 @@ angular.module('BB.Controllers').controller 'AddressList',
     if $scope.client.postcode && !$scope.bb.postcode
       $scope.bb.postcode = $scope.client.postcode
 
-    # if client postcode is set and matches postcode entered by the user (and address isn't already set), copy the address from the client 
-    if $scope.client.postcode && $scope.bb.postcode && $scope.client.postcode == $scope.bb.postcode && !$scope.bb.address1 
+    # if client postcode is set and matches postcode entered by the user (and address isn't already set), copy the address from the client
+    if $scope.client.postcode && $scope.bb.postcode && $scope.client.postcode == $scope.bb.postcode && !$scope.bb.address1
       $scope.bb.address1 = $scope.client.address1
       $scope.bb.address2 = $scope.client.address2
       $scope.bb.address3 = $scope.client.address3
@@ -37,10 +79,17 @@ angular.module('BB.Controllers').controller 'AddressList',
   , (err) ->  $scope.setLoadedAndShowError($scope, err, 'Sorry, something went wrong')
 
 
-
-  # make a request for a list of addresses. They come as seperate list of
-  # objects containing addresses and monikers, which are converted into a single
-  # list of objects containing both properties.
+  ###**
+  * @ngdoc method
+  * @name $scope.findByPostcode
+  * @methodOf BB.Controllers:AddressList
+  *
+  * @description
+  * Make a request for a list of addresses. They come as seperate list of
+  * objects containing addresses and monikers, which are converted into a single
+  * list of objects containing both properties.
+  *
+  ###
   $scope.findByPostcode = () ->
     $scope.postcode_submitted = true
     return if !$scope.bb.postcode
@@ -83,7 +132,13 @@ angular.module('BB.Controllers').controller 'AddressList',
       $scope.postcode_submitted = true
       $scope.setLoaded $scope
 
-
+  ###**
+  * @ngdoc method
+  * @name $scope.showCompleteAddress
+  * @methodOf BB.Controllers:AddressList
+  *
+  *
+  ###
   $scope.showCompleteAddress = () ->
       $scope.show_complete_address = true
       $scope.postcode_submitted = false
@@ -186,9 +241,18 @@ angular.module('BB.Controllers').controller 'AddressList',
             $scope.setLoadedAndShowError($scope, err, 'Sorry, something went wrong')
 
 
+  ###**
+  * @ngdoc method
+  * @name $scope.setManualPostcodeEntry
+  * @methodOf BB.Controllers:AddressList
+  *
+  *
+  * @param {object} value Info
+  *
+  ###
   $scope.setManualPostcodeEntry = (value) ->
     $scope.manual_postcode_entry = value
-    
+
 
   $scope.$on "client_details:reset_search", (event) ->
     $scope.bb.address1 = null
@@ -199,4 +263,4 @@ angular.module('BB.Controllers').controller 'AddressList',
     $scope.show_complete_address = false
     $scope.postcode_submitted = false
     $scope.bb.address = $scope.addresses[0]
-    
+

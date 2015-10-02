@@ -1,3 +1,26 @@
+###**
+* @ngdoc directive
+* @name BBMember.Directives:memberForm
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BBMember.Directives:memberForm
+*
+* # Has the following set of methods:
+*
+* - controller($scope)
+* - $scope.submit(form)
+* - link(scope, element, attrs)
+*
+* @requires $modal
+* @requires $log
+* @requires $rootScope
+* @requires BBMember.Services:MemberLoginService
+* @requires BB.Services:MemberBookingService
+*
+###
+
 angular.module('BBMember').directive 'memberForm', ($modal, $log, $rootScope,
     MemberLoginService, MemberBookingService) ->
 

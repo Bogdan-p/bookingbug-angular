@@ -1,3 +1,29 @@
+###**
+* @ngdoc directive
+* @name BBAdminSettings.Directives:adminTable
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BBAdminSettings.Directives:adminTable
+*
+* # Has the following set of methods:
+*
+* - controller($scope)
+* - $scope.getAdministrators()
+* - $scope.newAdministrator()
+* - success(administrator)
+* - $scope.edit(id)
+* - link(scope, element, attrs)
+*
+* @requires BBAdmin.Services:AdminCompanyService
+* @requires BBAdmin.Services:AdminAdministratorService
+* @requires $modal
+* @requires $log
+* @requires BB.Services:ModalForm
+*
+###
+
 angular.module('BBAdminSettings').directive 'adminTable', (AdminCompanyService,
     AdminAdministratorService, $modal, $log, ModalForm) ->
 

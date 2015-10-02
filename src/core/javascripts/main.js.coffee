@@ -12,7 +12,7 @@ app = angular.module('BB', [
   'ui.bootstrap',
   'ngSanitize',
   'ui.map',
-  'ui.router.util', 
+  'ui.router.util',
   'ngLocalData',
   'ngAnimate',
   'angular-data.DSCacheFactory', # newer version of jmdobry angular cache'
@@ -29,18 +29,46 @@ app = angular.module('BB', [
 ]);
 
 
-# use this to inject application wide settings around the app
+###**
+* @ngdoc object
+* @name AppConfig
+*
+* @description
+* Use this to inject application wide settings around the app.
+*
+* <pre>
+* app.value('AppConfig', {
+*   appId: 'f6b16c23',
+*   appKey: 'f0bc4f65f4fbfe7b4b3b7264b655f5eb'
+* })
+* </pre>
+###
 app.value('AppConfig', {
   appId: 'f6b16c23',
   appKey: 'f0bc4f65f4fbfe7b4b3b7264b655f5eb'
 })
 
+###**
+* @ngdoc object
+* @name $bbug
+*
+* @description
+* Releases the hold on the $ shortcut identifier, so that other scripts can use it.
+###
 if (window.use_no_conflict)
   window.bbjq = $.noConflict()
   app.value '$bbug', jQuery.noConflict(true)
 else
   app.value '$bbug', jQuery
 
+###**
+* @ngdoc object
+* @name UriTemplate
+*
+* @description
+* UriTemplate is injectable as constant
+*
+###
 app.constant('UriTemplate', window.UriTemplate)
 
 app.config ($locationProvider, $httpProvider, $provide, ie8HttpBackendProvider) ->

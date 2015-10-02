@@ -1,3 +1,31 @@
+###**
+* @ngdoc service
+* @name BB.Services:AlertService
+*
+* @description
+* Factory AlertService
+*
+* @param {service} $rootScope Every application has a single root scope.
+* <br>
+* {@link https://docs.angularjs.org/api/ng/service/$rootScope more}
+*
+* @param {model} BBModel Info
+* <br>
+* {@link BB.Models:BBModel more}
+*
+* @returns {Promise} This service has the following set of methods:
+*
+* - titleLookup (type, title)
+* - add(type, {title, msg})
+* - closeAlert(alert)
+* - closeAlertIdx(index)
+* - clear()
+* - error(alert)
+* - danger(alert)
+* - info(alert)
+* - warning(alert)
+*
+###
 angular.module('BB.Services').factory 'AlertService', ($rootScope, ErrorService) ->
 
   $rootScope.alerts = []

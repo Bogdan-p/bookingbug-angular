@@ -5,9 +5,9 @@ adminapp = angular.module('BBAdmin', [
   'BBAdmin.Services',
   'BBAdmin.Filters',
   'BBAdmin.Controllers',
-  'trNgGrid'
-  # 'ui.state',
-#  'ui.calendar',
+  'trNgGrid',
+  #'ui.state',
+  #'ui.calendar',
 ])
 
 angular.module('BBAdmin').config ($logProvider) ->

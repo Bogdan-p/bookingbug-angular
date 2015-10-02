@@ -1,3 +1,21 @@
+###**
+* @ngdoc directive
+* @name BBMember.Directives:bbMemberPastBookings
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BBMember.Directives:bbMemberPastBookings
+*
+* # Has the following set of methods:
+*
+* -  link(scope, element, attrs)
+*    - getBookings()
+*
+* @requires $rootScope
+*
+###
+
 angular.module('BBMember').directive 'bbMemberPastBookings', ($rootScope) ->
 
   link = (scope, element, attrs) ->

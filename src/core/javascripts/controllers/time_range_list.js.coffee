@@ -1,5 +1,21 @@
 'use strict';
 
+###**
+* @ndgoc directive
+* @name BB.Directives:bbTimeRanges
+*
+* @restrict AE
+* @scope true
+*
+* @description
+*{@link https://docs.angularjs.org/guide/directive more about Directives}
+*
+* Directive BB.Directives:bbTimeRanges
+*
+* # Has the following set of methods:
+*
+###
+
 angular.module('BB.Directives').directive 'bbTimeRanges', () ->
   restrict: 'AE'
   replace: true
@@ -7,6 +23,51 @@ angular.module('BB.Directives').directive 'bbTimeRanges', () ->
   priority: 1
   controller : 'TimeRangeList'
 
+###**
+* @ngdoc controller
+* @name BB.Controllers:TimeRangeList
+*
+* @description
+* {@link https://docs.angularjs.org/guide/controller more about Controllers}
+*
+* Controller TimeRangeList
+*
+* # Has the following set of methods:
+*
+* - setTimeRange(selected_date, start_date)
+* - $scope.init(options = {})
+* - $scope.moment(date)
+* - $scope.setDataSource(source)
+* - $scope.add(type, amount)
+* - $scope.subtract(type, amount)
+* - $scope.isSubtractValid(type, amount)
+* - $scope.selectedDateChanged()
+* - $scope.updateHideStatus()
+* - $scope.isPast()
+* - $scope.status(day, slot)
+* - $scope.selectSlot(day, slot, route)
+* - $scope.highlightSlot(day, slot)
+* - $scope.loadData
+* - checkRequestedTime(day, time_slots)
+* - $scope.padTimes(times)
+* - $scope.setReady()
+* - $scope.format_date(fmt)
+* - $scope.format_start_date(fmt)
+* - $scope.format_end_date(fmt)
+* - $scope.pretty_month_title(month_format, year_format, seperator = '-')
+* -  $scope.selectEarliestTimeSlot()
+*
+* @requires $scope
+* @requires $element
+* @requires $attrs
+* @requires $rootScope
+* @requires $q
+* @requires BB.Services:TimeService
+* @requires BB.Services:AlertService
+* @requires BB.Models:BBModel
+* @requires BB.Services:FormDataStoreService
+*
+###
 
 # TODO Get the add/subtract functions to respect the current time range. Get the time range length to adjust if display mode is preset
 angular.module('BB.Controllers').controller 'TimeRangeList',
